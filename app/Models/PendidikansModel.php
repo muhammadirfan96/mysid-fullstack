@@ -26,6 +26,11 @@ class PendidikansModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+    public $myValidationRules = [
+        'pendidikan' => 'required|is_unique[pendidikans.pendidikan]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Validation
     protected $validationRules      = [];

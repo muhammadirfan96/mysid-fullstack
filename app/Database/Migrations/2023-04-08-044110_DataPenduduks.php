@@ -15,6 +15,10 @@ class DataPenduduks extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'nama_lengkap' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '225',
+            ],
             'nik' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '20',
@@ -23,7 +27,7 @@ class DataPenduduks extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
             ],
-            'id_agama' => [
+            'id_agamas' => [
                 'type' => 'INT',
                 'constraint' => 11,
             ],

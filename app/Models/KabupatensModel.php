@@ -33,6 +33,12 @@ class KabupatensModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'kabupaten' => 'required|is_unique[kabupatens.kabupaten]',
+        'logo' => 'uploaded[logo]|max_size[logo,1024]|is_image[logo]|mime_in[logo,image/jpg,image/jpeg,image/png]',
+        'created_by' => 'required',
+        'updated_by' => 'required'
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

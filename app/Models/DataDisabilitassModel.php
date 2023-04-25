@@ -33,6 +33,12 @@ class DataDisabilitassModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'disabilitas' => 'required',
+        'id_data_penduduks' => 'required|is_not_unique[data_penduduks.id]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

@@ -2,13 +2,14 @@
 
 namespace App\Controllers\Backend;
 
-use App\Models\AgamasModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class Agama extends ResourceController
+class TingkatKesejahteraans extends ResourceController
 {
     use ResponseTrait;
+    protected $modelName = 'App\Models\TingkatKesejahteraansModel';
+    protected $format    = 'json';
     /**
      * Return an array of resource objects, themselves in array format
      *
@@ -16,8 +17,7 @@ class Agama extends ResourceController
      */
     public function index()
     {
-        $model = new AgamasModel();
-        $data = $model->findAll();
+        $data = $this->model->orderBy('id', 'DESC')->findAll();
         return $this->respond($data);
     }
 
@@ -28,20 +28,9 @@ class Agama extends ResourceController
      */
     public function show($id = null)
     {
-        $model = new AgamasModel();
-        $data = $model->find($id);
+        $data = $this->model->find($id);
         if (!$data) return $this->failNotFound('no data found');
         return $this->respond($data);
-    }
-
-    /**
-     * Return a new resource object, with default properties
-     *
-     * @return mixed
-     */
-    public function new()
-    {
-        //
     }
 
     /**
@@ -51,19 +40,18 @@ class Agama extends ResourceController
      */
     public function create()
     {
-        $model = new AgamasModel();
         helper(['form']);
 
-        $rules = $model->getValidationRules();
+        $rules = $this->model->myValidationRules;
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [
-            'agama' => $this->request->getVar('agama'),
+            'tingkat_kesejahteraan' => $this->request->getVar('tingkat_kesejahteraan'),
             'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
 
-        $model->save($data);
+        $this->model->save($data);
         $response = [
             'status' => 201,
             'error' => null,
@@ -75,38 +63,27 @@ class Agama extends ResourceController
     }
 
     /**
-     * Return the editable properties of a resource object
-     *
-     * @return mixed
-     */
-    public function edit($id = null)
-    {
-        //
-    }
-
-    /**
      * Add or update a model resource, from "posted" properties
      *
      * @return mixed
      */
     public function update($id = null)
     {
-        $model = new AgamasModel();
-        helper(['form']);
-
-        $rules = $model->getValidationRules();
-        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
-
-        $findData = $model->find($id);
+        $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
+        helper(['form']);
+
+        $rules = $this->model->myValidationRules;
+        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
         $data = [
-            'agama' => $this->request->getVar('agama'),
+            'tingkat_kesejahteraan' => $this->request->getVar('tingkat_kesejahteraan'),
             'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
 
-        $model->update($id, $data);
+        $this->model->update($id, $data);
         $response = [
             'status' => 200,
             'error' => null,
@@ -124,12 +101,10 @@ class Agama extends ResourceController
      */
     public function delete($id = null)
     {
-        $model = new AgamasModel();
-
-        $findData = $model->find($id);
+        $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
-        $model->delete($id);
+        $this->model->delete($id);
         $response = [
             'status' => 200,
             'error' => null,
@@ -139,5 +114,12 @@ class Agama extends ResourceController
         ];
 
         return $this->respondDeleted($response);
+    }
+
+    public function find($key = null, $limit = 0, $offset = 0)
+    {
+        $where = "tingkat_kesejahteraan LIKE '%$key%'";
+        $data = $this->model->where($where)->orderBy('id', 'DESC')->findAll($limit, $offset);
+        return $this->respond($data);
     }
 }

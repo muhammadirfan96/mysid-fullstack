@@ -32,6 +32,11 @@ class StatusHubDlmKelsModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'status_hub_dlm_kel' => 'required|is_unique[status_hub_dlm_kels.status_hub_dlm_kel]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

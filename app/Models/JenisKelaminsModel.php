@@ -32,6 +32,11 @@ class JenisKelaminsModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'jenis_kelamin' => 'required|is_unique[jenis_kelamins.jenis_kelamin]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

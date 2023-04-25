@@ -39,6 +39,18 @@ class BantuansModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'bantuan' => 'required',
+        'sumber' => 'required',
+        'penerima' => 'required',
+        'jumlah' => 'required',
+        'satuan' => 'required',
+        'foto' => 'uploaded[foto]|max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+        'waktu_terima' => 'required',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

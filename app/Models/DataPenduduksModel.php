@@ -15,24 +15,25 @@ class DataPenduduksModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-    'nik',
-    'id_data_nkks',
-    'id_agama',
-    'id_golongan_darahs',
-    'id_pendidikans',
-    'id_status_hub_dlm_kels',
-    'id_kewarganegaraans',
-    'id_jenis_kelamins',
-    'id_provinsis',
-    'id_kabupatens',
-    'id_kecamatans',
-    'id_desas',
-    'alamat_lengkap',
-    'pekerjaan',
-    'foto',
-    'created_by',
-    'updated_by',
-];
+        'nik',
+        'nama_lengkap',
+        'id_data_nkks',
+        'id_agamas',
+        'id_golongan_darahs',
+        'id_pendidikans',
+        'id_status_hub_dlm_kels',
+        'id_kewarganegaraans',
+        'id_jenis_kelamins',
+        'id_provinsis',
+        'id_kabupatens',
+        'id_kecamatans',
+        'id_desas',
+        'alamat_lengkap',
+        'pekerjaan',
+        'foto',
+        'created_by',
+        'updated_by',
+    ];
 
     // Dates
     protected $useTimestamps = true;
@@ -46,6 +47,26 @@ class DataPenduduksModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'nik' => 'required|is_unique[data_penduduks.nik]',
+        'nama_lengkap' => 'required',
+        'id_data_nkks' => 'required|is_not_unique[data_nkks.id]',
+        'id_agamas' => 'required|is_not_unique[agamas.id]',
+        'id_golongan_darahs' => 'required|is_not_unique[golongan_darahs.id]',
+        'id_pendidikans' => 'required|is_not_unique[pendidikans.id]',
+        'id_status_hub_dlm_kels' => 'required|is_not_unique[status_hub_dlm_kels.id]',
+        'id_kewarganegaraans' => 'required|is_not_unique[kewarganegaraans.id]',
+        'id_jenis_kelamins' => 'required|is_not_unique[jenis_kelamins.id]',
+        'id_provinsis' => 'required|is_not_unique[provinsis.id]',
+        'id_kabupatens' => 'required|is_not_unique[kabupatens.id]',
+        'id_kecamatans' => 'required|is_not_unique[kecamatans.id]',
+        'id_desas' => 'required|is_not_unique[desas.id]',
+        'alamat_lengkap' => 'required',
+        'pekerjaan' => 'required',
+        'foto' => 'uploaded[foto]|max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

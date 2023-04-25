@@ -32,6 +32,11 @@ class GolonganDarahsModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'golongan_darah' => 'required|is_unique[golongan_darahs.golongan_darah]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

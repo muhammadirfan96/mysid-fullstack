@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AsetPrasaranaPemerintahanDesasModel extends Model
+class DataWilayahsModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'aset_prasarana_pemerintahan_desas';
+    protected $table            = 'data_wilayahs';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,9 +15,20 @@ class AsetPrasaranaPemerintahanDesasModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id_provinsis',
+        'id_kabupatens',
+        'id_kecamatans',
+        'id_desas',
+        'aset_prasarana_ekonomi',
+        'aset_prasarana_ibadah',
+        'aset_prasarana_kesehatan',
         'aset_prasarana_pemerintahan_desa',
-        'jumlah',
-        'satuan',
+        'aset_prasarana_pendidikan',
+        'aset_prasarana_umum',
+        'lembaga_pelayanan',
+        'kebiasaan',
+        'sumber_daya_milik_warga',
+        'sumber_daya_alam',
         'created_by',
         'updated_by',
     ];
@@ -34,6 +45,14 @@ class AsetPrasaranaPemerintahanDesasModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'id_provinsis' => 'required|is_not_unique[provinsis.id]|is_unique[data_wilayahs.id_provinsis]',
+        'id_kabupatens' => 'required|is_not_unique[kabupatens.id]|is_unique[data_wilayahs.id_kabupatens]',
+        'id_kecamatans' => 'required|is_not_unique[kecamatans.id]|is_unique[data_wilayahs.id_kecamatans]',
+        'id_desas' => 'required|is_not_unique[desas.id]|is_unique[data_wilayahs.id_desas]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

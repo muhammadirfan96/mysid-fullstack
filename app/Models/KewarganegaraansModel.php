@@ -32,6 +32,11 @@ class KewarganegaraansModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'kewarganegaraan' => 'required|is_unique[kewarganegaraans.kewarganegaraan]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

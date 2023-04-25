@@ -32,6 +32,11 @@ class TingkatKesejahteraansModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'tingkat_kesejahteraan' => 'required|is_unique[tingkat_kesejahteraans.tingkat_kesejahteraan]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;

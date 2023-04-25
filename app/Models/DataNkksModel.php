@@ -34,6 +34,13 @@ class DataNkksModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+    public $myValidationRules = [
+        'nkk' => 'required|is_unique[data_nkks.nkk]',
+        'id_tingkat_kesejahteraans' => 'required|is_not_unique[tingkat_kesejahteraans.id]',
+        'id_sumber_penghasilan_utamas' => 'required|is_not_unique[sumber_penghasilan_utamas.id]',
+        'created_by' => 'required',
+        'updated_by' => 'required',
+    ];
 
     // Callbacks
     protected $allowCallbacks = true;
