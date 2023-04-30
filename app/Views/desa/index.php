@@ -63,7 +63,7 @@
     const tbody = document.querySelector('#tbody')
     const img_preview = document.querySelector('#img_preview')
 
-    const tr_tbody = (item) => {
+    const tr_tbody = item => {
         return `<tr>
                     <td>
                         <button onclick="show_ubah(${item.id})" type="button">update</button>
@@ -139,7 +139,7 @@
         form_input.onsubmit = () => tambah(event)
     }
 
-    const tambah = (event) => {
+    const tambah = event => {
         event.preventDefault()
         const formData = new FormData()
         formData.append('desa', desa.value)
@@ -155,7 +155,7 @@
         fr.onload = () => img_preview.src = fr.result
     }
 
-    const show_ubah = async (id) => {
+    const show_ubah = async id => {
         form_input.reset()
         modal_form.style.display = ''
         head_form.innerHTML = 'form ubah data'
