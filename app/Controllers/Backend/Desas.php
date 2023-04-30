@@ -138,10 +138,11 @@ class Desas extends ResourceController
         return $this->respondDeleted($response);
     }
 
-    public function find($key = null, $limit = 0, $offset = 0)
+    public function find($key = '*', $limit = 0, $offset = 0)
     {
         $where = "desa LIKE '%$key%'";
         $data = $this->model->where($where)->orderBy('id', 'DESC')->findAll($limit, $offset);
+        if ($key == '*') $data = $this->model->orderBy('id', 'DESC')->findAll($limit, $offset);
         return $this->respond($data);
     }
 }
