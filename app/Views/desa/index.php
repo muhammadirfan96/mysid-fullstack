@@ -103,6 +103,22 @@
         }
     }
 
+    const generate_isi_tabel = async (offset = 0) => {
+        try {
+            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`)
+            const result = await response.json()
+
+            let all_tr_table = ``
+            result.forEach(item => {
+                all_tr_table += tr_tbody(item)
+            });
+
+            tbody.innerHTML = all_tr_table
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
     const update_page = () => {
         generate_isi_page_list()
         generate_isi_tabel()
@@ -196,22 +212,6 @@
             console.error("Error:", error)
         }
         update_page()
-    }
-
-    const generate_isi_tabel = async (offset = 0) => {
-        try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`)
-            const result = await response.json()
-
-            let all_tr_table = ``
-            result.forEach(item => {
-                all_tr_table += tr_tbody(item)
-            });
-
-            tbody.innerHTML = all_tr_table
-        } catch (error) {
-            console.error("Error:", error)
-        }
     }
 
     modal_form.style.display = 'none'
