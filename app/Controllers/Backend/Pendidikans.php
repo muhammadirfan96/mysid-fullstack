@@ -120,6 +120,7 @@ class Pendidikans extends ResourceController
     {
         $where = "pendidikan LIKE '%$key%'";
         $data = $this->model->where($where)->orderBy('id', 'DESC')->findAll($limit, $offset);
+        if ($key == '*') $data = $this->model->orderBy('id', 'DESC')->findAll($limit, $offset);
         return $this->respond($data);
     }
 }

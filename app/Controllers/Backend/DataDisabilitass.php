@@ -125,9 +125,10 @@ class DataDisabilitass extends ResourceController
         return $this->respondDeleted($response);
     }
 
-    public function find($key = null, $limit = 0, $offset = 0)
+    public function find($key, $limit = 0, $offset = 0)
     {
         $where = "disabilitas LIKE '%$key%'";
+        if ($key == '*') $where = null;
 
         $data_disabilitass = $this->db->table('data_disabilitass')
             ->orderBy('data_disabilitass.id', 'DESC')

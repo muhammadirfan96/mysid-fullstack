@@ -172,4 +172,168 @@ class DataPenduduks extends ResourceController
 
         return $this->respondDeleted($response);
     }
+
+    public function find($key, $limit = 0, $offset = 0)
+    {
+        if (str_contains($key, '@')) {
+            $keys = explode("@", $key);
+            if (str_contains($key, 'nama_lengkap')) $where = "nama_lengkap LIKE '%$keys[1]%'";
+            if (str_contains($key, 'nik')) $where = "nik LIKE '%$keys[1]%'";
+            if (str_contains($key, 'nkk')) $where = "id_data_nkks = '$keys[1]'";
+        } else {
+            $where = null;
+        }
+
+
+        $data_penduduks = $this->db->table('data_penduduks')
+            ->orderBy('data_penduduks.id', 'DESC')
+            ->getWhere($where, $limit, $offset)
+            ->getResultArray();
+
+        $data_nkks = $this->db->table('data_nkks')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($data_nkks as $data_nkk) {
+                if ($data_penduduk['id_data_nkks'] == $data_nkk['id']) {
+                    $data_penduduks[$key]['data_nkk'] = $data_nkk['data_nkk'];
+                }
+            }
+        }
+
+        $agamas = $this->db->table('agamas')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($agamas as $agama) {
+                if ($data_penduduk['id_agamas'] == $agama['id']) {
+                    $data_penduduks[$key]['agama'] = $agama['agama'];
+                }
+            }
+        }
+
+        $golongan_darahs = $this->db->table('golongan_darahs')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($golongan_darahs as $golongan_darah) {
+                if ($data_penduduk['id_golongan_darahs'] == $golongan_darah['id']) {
+                    $data_penduduks[$key]['golongan_darah'] = $golongan_darah['golongan_darah'];
+                }
+            }
+        }
+
+        $pendidikans = $this->db->table('pendidikans')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($pendidikans as $pendidikan) {
+                if ($data_penduduk['id_pendidikans'] == $pendidikan['id']) {
+                    $data_penduduks[$key]['pendidikan'] = $pendidikan['pendidikan'];
+                }
+            }
+        }
+
+        $pendidikans = $this->db->table('pendidikans')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($pendidikans as $pendidikan) {
+                if ($data_penduduk['id_pendidikans'] == $pendidikan['id']) {
+                    $data_penduduks[$key]['pendidikan'] = $pendidikan['pendidikan'];
+                }
+            }
+        }
+
+        $status_hub_dlm_kels = $this->db->table('status_hub_dlm_kels')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($status_hub_dlm_kels as $status_hub_dlm_kel) {
+                if ($data_penduduk['id_status_hub_dlm_kels'] == $status_hub_dlm_kel['id']) {
+                    $data_penduduks[$key]['status_hub_dlm_kel'] = $status_hub_dlm_kel['status_hub_dlm_kel'];
+                }
+            }
+        }
+
+        $kewarganegaraans = $this->db->table('kewarganegaraans')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($kewarganegaraans as $kewarganegaraan) {
+                if ($data_penduduk['id_kewarganegaraans'] == $kewarganegaraan['id']) {
+                    $data_penduduks[$key]['kewarganegaraan'] = $kewarganegaraan['kewarganegaraan'];
+                }
+            }
+        }
+
+        $jenis_kelamins = $this->db->table('jenis_kelamins')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($jenis_kelamins as $jenis_kelamin) {
+                if ($data_penduduk['id_jenis_kelamins'] == $jenis_kelamin['id']) {
+                    $data_penduduks[$key]['jenis_kelamin'] = $jenis_kelamin['jenis_kelamin'];
+                }
+            }
+        }
+
+        $provinsis = $this->db->table('provinsis')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($provinsis as $provinsi) {
+                if ($data_penduduk['id_provinsis'] == $provinsi['id']) {
+                    $data_penduduks[$key]['provinsi'] = $provinsi['provinsi'];
+                }
+            }
+        }
+
+        $kabupatens = $this->db->table('kabupatens')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($kabupatens as $kabupaten) {
+                if ($data_penduduk['id_kabupatens'] == $kabupaten['id']) {
+                    $data_penduduks[$key]['kabupaten'] = $kabupaten['kabupaten'];
+                }
+            }
+        }
+
+        $kecamatans = $this->db->table('kecamatans')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($kecamatans as $kecamatan) {
+                if ($data_penduduk['id_kecamatans'] == $kecamatan['id']) {
+                    $data_penduduks[$key]['kecamatan'] = $kecamatan['kecamatan'];
+                }
+            }
+        }
+
+        $desas = $this->db->table('desas')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($desas as $desa) {
+                if ($data_penduduk['id_desas'] == $desa['id']) {
+                    $data_penduduks[$key]['desa'] = $desa['desa'];
+                }
+            }
+        }
+
+        return $this->respond($data_penduduks);
+    }
 }

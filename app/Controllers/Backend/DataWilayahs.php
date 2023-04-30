@@ -348,20 +348,16 @@ class DataWilayahs extends ResourceController
         return $this->respondDeleted($response);
     }
 
-    public function find($key = null, $limit = 0, $offset = 0)
+    public function find($key, $limit = 0, $offset = 0)
     {
-        $keys = explode("@", $key);
-        if (str_contains($key, 'provinsi')) {
-            $where = "id_provinsis = '$keys[1]'";
-        }
-        if (str_contains($key, 'kabupaten')) {
-            $where = "id_kabupatens = '$keys[1]'";
-        }
-        if (str_contains($key, 'kecamatan')) {
-            $where = "id_kecamatans = '$keys[1]'";
-        }
-        if (str_contains($key, 'desa')) {
-            $where = "id_desas = '$keys[1]'";
+        if (str_contains($key, '@')) {
+            $keys = explode("@", $key);
+            if (str_contains($key, 'provinsi')) $where = "id_provinsis = '$keys[1]'";
+            if (str_contains($key, 'kabupaten')) $where = "id_kabupatens = '$keys[1]'";
+            if (str_contains($key, 'kecamatan')) $where = "id_kecamatans = '$keys[1]'";
+            if (str_contains($key, 'desa')) $where = "id_desas = '$keys[1]'";
+        } else {
+            $where = null;
         }
 
         $data_wilayahs = $this->db->table('data_wilayahs')
