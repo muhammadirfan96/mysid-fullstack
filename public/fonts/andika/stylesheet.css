@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Andika';
+    src: url('Andika.woff2') format('woff2'),
+        url('Andika.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
