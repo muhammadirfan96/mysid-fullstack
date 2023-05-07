@@ -15,6 +15,22 @@ class Bantuans extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'id_provinsis' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+            ],
+            'id_kabupatens' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+            ],
+            'id_kecamatans' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+            ],
+            'id_desas' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+            ],
             'bantuan' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',

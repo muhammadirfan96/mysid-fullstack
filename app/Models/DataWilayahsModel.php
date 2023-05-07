@@ -46,9 +46,9 @@ class DataWilayahsModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
-        'id_provinsis' => 'required|is_not_unique[provinsis.id]|is_unique[data_wilayahs.id_provinsis]',
-        'id_kabupatens' => 'required|is_not_unique[kabupatens.id]|is_unique[data_wilayahs.id_kabupatens]',
-        'id_kecamatans' => 'required|is_not_unique[kecamatans.id]|is_unique[data_wilayahs.id_kecamatans]',
+        'id_provinsis' => 'required|is_not_unique[provinsis.id]',
+        'id_kabupatens' => 'required|is_not_unique[kabupatens.id]',
+        'id_kecamatans' => 'required|is_not_unique[kecamatans.id]',
         'id_desas' => 'required|is_not_unique[desas.id]|is_unique[data_wilayahs.id_desas]',
         'created_by' => 'required',
         'updated_by' => 'required',

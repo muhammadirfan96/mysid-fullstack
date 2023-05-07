@@ -14,14 +14,13 @@
                 <p class="text-center font-medium text-lg" id="head_form"></p>
                 <div class="bg-red-50 rounded-md p-1 my-1 text-xs italic text-red-700 border border-red-900" id="err_msg"></div>
                 <form class="mt-2" enctype="multipart/form-data" id="form_input">
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nama desa" type="text" id="desa" autocomplete="off">
-                    <div class="flex flex-wrap my-2">
-                        <div>
-                            <label class="p-1 border border-cyan-500 rounded-md" for="logo">logo</label>
-                            <input type="file" id="logo" onchange="generate_img_preview()">
-                        </div>
-                        <img class="w-24 h-24 rounded-full" id="img_preview">
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nama disabilitas" type="text" id="disabilitas" autocomplete="off">
+
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="data_penduduk"></select>
+                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_data_penduduk()">show penduduk</button>
                     </div>
+
                     <button class="bg-cyan-500 text-lg text-white font-medium py-1 rounded-md w-full" type="submit">submit</button>
                 </form>
             </div>
@@ -60,8 +59,9 @@
                 <thead class="bg-cyan-100 p-1 border-b-2">
                     <tr>
                         <th width="1%">action</th>
-                        <th>logo</th>
-                        <th>desa</th>
+                        <th>disabilitas</th>
+                        <th>nik</th>
+                        <th>nama lengkap</th>
                         <th>created_at</th>
                         <th>created_by</th>
                         <th>updated_at</th>
@@ -75,9 +75,10 @@
 </div>
 
 <script>
-    const api = '<?= base_url('/desas') ?>'
-    const desa = document.querySelector('#desa')
-    const logo = document.querySelector('#logo')
+    const api = '<?= base_url('/datadisabilitass') ?>'
+    const api_data_penduduk = '<?= base_url('/datapenduduks') ?>'
+    const disabilitas = document.querySelector('#disabilitas')
+    const data_penduduk = document.querySelector('#data_penduduk')
     const modal_form = document.querySelector('#modal_form')
     const head_form = document.querySelector('#head_form')
     const err_msg = document.querySelector('#err_msg')
@@ -86,25 +87,25 @@
     const per_page = document.querySelector('#per_page')
     const page_list = document.querySelector('#page_list')
     const tbody = document.querySelector('#tbody')
-    const img_preview = document.querySelector('#img_preview')
 
-    const tr_tbody = item => {
-        return `<tr class="border-b border-cyan-500">
-                    <td>
-                        <button class="px-3 py-1 rounded-sm w-full mb-1 text-sm bg-green-300" onclick="show_ubah(${item.id})" type="button">update</button>
-                        <button class="px-3 py-1 rounded-sm w-full text-sm bg-red-300" onclick="hapus(event, ${item.id})" type="button">delete</button>
-                    </td>
-                    <td>
-                        <div class="w-16 mx-auto">
-                            <img class="w-16 h-16 rounded-full mx-auto" src="img/logo/desa/${item.logo}" alt="${item.logo}">
-                        </div>
-                    </td>
-                    <td>${item.desa}</td>
-                    <td>${item.created_at}</td>
-                    <td>${item.created_by}</td>
-                    <td>${item.updated_at}</td>
-                    <td>${item.updated_by}</td>
-                </tr>`
+    const option_select_data_penduduk = item => {
+        return `<option value="${item.id}">${item.nama_lengkap}</option>`
+    }
+
+    const generate_isi_option_select_data_penduduk = async () => {
+        try {
+            const response = await fetch(`${api_data_penduduk}/find/*`)
+            const result = await response.json()
+
+            let all_option_select_data_penduduk = ``
+            result.forEach(item => {
+                all_option_select_data_penduduk += option_select_data_penduduk(item)
+            });
+
+            data_penduduk.innerHTML = all_option_select_data_penduduk
+        } catch (error) {
+            console.error("Error:", error)
+        }
     }
 
     const isi_page_list = halaman => {
@@ -130,17 +131,33 @@
         }
     }
 
+    const tr_tbody = item => {
+        return `<tr class="border-b border-cyan-500">
+                    <td>
+                        <button class="px-3 py-1 rounded-sm w-full mb-1 text-sm bg-green-300" onclick="show_ubah(${item.id})" type="button">update</button>
+                        <button class="px-3 py-1 rounded-sm w-full text-sm bg-red-300" onclick="hapus(event, ${item.id})" type="button">delete</button>
+                    </td>
+                    <td>${item.disabilitas}</td>
+                    <td>${item.nik}</td>
+                    <td>${item.nama_lengkap}</td>
+                    <td>${item.created_at}</td>
+                    <td>${item.created_by}</td>
+                    <td>${item.updated_at}</td>
+                    <td>${item.updated_by}</td>
+                </tr>`
+    }
+
     const generate_isi_tr_tbody = async (offset = 0) => {
         try {
             const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`)
             const result = await response.json()
 
-            let all_tr_table = ``
+            let all_tr_tbody = ``
             result.forEach(item => {
-                all_tr_table += tr_tbody(item)
+                all_tr_tbody += tr_tbody(item)
             });
 
-            tbody.innerHTML = all_tr_table
+            tbody.innerHTML = all_tr_tbody
         } catch (error) {
             console.error("Error:", error)
         }
@@ -186,17 +203,11 @@
     const tambah = event => {
         event.preventDefault()
         const formData = new FormData()
-        formData.append('desa', desa.value)
-        formData.append('logo', logo.files[0])
+        formData.append('disabilitas', disabilitas.value)
+        formData.append('id_data_penduduks', data_penduduk.value)
         formData.append('created_by', 'admin')
         formData.append('updated_by', 'admin')
         upload(`${api}`, formData)
-    }
-
-    const generate_img_preview = () => {
-        const fr = new FileReader()
-        fr.readAsDataURL(logo.files[0])
-        fr.onload = () => img_preview.src = fr.result
     }
 
     const show_ubah = id => {
@@ -208,8 +219,12 @@
                 const response = await fetch(`${api}/${id}`)
                 const result = await response.json()
 
-                desa.value = result.desa
-                img_preview.src = `img/logo/desa/${result.logo}`
+                disabilitas.value = result.disabilitas
+
+                const response_data_penduduk = await fetch(`${api_data_penduduk}/${result.id_data_penduduks}`)
+                const result_data_penduduk = await response_data_penduduk.json()
+                data_penduduk.innerHTML = `<option value="${result_data_penduduk.id}">${result_data_penduduk.nama_lengkap}</option>`
+
                 form_input.onsubmit = () => ubah(event, id)
             } catch (error) {
                 console.error("Error:", error)
@@ -221,8 +236,8 @@
     const ubah = (event, id) => {
         event.preventDefault()
         const formData = new FormData()
-        formData.append('desa', desa.value)
-        formData.append('logo', logo.files[0])
+        formData.append('disabilitas', disabilitas.value)
+        formData.append('id_data_penduduks', data_penduduk.value)
         formData.append('created_by', 'admin')
         formData.append('updated_by', 'admin')
         formData.append('_method', 'PATCH')
@@ -231,7 +246,7 @@
 
     const close_modal = () => {
         form_input.reset()
-        img_preview.src = ''
+        data_penduduk.innerHTML = ''
         err_msg.innerHTML = ''
         err_msg.style.display = 'none'
         modal_form.style.display = 'none'
@@ -258,7 +273,6 @@
 
     err_msg.style.display = 'none'
     modal_form.style.display = 'none'
-    logo.style.display = 'none'
     generate_isi_page_list()
     generate_isi_tr_tbody()
 </script>

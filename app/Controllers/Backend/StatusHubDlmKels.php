@@ -75,6 +75,7 @@ class StatusHubDlmKels extends ResourceController
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        $rules['status_hub_dlm_kel'] = 'required';
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [

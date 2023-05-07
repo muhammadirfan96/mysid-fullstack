@@ -75,6 +75,7 @@ class SumberPenghasilanUtamas extends ResourceController
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        $rules['sumber_penghasilan_utama'] = 'required';
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [

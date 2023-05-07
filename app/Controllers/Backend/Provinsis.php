@@ -81,6 +81,7 @@ class Provinsis extends ResourceController
 
         $logo = $this->request->getFile('logo');
         $rules = $this->model->myValidationRules;
+        $rules['provinsi'] = 'required';
         if ($logo == '') {
             unset($rules['logo']);
         }

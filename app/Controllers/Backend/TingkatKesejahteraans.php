@@ -75,6 +75,7 @@ class TingkatKesejahteraans extends ResourceController
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        $rules['tingkat_kesejahteraan'] = 'required';
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [

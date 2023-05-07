@@ -75,6 +75,7 @@ class Agamas extends ResourceController
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        $rules['agama'] = 'required';
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [

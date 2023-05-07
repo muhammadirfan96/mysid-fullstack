@@ -75,6 +75,7 @@ class JenisKelamins extends ResourceController
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        $rules['jenis_kelamin'] = 'required';
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [

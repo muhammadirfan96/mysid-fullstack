@@ -102,6 +102,7 @@ class DataPenduduks extends ResourceController
 
         $foto = $this->request->getFile('foto');
         $rules = $this->model->myValidationRules;
+        $rules['nik'] = 'required';
         if ($foto == '') {
             unset($rules['foto']);
         }
@@ -179,7 +180,13 @@ class DataPenduduks extends ResourceController
             $keys = explode("@", $key);
             if (str_contains($key, 'nama_lengkap')) $where = "nama_lengkap LIKE '%$keys[1]%'";
             if (str_contains($key, 'nik')) $where = "nik LIKE '%$keys[1]%'";
-            if (str_contains($key, 'nkk')) $where = "id_data_nkks = '$keys[1]'";
+            if (str_contains($key, 'nkk')) {
+                $data_nkksCrr = $this->db->table('data_nkks')
+                    ->getWhere("nkk LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $data_nkksId = $data_nkksCrr[0]['id'];
+                $where = "id_data_nkks = '$data_nkksId'";
+            }
         } else {
             $where = null;
         }
@@ -197,7 +204,7 @@ class DataPenduduks extends ResourceController
         foreach ($data_penduduks as $key => $data_penduduk) {
             foreach ($data_nkks as $data_nkk) {
                 if ($data_penduduk['id_data_nkks'] == $data_nkk['id']) {
-                    $data_penduduks[$key]['data_nkk'] = $data_nkk['data_nkk'];
+                    $data_penduduks[$key]['nkk'] = $data_nkk['nkk'];
                 }
             }
         }

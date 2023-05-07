@@ -81,6 +81,7 @@ class Kabupatens extends ResourceController
 
         $logo = $this->request->getFile('logo');
         $rules = $this->model->myValidationRules;
+        $rules['kabupaten'] = 'required';
         if ($logo == '') {
             unset($rules['logo']);
         }

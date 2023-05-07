@@ -75,6 +75,7 @@ class Pendidikans extends ResourceController
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        $rules['pendidikan'] = 'required';
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [

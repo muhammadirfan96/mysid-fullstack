@@ -53,8 +53,8 @@ class DataWilayahs extends ResourceController
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $aset_prasarana_ekonomi = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_ekonomi')) || $this->request->getVar('nama_aset_prasarana_ekonomi') == [""]) return $this->fail('The nama_aset_prasarana_ekonomi key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_ekonomi')) || $this->request->getVar('jumlah_aset_prasarana_ekonomi') == [""]) return $this->fail('The jumlah_aset_prasarana_ekonomi key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_ekonomi') == [""]) return $this->fail('The nama_aset_prasarana_ekonomi value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_ekonomi') == [""]) return $this->fail('The jumlah_aset_prasarana_ekonomi value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_ekonomi') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_ekonomi') as $k => $jumlah) {
                 if ($k === $key) {
@@ -63,8 +63,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_ibadah = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_ibadah')) || $this->request->getVar('nama_aset_prasarana_ibadah') == [""]) return $this->fail('The nama_aset_prasarana_ibadah key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_ibadah')) || $this->request->getVar('jumlah_aset_prasarana_ibadah') == [""]) return $this->fail('The jumlah_aset_prasarana_ibadah key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_ibadah') == [""]) return $this->fail('The nama_aset_prasarana_ibadah value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_ibadah') == [""]) return $this->fail('The jumlah_aset_prasarana_ibadah value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_ibadah') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_ibadah') as $k => $jumlah) {
                 if ($k === $key) {
@@ -73,8 +73,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_kesehatan = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_kesehatan')) || $this->request->getVar('nama_aset_prasarana_kesehatan') == [""]) return $this->fail('The nama_aset_prasarana_kesehatan key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_kesehatan')) || $this->request->getVar('jumlah_aset_prasarana_kesehatan') == [""]) return $this->fail('The jumlah_aset_prasarana_kesehatan key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_kesehatan') == [""]) return $this->fail('The nama_aset_prasarana_kesehatan value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_kesehatan') == [""]) return $this->fail('The jumlah_aset_prasarana_kesehatan value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_kesehatan') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_kesehatan') as $k => $jumlah) {
                 if ($k === $key) {
@@ -83,8 +83,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_pemerintahan_desa = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_pemerintahan_desa')) || $this->request->getVar('nama_aset_prasarana_pemerintahan_desa') == [""]) return $this->fail('The nama_aset_prasarana_pemerintahan_desa key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_pemerintahan_desa')) || $this->request->getVar('jumlah_aset_prasarana_pemerintahan_desa') == [""]) return $this->fail('The jumlah_aset_prasarana_pemerintahan_desa key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_pemerintahan_desa') == [""]) return $this->fail('The nama_aset_prasarana_pemerintahan_desa value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_pemerintahan_desa') == [""]) return $this->fail('The jumlah_aset_prasarana_pemerintahan_desa value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_pemerintahan_desa') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_pemerintahan_desa') as $k => $jumlah) {
                 if ($k === $key) {
@@ -93,8 +93,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_pendidikan = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_pendidikan')) || $this->request->getVar('nama_aset_prasarana_pendidikan') == [""]) return $this->fail('The nama_aset_prasarana_pendidikan key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_pendidikan')) || $this->request->getVar('jumlah_aset_prasarana_pendidikan') == [""]) return $this->fail('The jumlah_aset_prasarana_pendidikan key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_pendidikan') == [""]) return $this->fail('The nama_aset_prasarana_pendidikan value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_pendidikan') == [""]) return $this->fail('The jumlah_aset_prasarana_pendidikan value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_pendidikan') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_pendidikan') as $k => $jumlah) {
                 if ($k === $key) {
@@ -103,8 +103,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_umum = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_umum')) || $this->request->getVar('nama_aset_prasarana_umum') == [""]) return $this->fail('The nama_aset_prasarana_umum key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_umum')) || $this->request->getVar('jumlah_aset_prasarana_umum') == [""]) return $this->fail('The jumlah_aset_prasarana_umum key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_umum') == [""]) return $this->fail('The nama_aset_prasarana_umum value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_umum') == [""]) return $this->fail('The jumlah_aset_prasarana_umum value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_umum') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_umum') as $k => $jumlah) {
                 if ($k === $key) {
@@ -113,8 +113,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $lembaga_pelayanan = '';
-        if (!is_array($this->request->getVar('nama_lembaga_pelayanan')) || $this->request->getVar('nama_lembaga_pelayanan') == [""]) return $this->fail('The nama_lembaga_pelayanan key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_lembaga_pelayanan')) || $this->request->getVar('jumlah_lembaga_pelayanan') == [""]) return $this->fail('The jumlah_lembaga_pelayanan key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_lembaga_pelayanan') == [""]) return $this->fail('The nama_lembaga_pelayanan value is not null');
+        if ($this->request->getVar('jumlah_lembaga_pelayanan') == [""]) return $this->fail('The jumlah_lembaga_pelayanan value is not null');
         foreach ($this->request->getVar('nama_lembaga_pelayanan') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_lembaga_pelayanan') as $k => $jumlah) {
                 if ($k === $key) {
@@ -123,8 +123,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $kebiasaan = '';
-        if (!is_array($this->request->getVar('nama_kebiasaan')) || $this->request->getVar('nama_kebiasaan') == [""]) return $this->fail('The nama_kebiasaan key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('ket_kebiasaan')) || $this->request->getVar('ket_kebiasaan') == [""]) return $this->fail('The ket_kebiasaan key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_kebiasaan') == [""]) return $this->fail('The nama_kebiasaan value is not null');
+        if ($this->request->getVar('ket_kebiasaan') == [""]) return $this->fail('The ket_kebiasaan value is not null');
         foreach ($this->request->getVar('nama_kebiasaan') as $key => $nama) {
             foreach ($this->request->getVar('ket_kebiasaan') as $k => $ket) {
                 if ($k === $key) {
@@ -133,8 +133,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $sumber_daya_milik_warga = '';
-        if (!is_array($this->request->getVar('nama_sumber_daya_milik_warga')) || $this->request->getVar('nama_sumber_daya_milik_warga') == [""]) return $this->fail('The nama_sumber_daya_milik_warga key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_sumber_daya_milik_warga')) || $this->request->getVar('jumlah_sumber_daya_milik_warga') == [""]) return $this->fail('The jumlah_sumber_daya_milik_warga key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_sumber_daya_milik_warga') == [""]) return $this->fail('The nama_sumber_daya_milik_warga value is not null');
+        if ($this->request->getVar('jumlah_sumber_daya_milik_warga') == [""]) return $this->fail('The jumlah_sumber_daya_milik_warga value is not null');
         foreach ($this->request->getVar('nama_sumber_daya_milik_warga') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_sumber_daya_milik_warga') as $k => $jumlah) {
                 if ($k === $key) {
@@ -143,8 +143,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $sumber_daya_alam = '';
-        if (!is_array($this->request->getVar('nama_sumber_daya_alam')) || $this->request->getVar('nama_sumber_daya_alam') == [""]) return $this->fail('The nama_sumber_daya_alam key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('ket_sumber_daya_alam')) || $this->request->getVar('ket_sumber_daya_alam') == [""]) return $this->fail('The ket_sumber_daya_alam key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_sumber_daya_alam') == [""]) return $this->fail('The nama_sumber_daya_alam value is not null');
+        if ($this->request->getVar('ket_sumber_daya_alam') == [""]) return $this->fail('The ket_sumber_daya_alam value is not null');
         foreach ($this->request->getVar('nama_sumber_daya_alam') as $key => $nama) {
             foreach ($this->request->getVar('ket_sumber_daya_alam') as $k => $ket) {
                 if ($k === $key) {
@@ -200,8 +200,8 @@ class DataWilayahs extends ResourceController
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $aset_prasarana_ekonomi = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_ekonomi')) || $this->request->getVar('nama_aset_prasarana_ekonomi') == [""]) return $this->fail('The nama_aset_prasarana_ekonomi key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_ekonomi')) || $this->request->getVar('jumlah_aset_prasarana_ekonomi') == [""]) return $this->fail('The jumlah_aset_prasarana_ekonomi key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_ekonomi') == [""]) return $this->fail('The nama_aset_prasarana_ekonomi value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_ekonomi') == [""]) return $this->fail('The jumlah_aset_prasarana_ekonomi value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_ekonomi') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_ekonomi') as $k => $jumlah) {
                 if ($k === $key) {
@@ -210,8 +210,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_ibadah = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_ibadah')) || $this->request->getVar('nama_aset_prasarana_ibadah') == [""]) return $this->fail('The nama_aset_prasarana_ibadah key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_ibadah')) || $this->request->getVar('jumlah_aset_prasarana_ibadah') == [""]) return $this->fail('The jumlah_aset_prasarana_ibadah key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_ibadah') == [""]) return $this->fail('The nama_aset_prasarana_ibadah value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_ibadah') == [""]) return $this->fail('The jumlah_aset_prasarana_ibadah value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_ibadah') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_ibadah') as $k => $jumlah) {
                 if ($k === $key) {
@@ -220,8 +220,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_kesehatan = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_kesehatan')) || $this->request->getVar('nama_aset_prasarana_kesehatan') == [""]) return $this->fail('The nama_aset_prasarana_kesehatan key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_kesehatan')) || $this->request->getVar('jumlah_aset_prasarana_kesehatan') == [""]) return $this->fail('The jumlah_aset_prasarana_kesehatan key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_kesehatan') == [""]) return $this->fail('The nama_aset_prasarana_kesehatan value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_kesehatan') == [""]) return $this->fail('The jumlah_aset_prasarana_kesehatan value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_kesehatan') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_kesehatan') as $k => $jumlah) {
                 if ($k === $key) {
@@ -230,8 +230,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_pemerintahan_desa = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_pemerintahan_desa')) || $this->request->getVar('nama_aset_prasarana_pemerintahan_desa') == [""]) return $this->fail('The nama_aset_prasarana_pemerintahan_desa key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_pemerintahan_desa')) || $this->request->getVar('jumlah_aset_prasarana_pemerintahan_desa') == [""]) return $this->fail('The jumlah_aset_prasarana_pemerintahan_desa key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_pemerintahan_desa') == [""]) return $this->fail('The nama_aset_prasarana_pemerintahan_desa value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_pemerintahan_desa') == [""]) return $this->fail('The jumlah_aset_prasarana_pemerintahan_desa value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_pemerintahan_desa') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_pemerintahan_desa') as $k => $jumlah) {
                 if ($k === $key) {
@@ -240,8 +240,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_pendidikan = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_pendidikan')) || $this->request->getVar('nama_aset_prasarana_pendidikan') == [""]) return $this->fail('The nama_aset_prasarana_pendidikan key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_pendidikan')) || $this->request->getVar('jumlah_aset_prasarana_pendidikan') == [""]) return $this->fail('The jumlah_aset_prasarana_pendidikan key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_pendidikan') == [""]) return $this->fail('The nama_aset_prasarana_pendidikan value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_pendidikan') == [""]) return $this->fail('The jumlah_aset_prasarana_pendidikan value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_pendidikan') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_pendidikan') as $k => $jumlah) {
                 if ($k === $key) {
@@ -250,8 +250,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $aset_prasarana_umum = '';
-        if (!is_array($this->request->getVar('nama_aset_prasarana_umum')) || $this->request->getVar('nama_aset_prasarana_umum') == [""]) return $this->fail('The nama_aset_prasarana_umum key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_aset_prasarana_umum')) || $this->request->getVar('jumlah_aset_prasarana_umum') == [""]) return $this->fail('The jumlah_aset_prasarana_umum key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_aset_prasarana_umum') == [""]) return $this->fail('The nama_aset_prasarana_umum value is not null');
+        if ($this->request->getVar('jumlah_aset_prasarana_umum') == [""]) return $this->fail('The jumlah_aset_prasarana_umum value is not null');
         foreach ($this->request->getVar('nama_aset_prasarana_umum') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_aset_prasarana_umum') as $k => $jumlah) {
                 if ($k === $key) {
@@ -260,8 +260,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $lembaga_pelayanan = '';
-        if (!is_array($this->request->getVar('nama_lembaga_pelayanan')) || $this->request->getVar('nama_lembaga_pelayanan') == [""]) return $this->fail('The nama_lembaga_pelayanan key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_lembaga_pelayanan')) || $this->request->getVar('jumlah_lembaga_pelayanan') == [""]) return $this->fail('The jumlah_lembaga_pelayanan key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_lembaga_pelayanan') == [""]) return $this->fail('The nama_lembaga_pelayanan value is not null');
+        if ($this->request->getVar('jumlah_lembaga_pelayanan') == [""]) return $this->fail('The jumlah_lembaga_pelayanan value is not null');
         foreach ($this->request->getVar('nama_lembaga_pelayanan') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_lembaga_pelayanan') as $k => $jumlah) {
                 if ($k === $key) {
@@ -270,8 +270,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $kebiasaan = '';
-        if (!is_array($this->request->getVar('nama_kebiasaan')) || $this->request->getVar('nama_kebiasaan') == [""]) return $this->fail('The nama_kebiasaan key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('ket_kebiasaan')) || $this->request->getVar('ket_kebiasaan') == [""]) return $this->fail('The ket_kebiasaan key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_kebiasaan') == [""]) return $this->fail('The nama_kebiasaan value is not null');
+        if ($this->request->getVar('ket_kebiasaan') == [""]) return $this->fail('The ket_kebiasaan value is not null');
         foreach ($this->request->getVar('nama_kebiasaan') as $key => $nama) {
             foreach ($this->request->getVar('ket_kebiasaan') as $k => $ket) {
                 if ($k === $key) {
@@ -280,8 +280,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $sumber_daya_milik_warga = '';
-        if (!is_array($this->request->getVar('nama_sumber_daya_milik_warga')) || $this->request->getVar('nama_sumber_daya_milik_warga') == [""]) return $this->fail('The nama_sumber_daya_milik_warga key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('jumlah_sumber_daya_milik_warga')) || $this->request->getVar('jumlah_sumber_daya_milik_warga') == [""]) return $this->fail('The jumlah_sumber_daya_milik_warga key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_sumber_daya_milik_warga') == [""]) return $this->fail('The nama_sumber_daya_milik_warga value is not null');
+        if ($this->request->getVar('jumlah_sumber_daya_milik_warga') == [""]) return $this->fail('The jumlah_sumber_daya_milik_warga value is not null');
         foreach ($this->request->getVar('nama_sumber_daya_milik_warga') as $key => $nama) {
             foreach ($this->request->getVar('jumlah_sumber_daya_milik_warga') as $k => $jumlah) {
                 if ($k === $key) {
@@ -290,8 +290,8 @@ class DataWilayahs extends ResourceController
             }
         }
         $sumber_daya_alam = '';
-        if (!is_array($this->request->getVar('nama_sumber_daya_alam')) || $this->request->getVar('nama_sumber_daya_alam') == [""]) return $this->fail('The nama_sumber_daya_alam key (not value) is most array or value is not null');
-        if (!is_array($this->request->getVar('ket_sumber_daya_alam')) || $this->request->getVar('ket_sumber_daya_alam') == [""]) return $this->fail('The ket_sumber_daya_alam key (not value) is most array or value is not null');
+        if ($this->request->getVar('nama_sumber_daya_alam') == [""]) return $this->fail('The nama_sumber_daya_alam value is not null');
+        if ($this->request->getVar('ket_sumber_daya_alam') == [""]) return $this->fail('The ket_sumber_daya_alam value is not null');
         foreach ($this->request->getVar('nama_sumber_daya_alam') as $key => $nama) {
             foreach ($this->request->getVar('ket_sumber_daya_alam') as $k => $ket) {
                 if ($k === $key) {
@@ -352,10 +352,34 @@ class DataWilayahs extends ResourceController
     {
         if (str_contains($key, '@')) {
             $keys = explode("@", $key);
-            if (str_contains($key, 'provinsi')) $where = "id_provinsis = '$keys[1]'";
-            if (str_contains($key, 'kabupaten')) $where = "id_kabupatens = '$keys[1]'";
-            if (str_contains($key, 'kecamatan')) $where = "id_kecamatans = '$keys[1]'";
-            if (str_contains($key, 'desa')) $where = "id_desas = '$keys[1]'";
+            if (str_contains($key, 'provinsi')) {
+                $provinsisCrr = $this->db->table('provinsis')
+                    ->getWhere("provinsi LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $provinsiId = $provinsisCrr[0]['id'];
+                $where = "id_provinsis = '$provinsiId'";
+            }
+            if (str_contains($key, 'kabupaten')) {
+                $kabupatensCrr = $this->db->table('kabupatens')
+                    ->getWhere("kabupaten LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $kabupatenId = $kabupatensCrr[0]['id'];
+                $where = "id_kabupatens = '$kabupatenId'";
+            }
+            if (str_contains($key, 'kecamatan')) {
+                $kecamatansCrr = $this->db->table('kecamatans')
+                    ->getWhere("kecamatan LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $kecamatanId = $kecamatansCrr[0]['id'];
+                $where = "id_kecamatans = '$kecamatanId'";
+            }
+            if (str_contains($key, 'desa')) {
+                $desasCrr = $this->db->table('desas')
+                    ->getWhere("desa LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $desaId = $desasCrr[0]['id'];
+                $where = "id_desas = '$desaId'";
+            }
         } else {
             $where = null;
         }

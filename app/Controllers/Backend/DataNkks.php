@@ -84,6 +84,7 @@ class DataNkks extends ResourceController
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        $rules['nkk'] = 'required';
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [

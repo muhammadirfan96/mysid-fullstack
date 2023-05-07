@@ -75,6 +75,7 @@ class Kewarganegaraans extends ResourceController
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        $rules['kewarganegaraan'] = 'required';
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [

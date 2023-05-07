@@ -70,6 +70,14 @@ $routes->get('tingkatkesejahteraans/find/(:any)', 'Backend\TingkatKesejahteraans
 
 // FRONT END
 $routes->get('desa', 'Frontend\Desa::index');
+$routes->get('kecamatan', 'Frontend\Kecamatan::index');
+$routes->get('kabupaten', 'Frontend\Kabupaten::index');
+$routes->get('provinsi', 'Frontend\Provinsi::index');
+$routes->get('bantuan', 'Frontend\Bantuan::index');
+$routes->get('datankk', 'Frontend\DataNkk::index');
+$routes->get('datadisabilitas', 'Frontend\DataDisabilitas::index');
+$routes->get('datapenduduk', 'Frontend\DataPenduduk::index');
+$routes->get('datawilayah', 'Frontend\DataWilayah::index');
 
 /*
  * --------------------------------------------------------------------
