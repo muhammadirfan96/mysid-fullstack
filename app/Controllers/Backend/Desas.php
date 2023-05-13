@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Backend;
 
+use App\Libraries\GetUser;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -10,6 +11,13 @@ class Desas extends ResourceController
     use ResponseTrait;
     protected $modelName = 'App\Models\DesasModel';
     protected $format    = 'json';
+    protected $user;
+
+    public function __construct()
+    {
+        $this->user = new GetUser();
+    }
+
     /**
      * Return an array of resource objects, themselves in array format
      *
@@ -17,7 +25,10 @@ class Desas extends ResourceController
      */
     public function index()
     {
-        $data = $this->model->findAll();
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
+        $data = $this->model->orderBy('id', 'DESC')->findAll();
         return $this->respond($data);
     }
 
@@ -30,6 +41,12 @@ class Desas extends ResourceController
     {
         $data = $this->model->find($id);
         if (!$data) return $this->failNotFound('no data found');
+
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') {
+            $data = $this->model->where('desa', $currUser['desa'])->first();
+        }
+
         return $this->respond($data);
     }
 
@@ -40,6 +57,9 @@ class Desas extends ResourceController
      */
     public function create()
     {
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
@@ -74,6 +94,9 @@ class Desas extends ResourceController
      */
     public function update($id = null)
     {
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
@@ -119,6 +142,9 @@ class Desas extends ResourceController
      */
     public function delete($id = null)
     {
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
@@ -141,8 +167,15 @@ class Desas extends ResourceController
     public function find($key, $limit = 0, $offset = 0)
     {
         $where = "desa LIKE '%$key%'";
+        if ($key == '*') $where = '1=1';
+
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') {
+            $currDesa = $currUser['desa'];
+            $where = "desa = '$currDesa'";
+        }
+
         $data = $this->model->where($where)->orderBy('id', 'DESC')->findAll($limit, $offset);
-        if ($key == '*') $data = $this->model->orderBy('id', 'DESC')->findAll($limit, $offset);
         return $this->respond($data);
     }
 }

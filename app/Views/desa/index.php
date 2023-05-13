@@ -114,7 +114,11 @@
 
     const generate_isi_page_list = async () => {
         try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}`)
+            const response = await fetch(`${api}/find/${key_pencarian.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
             let total_data = 0
             result.forEach(item => total_data++);
@@ -132,7 +136,11 @@
 
     const generate_isi_tr_tbody = async (offset = 0) => {
         try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`)
+            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_tr_table = ``
@@ -156,6 +164,9 @@
             const response = await fetch(url, {
                 method: "POST",
                 body: formData,
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
             });
             const result = await response.json();
             if (result.status == 400) {
@@ -205,7 +216,11 @@
             modal_form.style.display = ''
             head_form.innerHTML = 'form ubah data'
             try {
-                const response = await fetch(`${api}/${id}`)
+                const response = await fetch(`${api}/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result = await response.json()
 
                 desa.value = result.desa
@@ -242,7 +257,10 @@
         questionAlert('the selected data will be permanently deleted. are you sure?', async () => {
             try {
                 const response = await fetch(`${api}/${id}`, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
                 })
                 const result = await response.json()
                 successAlert(result.messages.success)
@@ -256,11 +274,22 @@
         })
     }
 
+    function getCookie(cookieName) {
+        let cookie = {};
+        document.cookie.split(';').forEach(function(el) {
+            let [key, value] = el.split('=');
+            cookie[key.trim()] = value;
+        })
+        return cookie[cookieName];
+    }
+
     err_msg.style.display = 'none'
     modal_form.style.display = 'none'
     logo.style.display = 'none'
     generate_isi_page_list()
     generate_isi_tr_tbody()
 </script>
+
+<!-- <script src="/js/auth/getCookie.js"></script> -->
 
 <?= $this->endSection(); ?>

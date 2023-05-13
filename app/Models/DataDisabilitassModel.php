@@ -34,6 +34,10 @@ class DataDisabilitassModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
+        'id_provinsis' => 'required|is_not_unique[provinsis.id]',
+        'id_kabupatens' => 'required|is_not_unique[kabupatens.id]',
+        'id_kecamatans' => 'required|is_not_unique[kecamatans.id]',
+        'id_desas' => 'required|is_not_unique[desas.id]',
         'disabilitas' => 'required',
         'id_data_penduduks' => 'required|is_not_unique[data_penduduks.id]',
         'created_by' => 'required',

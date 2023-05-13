@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Backend;
 
+use App\Libraries\GetUser;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -10,6 +11,13 @@ class Provinsis extends ResourceController
     use ResponseTrait;
     protected $modelName = 'App\Models\ProvinsisModel';
     protected $format    = 'json';
+    protected $user;
+
+    public function __construct()
+    {
+        $this->user = new GetUser();
+    }
+
     /**
      * Return an array of resource objects, themselves in array format
      *
@@ -17,7 +25,10 @@ class Provinsis extends ResourceController
      */
     public function index()
     {
-        $data = $this->model->findAll();
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
+        $data = $this->model->orderBy('id', 'DESC')->findAll();
         return $this->respond($data);
     }
 
@@ -40,6 +51,9 @@ class Provinsis extends ResourceController
      */
     public function create()
     {
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
@@ -74,6 +88,9 @@ class Provinsis extends ResourceController
      */
     public function update($id = null)
     {
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
@@ -120,6 +137,9 @@ class Provinsis extends ResourceController
      */
     public function delete($id = null)
     {
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 

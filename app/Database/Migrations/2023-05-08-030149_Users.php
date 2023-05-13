@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class DataDisabilitass extends Migration
+class Users extends Migration
 {
     public function up()
     {
@@ -15,29 +15,17 @@ class DataDisabilitass extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_provinsis' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-            ],
-            'id_kabupatens' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-            ],
-            'id_kecamatans' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-            ],
-            'id_desas' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-            ],
-            'disabilitas' => [
+            'desa' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'id_data_penduduks' => [
-                'type'       => 'INT',
-                'constraint' => 11,
+            'password' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'email' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -55,7 +43,7 @@ class DataDisabilitass extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('data_disabilitass');
+        $this->forge->createTable('users');
     }
 
     public function down()

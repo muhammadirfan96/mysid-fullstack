@@ -14,6 +14,24 @@
                 <p class="text-center font-medium text-lg" id="head_form"></p>
                 <div class="bg-red-50 rounded-md p-1 my-1 text-xs italic text-red-700 border border-red-900" id="err_msg"></div>
                 <form class="mt-2" enctype="multipart/form-data" id="form_input">
+
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="provinsi"></select>
+                        <button id="btn_show_provinsi" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_provinsi()">show provinsi</button>
+                    </div>
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="kabupaten"></select>
+                        <button id="btn_show_kabupaten" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_kabupaten()">show kabupaten</button>
+                    </div>
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="kecamatan"></select>
+                        <button id="btn_show_kecamatan" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_kecamatan()">show kecamatan</button>
+                    </div>
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="desa"></select>
+                        <button id="btn_show_desa" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_desa()">show desa</button>
+                    </div>
+
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nomor nkk" type="text" id="nkk" autocomplete="off">
 
                     <div class="flex">
@@ -64,6 +82,10 @@
                 <thead class="bg-cyan-100 p-1 border-b-2">
                     <tr>
                         <th width="1%">action</th>
+                        <th>provinsi</th>
+                        <th>kabupaten</th>
+                        <th>kecamatan</th>
+                        <th>desa</th>
                         <th>nkk</th>
                         <th>tingkat kesejahteraan</th>
                         <th>sumber penghasilan utama</th>
@@ -81,6 +103,14 @@
 
 <script>
     const api = '<?= base_url('/datankks') ?>'
+    const api_provinsi = '<?= base_url('/provinsis') ?>'
+    const api_kabupaten = '<?= base_url('/kabupatens') ?>'
+    const api_kecamatan = '<?= base_url('/kecamatans') ?>'
+    const api_desa = '<?= base_url('/desas') ?>'
+    const provinsi = document.querySelector('#provinsi')
+    const kabupaten = document.querySelector('#kabupaten')
+    const kecamatan = document.querySelector('#kecamatan')
+    const desa = document.querySelector('#desa')
     const api_tingkat_kesejahteraan = '<?= base_url('/tingkatkesejahteraans') ?>'
     const api_sumber_penghasilan_utama = '<?= base_url('/sumberpenghasilanutamas') ?>'
     const nkk = document.querySelector('#nkk')
@@ -95,13 +125,113 @@
     const page_list = document.querySelector('#page_list')
     const tbody = document.querySelector('#tbody')
 
+    const option_select_desa = item => {
+        return `<option value="${item.id}">${item.desa}</option>`
+    }
+
+    const generate_isi_option_select_desa = async () => {
+        try {
+            const response = await fetch(`${api_desa}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_desa = ``
+            result.forEach(item => {
+                all_option_select_desa += option_select_desa(item)
+            });
+
+            desa.innerHTML = all_option_select_desa
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_kecamatan = item => {
+        return `<option value="${item.id}">${item.kecamatan}</option>`
+    }
+
+    const generate_isi_option_select_kecamatan = async () => {
+        try {
+            const response = await fetch(`${api_kecamatan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_kecamatan = ``
+            result.forEach(item => {
+                all_option_select_kecamatan += option_select_kecamatan(item)
+            });
+
+            kecamatan.innerHTML = all_option_select_kecamatan
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_kabupaten = item => {
+        return `<option value="${item.id}">${item.kabupaten}</option>`
+    }
+
+    const generate_isi_option_select_kabupaten = async () => {
+        try {
+            const response = await fetch(`${api_kabupaten}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_kabupaten = ``
+            result.forEach(item => {
+                all_option_select_kabupaten += option_select_kabupaten(item)
+            });
+
+            kabupaten.innerHTML = all_option_select_kabupaten
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_provinsi = item => {
+        return `<option value="${item.id}">${item.provinsi}</option>`
+    }
+
+    const generate_isi_option_select_provinsi = async () => {
+        try {
+            const response = await fetch(`${api_provinsi}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_provinsi = ``
+            result.forEach(item => {
+                all_option_select_provinsi += option_select_provinsi(item)
+            });
+
+            provinsi.innerHTML = all_option_select_provinsi
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
     const option_select_sumber_penghasilan_utama = item => {
         return `<option value="${item.id}">${item.sumber_penghasilan_utama}</option>`
     }
 
     const generate_isi_option_select_sumber_penghasilan_utama = async () => {
         try {
-            const response = await fetch(`${api_sumber_penghasilan_utama}/find/*`)
+            const response = await fetch(`${api_sumber_penghasilan_utama}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_sumber_penghasilan_utama = ``
@@ -121,7 +251,11 @@
 
     const generate_isi_option_select_tingkat_kesejahteraan = async () => {
         try {
-            const response = await fetch(`${api_tingkat_kesejahteraan}/find/*`)
+            const response = await fetch(`${api_tingkat_kesejahteraan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_tingkat_kesejahteraan = ``
@@ -142,7 +276,11 @@
 
     const generate_isi_page_list = async () => {
         try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}`)
+            const response = await fetch(`${api}/find/${key_pencarian.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
             let total_data = 0
             result.forEach(item => total_data++);
@@ -164,6 +302,10 @@
                         <button class="px-3 py-1 rounded-sm w-full mb-1 text-sm bg-green-300" onclick="show_ubah(${item.id})" type="button">update</button>
                         <button class="px-3 py-1 rounded-sm w-full text-sm bg-red-300" onclick="hapus(event, ${item.id})" type="button">delete</button>
                     </td>
+                    <td>${item.provinsi}</td>
+                    <td>${item.kabupaten}</td>
+                    <td>${item.kecamatan}</td>
+                    <td>${item.desa}</td>
                     <td>${item.nkk}</td>
                     <td>${item.tingkat_kesejahteraan}</td>
                     <td>${item.sumber_penghasilan_utama}</td>
@@ -176,7 +318,11 @@
 
     const generate_isi_tr_tbody = async (offset = 0) => {
         try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`)
+            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_tr_tbody = ``
@@ -200,6 +346,9 @@
             const response = await fetch(url, {
                 method: "POST",
                 body: formData,
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
             });
             const result = await response.json();
             if (result.status == 400) {
@@ -230,6 +379,10 @@
     const tambah = event => {
         event.preventDefault()
         const formData = new FormData()
+        formData.append('id_provinsis', provinsi.value)
+        formData.append('id_kabupatens', kabupaten.value)
+        formData.append('id_kecamatans', kecamatan.value)
+        formData.append('id_desas', desa.value)
         formData.append('nkk', nkk.value)
         formData.append('id_tingkat_kesejahteraans', tingkat_kesejahteraan.value)
         formData.append('id_sumber_penghasilan_utamas', sumber_penghasilan_utama.value)
@@ -244,16 +397,61 @@
             modal_form.style.display = ''
             head_form.innerHTML = 'form ubah data'
             try {
-                const response = await fetch(`${api}/${id}`)
+                const response = await fetch(`${api}/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result = await response.json()
+
+                const response_provinsi = await fetch(`${api_provinsi}/${result.id_provinsis}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_provinsi = await response_provinsi.json()
+                provinsi.innerHTML = `<option value="${result_provinsi.id}">${result_provinsi.provinsi}</option>`
+                btn_show_provinsi.setAttribute('disabled', '')
+                const response_kabupaten = await fetch(`${api_kabupaten}/${result.id_kabupatens}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_kabupaten = await response_kabupaten.json()
+                kabupaten.innerHTML = `<option value="${result_kabupaten.id}">${result_kabupaten.kabupaten}</option>`
+                btn_show_kabupaten.setAttribute('disabled', '')
+                const response_kecamatan = await fetch(`${api_kecamatan}/${result.id_kecamatans}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_kecamatan = await response_kecamatan.json()
+                kecamatan.innerHTML = `<option value="${result_kecamatan.id}">${result_kecamatan.kecamatan}</option>`
+                btn_show_kecamatan.setAttribute('disabled', '')
+                const response_desa = await fetch(`${api_desa}/${result.id_desas}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_desa = await response_desa.json()
+                desa.innerHTML = `<option value="${result_desa.id}">${result_desa.desa}</option>`
+                btn_show_desa.setAttribute('disabled', '')
 
                 nkk.value = result.nkk
 
-                const response_tingkat_kesejahteraan = await fetch(`${api_tingkat_kesejahteraan}/${result.id_tingkat_kesejahteraans}`)
+                const response_tingkat_kesejahteraan = await fetch(`${api_tingkat_kesejahteraan}/${result.id_tingkat_kesejahteraans}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_tingkat_kesejahteraan = await response_tingkat_kesejahteraan.json()
                 tingkat_kesejahteraan.innerHTML = `<option value="${result_tingkat_kesejahteraan.id}">${result_tingkat_kesejahteraan.tingkat_kesejahteraan}</option>`
 
-                const response_sumber_penghasilan_utama = await fetch(`${api_sumber_penghasilan_utama}/${result.id_sumber_penghasilan_utamas}`)
+                const response_sumber_penghasilan_utama = await fetch(`${api_sumber_penghasilan_utama}/${result.id_sumber_penghasilan_utamas}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_sumber_penghasilan_utama = await response_sumber_penghasilan_utama.json()
                 sumber_penghasilan_utama.innerHTML = `<option value="${result_sumber_penghasilan_utama.id}">${result_sumber_penghasilan_utama.sumber_penghasilan_utama}</option>`
 
@@ -279,6 +477,10 @@
 
     const close_modal = () => {
         form_input.reset()
+        provinsi.innerHTML = ''
+        kabupaten.innerHTML = ''
+        kecamatan.innerHTML = ''
+        desa.innerHTML = ''
         tingkat_kesejahteraan.innerHTML = ''
         sumber_penghasilan_utama.innerHTML = ''
         err_msg.innerHTML = ''
@@ -291,7 +493,11 @@
         questionAlert('the selected data will be permanently deleted. are you sure?', async () => {
             try {
                 const response = await fetch(`${api}/${id}`, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+
                 })
                 const result = await response.json()
                 successAlert(result.messages.success)
@@ -303,6 +509,15 @@
         }, () => {
             infoAlert('deleting data canceled')
         })
+    }
+
+    function getCookie(cookieName) {
+        let cookie = {};
+        document.cookie.split(';').forEach(function(el) {
+            let [key, value] = el.split('=');
+            cookie[key.trim()] = value;
+        })
+        return cookie[cookieName];
     }
 
     err_msg.style.display = 'none'

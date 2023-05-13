@@ -30,45 +30,53 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
+// AUTH
+$routes->post('register', 'Auth\Register::index');
+$routes->post('login', 'Auth\Login::index');
+$routes->get('me', 'Auth\Me::index');
+
+
 // BACK END
-$routes->resource('agamas', ['controller' => 'Backend\Agamas', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('bantuans', ['controller' => 'Backend\Bantuans', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('datadisabilitass', ['controller' => 'Backend\DataDisabilitass', 'placeholder' => '(:num)', 'except' => 'new,edit']);
+$routes->resource('agamas', ['controller' => 'Backend\Agamas', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('bantuans', ['controller' => 'Backend\Bantuans', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('datadisabilitass', ['controller' => 'Backend\DataDisabilitass', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('datankks', ['controller' => 'Backend\DataNkks', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('datapenduduks', ['controller' => 'Backend\DataPenduduks', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('datawilayahs', ['controller' => 'Backend\DataWilayahs', 'placeholder' => '(:num)', 'except' => 'new,edit']);
+$routes->resource('datapenduduks', ['controller' => 'Backend\DataPenduduks', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('datawilayahs', ['controller' => 'Backend\DataWilayahs', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('desas', ['controller' => 'Backend\Desas', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('golongandarahs', ['controller' => 'Backend\GolonganDarahs', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('jeniskelamins', ['controller' => 'Backend\JenisKelamins', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('kabupatens', ['controller' => 'Backend\Kabupatens', 'placeholder' => '(:num)', 'except' => 'new,edit']);
+$routes->resource('golongandarahs', ['controller' => 'Backend\GolonganDarahs', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('jeniskelamins', ['controller' => 'Backend\JenisKelamins', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('kabupatens', ['controller' => 'Backend\Kabupatens', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('kecamatans', ['controller' => 'Backend\Kecamatans', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('kewarganegaraans', ['controller' => 'Backend\Kewarganegaraans', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('pendidikans', ['controller' => 'Backend\Pendidikans', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('provinsis', ['controller' => 'Backend\Provinsis', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('statushubdlmkels', ['controller' => 'Backend\StatusHubDlmKels', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('sumberpenghasilanutamas', ['controller' => 'Backend\SumberPenghasilanUtamas', 'placeholder' => '(:num)', 'except' => 'new,edit']);
-$routes->resource('tingkatkesejahteraans', ['controller' => 'Backend\TingkatKesejahteraans', 'placeholder' => '(:num)', 'except' => 'new,edit']);
+$routes->resource('kewarganegaraans', ['controller' => 'Backend\Kewarganegaraans', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('pendidikans', ['controller' => 'Backend\Pendidikans', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('provinsis', ['controller' => 'Backend\Provinsis', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('statushubdlmkels', ['controller' => 'Backend\StatusHubDlmKels', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('sumberpenghasilanutamas', ['controller' => 'Backend\SumberPenghasilanUtamas', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('tingkatkesejahteraans', ['controller' => 'Backend\TingkatKesejahteraans', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 
 // find
-$routes->get('agamas/find/(:any)', 'Backend\Agamas::find/$1');
-$routes->get('bantuans/find/(:any)', 'Backend\Bantuans::find/$1');
-$routes->get('datadisabilitass/find/(:any)', 'Backend\DataDisabilitass::find/$1');
-$routes->get('datankks/find/(:any)', 'Backend\DataNkks::find/$1');
-$routes->get('datapenduduks/find/(:any)', 'Backend\DataPenduduks::find/$1');
-$routes->get('datawilayahs/find/(:any)', 'Backend\DataWilayahs::find/$1');
-$routes->get('desas/find/(:any)', 'Backend\Desas::find/$1');
-$routes->get('golongandarahs/find/(:any)', 'Backend\GolonganDarahs::find/$1');
-$routes->get('jeniskelamins/find/(:any)', 'Backend\JenisKelamins::find/$1');
-$routes->get('kabupatens/find/(:any)', 'Backend\Kabupatens::find/$1');
-$routes->get('kecamatans/find/(:any)', 'Backend\Kecamatans::find/$1');
-$routes->get('kewarganegaraans/find/(:any)', 'Backend\Kewarganegaraans::find/$1');
-$routes->get('pendidikans/find/(:any)', 'Backend\Pendidikans::find/$1');
-$routes->get('provinsis/find/(:any)', 'Backend\Provinsis::find/$1');
-$routes->get('statushubdlmkels/find/(:any)', 'Backend\StatusHubDlmKels::find/$1');
-$routes->get('sumberpenghasilanutamas/find/(:any)', 'Backend\SumberPenghasilanUtamas::find/$1');
-$routes->get('tingkatkesejahteraans/find/(:any)', 'Backend\TingkatKesejahteraans::find/$1');
+$routes->get('agamas/find/(:any)', 'Backend\Agamas::find/$1', ['filter' => 'auth']);
+$routes->get('bantuans/find/(:any)', 'Backend\Bantuans::find/$1', ['filter' => 'auth']);
+$routes->get('datadisabilitass/find/(:any)', 'Backend\DataDisabilitass::find/$1', ['filter' => 'auth']);
+$routes->get('datankks/find/(:any)', 'Backend\DataNkks::find/$1', ['filter' => 'auth']);
+$routes->get('datapenduduks/find/(:any)', 'Backend\DataPenduduks::find/$1', ['filter' => 'auth']);
+$routes->get('datawilayahs/find/(:any)', 'Backend\DataWilayahs::find/$1', ['filter' => 'auth']);
+$routes->get('desas/find/(:any)', 'Backend\Desas::find/$1', ['filter' => 'auth']);
+$routes->get('golongandarahs/find/(:any)', 'Backend\GolonganDarahs::find/$1', ['filter' => 'auth']);
+$routes->get('jeniskelamins/find/(:any)', 'Backend\JenisKelamins::find/$1', ['filter' => 'auth']);
+$routes->get('kabupatens/find/(:any)', 'Backend\Kabupatens::find/$1', ['filter' => 'auth']);
+$routes->get('kecamatans/find/(:any)', 'Backend\Kecamatans::find/$1', ['filter' => 'auth']);
+$routes->get('kewarganegaraans/find/(:any)', 'Backend\Kewarganegaraans::find/$1', ['filter' => 'auth']);
+$routes->get('pendidikans/find/(:any)', 'Backend\Pendidikans::find/$1', ['filter' => 'auth']);
+$routes->get('provinsis/find/(:any)', 'Backend\Provinsis::find/$1', ['filter' => 'auth']);
+$routes->get('statushubdlmkels/find/(:any)', 'Backend\StatusHubDlmKels::find/$1', ['filter' => 'auth']);
+$routes->get('sumberpenghasilanutamas/find/(:any)', 'Backend\SumberPenghasilanUtamas::find/$1', ['filter' => 'auth']);
+$routes->get('tingkatkesejahteraans/find/(:any)', 'Backend\TingkatKesejahteraans::find/$1', ['filter' => 'auth']);
 
 // FRONT END
+$routes->get('login', 'Frontend\Login::index');
+$routes->get('register', 'Frontend\Register::index');
 $routes->get('desa', 'Frontend\Desa::index');
 $routes->get('kecamatan', 'Frontend\Kecamatan::index');
 $routes->get('kabupaten', 'Frontend\Kabupaten::index');

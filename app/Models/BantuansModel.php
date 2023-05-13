@@ -47,7 +47,7 @@ class BantuansModel extends Model
         'id_provinsis' => 'required|is_not_unique[provinsis.id]',
         'id_kabupatens' => 'required|is_not_unique[kabupatens.id]',
         'id_kecamatans' => 'required|is_not_unique[kecamatans.id]',
-        'id_desas' => 'required|is_not_unique[desas.id]|',
+        'id_desas' => 'required|is_not_unique[desas.id]',
         'bantuan' => 'required',
         'sumber' => 'required',
         'penerima' => 'required',

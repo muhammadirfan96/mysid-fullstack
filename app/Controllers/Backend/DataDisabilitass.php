@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Backend;
 
+use App\Libraries\GetDesa;
+use App\Libraries\GetUser;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -10,11 +12,13 @@ class DataDisabilitass extends ResourceController
     use ResponseTrait;
     protected $modelName = 'App\Models\DataDisabilitassModel';
     protected $format    = 'json';
+    protected $db, $user, $desa;
 
-    protected $db;
     public function __construct()
     {
         $this->db = \Config\Database::connect();
+        $this->user = new GetUser();
+        $this->desa = new GetDesa();
     }
 
     /**
@@ -24,6 +28,9 @@ class DataDisabilitass extends ResourceController
      */
     public function index()
     {
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+
         $data = $this->model->orderBy('id', 'DESC')->findAll();
         return $this->respond($data);
     }
@@ -37,6 +44,13 @@ class DataDisabilitass extends ResourceController
     {
         $data = $this->model->find($id);
         if (!$data) return $this->failNotFound('no data found');
+
+        $currUser = $this->user->currLogin();
+        $currDesa = $this->desa->currDesa($data['id_desas']);
+        if ($currUser['desa'] != 'admin') {
+            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        }
+
         return $this->respond($data);
     }
 
@@ -47,12 +61,22 @@ class DataDisabilitass extends ResourceController
      */
     public function create()
     {
+        $currUser = $this->user->currLogin();
+        $currDesa = $this->desa->currDesa($this->request->getVar('id_desas'));
+        if ($currUser['desa'] != 'admin') {
+            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        }
+
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [
+            'id_provinsis' => $this->request->getVar('id_provinsis'),
+            'id_kabupatens' => $this->request->getVar('id_kabupatens'),
+            'id_kecamatans' => $this->request->getVar('id_kecamatans'),
+            'id_desas' => $this->request->getVar('id_desas'),
             'disabilitas' => $this->request->getVar('disabilitas'),
             'id_data_penduduks' => $this->request->getVar('id_data_penduduks'),
             'created_by' => $this->request->getVar('created_by'),
@@ -80,9 +104,16 @@ class DataDisabilitass extends ResourceController
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
+        $currUser = $this->user->currLogin();
+        $currDesa = $this->desa->currDesa($findData('id_desas'));
+        if ($currUser['desa'] != 'admin') {
+            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        }
+
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
+        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas']);
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [
@@ -113,6 +144,12 @@ class DataDisabilitass extends ResourceController
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
+        $currUser = $this->user->currLogin();
+        $currDesa = $this->desa->currDesa($findData('id_desas'));
+        if ($currUser['desa'] != 'admin') {
+            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        }
+
         $this->model->delete($id);
         $response = [
             'status' => 200,
@@ -127,8 +164,49 @@ class DataDisabilitass extends ResourceController
 
     public function find($key, $limit = 0, $offset = 0)
     {
-        $where = "disabilitas LIKE '%$key%'";
-        if ($key == '*') $where = null;
+        if (str_contains($key, '@')) {
+            $keys = explode("@", $key);
+            if (str_contains($key, 'provinsi')) {
+                $provinsisCrr = $this->db->table('provinsis')
+                    ->getWhere("provinsi LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $provinsiId = $provinsisCrr[0]['id'];
+                $where = "id_provinsis = '$provinsiId'";
+            }
+            if (str_contains($key, 'kabupaten')) {
+                $kabupatensCrr = $this->db->table('kabupatens')
+                    ->getWhere("kabupaten LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $kabupatenId = $kabupatensCrr[0]['id'];
+                $where = "id_kabupatens = '$kabupatenId'";
+            }
+            if (str_contains($key, 'kecamatan')) {
+                $kecamatansCrr = $this->db->table('kecamatans')
+                    ->getWhere("kecamatan LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $kecamatanId = $kecamatansCrr[0]['id'];
+                $where = "id_kecamatans = '$kecamatanId'";
+            }
+            if (str_contains($key, 'desa')) {
+                $desasCrr = $this->db->table('desas')
+                    ->getWhere("desa LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $desaId = $desasCrr[0]['id'];
+                $where = "id_desas = '$desaId'";
+            }
+        } else {
+            $where = null;
+        }
+
+        $currUser = $this->user->currLogin();
+        if ($currUser['desa'] != 'admin') {
+            $currDesa = $currUser['desa'];
+            $desasCrr = $this->db->table('desas')
+                ->getWhere("desa = '$currDesa'")
+                ->getResultArray();
+            $desaId = $desasCrr[0]['id'];
+            $where = "id_desas = '$desaId'";
+        }
 
         $data_disabilitass = $this->db->table('data_disabilitass')
             ->orderBy('data_disabilitass.id', 'DESC')
@@ -144,6 +222,54 @@ class DataDisabilitass extends ResourceController
                 if ($data_disabilitas['id_data_penduduks'] == $data_penduduk['id']) {
                     $data_disabilitass[$key]['nik'] = $data_penduduk['nik'];
                     $data_disabilitass[$key]['nama_lengkap'] = $data_penduduk['nama_lengkap'];
+                }
+            }
+        }
+
+        $provinsis = $this->db->table('provinsis')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_disabilitass as $key => $data_disabilitas) {
+            foreach ($provinsis as $provinsi) {
+                if ($data_disabilitas['id_provinsis'] == $provinsi['id']) {
+                    $data_disabilitass[$key]['provinsi'] = $provinsi['provinsi'];
+                }
+            }
+        }
+
+        $kabupatens = $this->db->table('kabupatens')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_disabilitass as $key => $data_disabilitas) {
+            foreach ($kabupatens as $kabupaten) {
+                if ($data_disabilitas['id_kabupatens'] == $kabupaten['id']) {
+                    $data_disabilitass[$key]['kabupaten'] = $kabupaten['kabupaten'];
+                }
+            }
+        }
+
+        $kecamatans = $this->db->table('kecamatans')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_disabilitass as $key => $data_disabilitas) {
+            foreach ($kecamatans as $kecamatan) {
+                if ($data_disabilitas['id_kecamatans'] == $kecamatan['id']) {
+                    $data_disabilitass[$key]['kecamatan'] = $kecamatan['kecamatan'];
+                }
+            }
+        }
+
+        $desas = $this->db->table('desas')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_disabilitass as $key => $data_disabilitas) {
+            foreach ($desas as $desa) {
+                if ($data_disabilitas['id_desas'] == $desa['id']) {
+                    $data_disabilitass[$key]['desa'] = $desa['desa'];
                 }
             }
         }

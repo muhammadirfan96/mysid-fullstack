@@ -1161,6 +1161,10 @@ video {
     display: none;
   }
 
+  .md\:w-\[40\%\] {
+    width: 40%;
+  }
+
   .md\:w-\[50\%\] {
     width: 50%;
   }
@@ -1168,5 +1172,11 @@ video {
   .md\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:w-\[30\%\] {
+    width: 30%;
   }
 }

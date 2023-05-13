@@ -196,7 +196,11 @@
 
     const generate_isi_option_select_desa = async () => {
         try {
-            const response = await fetch(`${api_desa}/find/*`)
+            const response = await fetch(`${api_desa}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_desa = ``
@@ -216,7 +220,11 @@
 
     const generate_isi_option_select_kecamatan = async () => {
         try {
-            const response = await fetch(`${api_kecamatan}/find/*`)
+            const response = await fetch(`${api_kecamatan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_kecamatan = ``
@@ -236,7 +244,11 @@
 
     const generate_isi_option_select_kabupaten = async () => {
         try {
-            const response = await fetch(`${api_kabupaten}/find/*`)
+            const response = await fetch(`${api_kabupaten}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_kabupaten = ``
@@ -256,7 +268,11 @@
 
     const generate_isi_option_select_provinsi = async () => {
         try {
-            const response = await fetch(`${api_provinsi}/find/*`)
+            const response = await fetch(`${api_provinsi}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_provinsi = ``
@@ -276,7 +292,11 @@
 
     const generate_isi_option_select_jenis_kelamin = async () => {
         try {
-            const response = await fetch(`${api_jenis_kelamin}/find/*`)
+            const response = await fetch(`${api_jenis_kelamin}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_jenis_kelamin = ``
@@ -296,7 +316,11 @@
 
     const generate_isi_option_select_kewarganegaraan = async () => {
         try {
-            const response = await fetch(`${api_kewarganegaraan}/find/*`)
+            const response = await fetch(`${api_kewarganegaraan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_kewarganegaraan = ``
@@ -316,7 +340,11 @@
 
     const generate_isi_option_select_status_hub_dlm_kel = async () => {
         try {
-            const response = await fetch(`${api_status_hub_dlm_kel}/find/*`)
+            const response = await fetch(`${api_status_hub_dlm_kel}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_status_hub_dlm_kel = ``
@@ -336,7 +364,11 @@
 
     const generate_isi_option_select_pendidikan = async () => {
         try {
-            const response = await fetch(`${api_pendidikan}/find/*`)
+            const response = await fetch(`${api_pendidikan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_pendidikan = ``
@@ -356,7 +388,11 @@
 
     const generate_isi_option_select_golongan_darah = async () => {
         try {
-            const response = await fetch(`${api_golongan_darah}/find/*`)
+            const response = await fetch(`${api_golongan_darah}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_golongan_darah = ``
@@ -376,7 +412,11 @@
 
     const generate_isi_option_select_agama = async () => {
         try {
-            const response = await fetch(`${api_agama}/find/*`)
+            const response = await fetch(`${api_agama}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_agama = ``
@@ -395,7 +435,11 @@
 
     const generate_isi_option_select_data_nkk = async () => {
         try {
-            const response = await fetch(`${api_data_nkk}/find/*`)
+            const response = await fetch(`${api_data_nkk}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_option_select_data_nkk = ``
@@ -416,7 +460,11 @@
 
     const generate_isi_page_list = async () => {
         try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}`)
+            const response = await fetch(`${api}/find/${key_pencarian.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
             let total_data = 0
             result.forEach(item => total_data++);
@@ -467,7 +515,11 @@
 
     const generate_isi_tr_tbody = async (offset = 0) => {
         try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`)
+            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
             const result = await response.json()
 
             let all_tr_tbody = ``
@@ -491,6 +543,9 @@
             const response = await fetch(url, {
                 method: "POST",
                 body: formData,
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
             });
             const result = await response.json();
             if (result.status == 400) {
@@ -554,53 +609,90 @@
             modal_form.style.display = ''
             head_form.innerHTML = 'form ubah data'
             try {
-                const response = await fetch(`${api}/${id}`)
+                const response = await fetch(`${api}/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result = await response.json()
 
                 nik.value = result.nik
                 nama_lengkap.value = result.nama_lengkap
-
-                const response_data_nkk = await fetch(`${api_data_nkk}/${result.id_data_nkks}`)
+                const response_data_nkk = await fetch(`${api_data_nkk}/${result.id_data_nkks}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_data_nkk = await response_data_nkk.json()
                 data_nkk.innerHTML = `<option value="${result_data_nkk.id}">${result_data_nkk.nkk}</option>`
-
-                const response_agama = await fetch(`${api_agama}/${result.id_agamas}`)
+                const response_agama = await fetch(`${api_agama}/${result.id_agamas}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_agama = await response_agama.json()
                 agama.innerHTML = `<option value="${result_agama.id}">${result_agama.agama}</option>`
-
-                const response_golongan_darah = await fetch(`${api_golongan_darah}/${result.id_golongan_darahs}`)
+                const response_golongan_darah = await fetch(`${api_golongan_darah}/${result.id_golongan_darahs}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_golongan_darah = await response_golongan_darah.json()
                 golongan_darah.innerHTML = `<option value="${result_golongan_darah.id}">${result_golongan_darah.golongan_darah}</option>`
-
-                const response_pendidikan = await fetch(`${api_pendidikan}/${result.id_pendidikans}`)
+                const response_pendidikan = await fetch(`${api_pendidikan}/${result.id_pendidikans}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_pendidikan = await response_pendidikan.json()
                 pendidikan.innerHTML = `<option value="${result_pendidikan.id}">${result_pendidikan.pendidikan}</option>`
-
-                const response_status_hub_dlm_kel = await fetch(`${api_status_hub_dlm_kel}/${result.id_status_hub_dlm_kels}`)
+                const response_status_hub_dlm_kel = await fetch(`${api_status_hub_dlm_kel}/${result.id_status_hub_dlm_kels}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_status_hub_dlm_kel = await response_status_hub_dlm_kel.json()
                 status_hub_dlm_kel.innerHTML = `<option value="${result_status_hub_dlm_kel.id}">${result_status_hub_dlm_kel.status_hub_dlm_kel}</option>`
-
-                const response_kewarganegaraan = await fetch(`${api_kewarganegaraan}/${result.id_kewarganegaraans}`)
+                const response_kewarganegaraan = await fetch(`${api_kewarganegaraan}/${result.id_kewarganegaraans}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_kewarganegaraan = await response_kewarganegaraan.json()
                 kewarganegaraan.innerHTML = `<option value="${result_kewarganegaraan.id}">${result_kewarganegaraan.kewarganegaraan}</option>`
-
-                const response_jenis_kelamin = await fetch(`${api_jenis_kelamin}/${result.id_jenis_kelamins}`)
+                const response_jenis_kelamin = await fetch(`${api_jenis_kelamin}/${result.id_jenis_kelamins}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_jenis_kelamin = await response_jenis_kelamin.json()
                 jenis_kelamin.innerHTML = `<option value="${result_jenis_kelamin.id}">${result_jenis_kelamin.jenis_kelamin}</option>`
-
-                const response_provinsi = await fetch(`${api_provinsi}/${result.id_provinsis}`)
+                const response_provinsi = await fetch(`${api_provinsi}/${result.id_provinsis}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_provinsi = await response_provinsi.json()
                 provinsi.innerHTML = `<option value="${result_provinsi.id}">${result_provinsi.provinsi}</option>`
-
-                const response_kabupaten = await fetch(`${api_kabupaten}/${result.id_kabupatens}`)
+                const response_kabupaten = await fetch(`${api_kabupaten}/${result.id_kabupatens}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_kabupaten = await response_kabupaten.json()
                 kabupaten.innerHTML = `<option value="${result_kabupaten.id}">${result_kabupaten.kabupaten}</option>`
-
-                const response_kecamatan = await fetch(`${api_kecamatan}/${result.id_kecamatans}`)
+                const response_kecamatan = await fetch(`${api_kecamatan}/${result.id_kecamatans}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_kecamatan = await response_kecamatan.json()
                 kecamatan.innerHTML = `<option value="${result_kecamatan.id}">${result_kecamatan.kecamatan}</option>`
-
-                const response_desa = await fetch(`${api_desa}/${result.id_desas}`)
+                const response_desa = await fetch(`${api_desa}/${result.id_desas}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
                 const result_desa = await response_desa.json()
                 desa.innerHTML = `<option value="${result_desa.id}">${result_desa.desa}</option>`
 
@@ -664,7 +756,10 @@
         questionAlert('the selected data will be permanently deleted. are you sure?', async () => {
             try {
                 const response = await fetch(`${api}/${id}`, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
                 })
                 const result = await response.json()
                 successAlert(result.messages.success)
@@ -676,6 +771,15 @@
         }, () => {
             infoAlert('deleting data canceled')
         })
+    }
+
+    function getCookie(cookieName) {
+        let cookie = {};
+        document.cookie.split(';').forEach(function(el) {
+            let [key, value] = el.split('=');
+            cookie[key.trim()] = value;
+        })
+        return cookie[cookieName];
     }
 
     err_msg.style.display = 'none'
