@@ -31,6 +31,7 @@ class DataPenduduksModel extends Model
         'alamat_lengkap',
         'pekerjaan',
         'foto',
+        'active',
         'created_by',
         'updated_by',
     ];
@@ -64,6 +65,7 @@ class DataPenduduksModel extends Model
         'alamat_lengkap' => 'required',
         'pekerjaan' => 'required',
         'foto' => 'uploaded[foto]|max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+        'active' => 'required',
         'created_by' => 'required',
         'updated_by' => 'required',
     ];

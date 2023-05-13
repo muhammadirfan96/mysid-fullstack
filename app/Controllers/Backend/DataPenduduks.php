@@ -93,6 +93,7 @@ class DataPenduduks extends ResourceController
             'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
             'pekerjaan' => $this->request->getVar('pekerjaan'),
             'foto' => $namaFile,
+            'active' => 1,
             'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
@@ -150,6 +151,7 @@ class DataPenduduks extends ResourceController
             'id_desas' => $this->request->getVar('id_desas'),
             'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
             'pekerjaan' => $this->request->getVar('pekerjaan'),
+            'active' => 1,
             'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];

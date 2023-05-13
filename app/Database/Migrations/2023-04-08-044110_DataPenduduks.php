@@ -79,6 +79,10 @@ class DataPenduduks extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ],
+            'active' => [
+                'type' => 'INT',
+                'constraint' => 11,
+            ],
             'created_at' => [
                 'type'       => 'DATETIME',
             ],
