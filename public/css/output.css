@@ -798,6 +798,14 @@ video {
   width: 100%;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-\[48\%\] {
+  width: 48%;
+}
+
 .origin-left {
   transform-origin: left;
 }
@@ -1234,6 +1242,10 @@ video {
     width: 10rem;
   }
 
+  .md\:w-\[24\%\] {
+    width: 24%;
+  }
+
   .md\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -1247,5 +1259,9 @@ video {
 
   .xl\:w-80 {
     width: 20rem;
+  }
+
+  .xl\:w-\[19\%\] {
+    width: 19%;
   }
 }
