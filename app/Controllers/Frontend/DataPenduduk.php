@@ -9,8 +9,8 @@ class DataPenduduk extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'data_penduduk'
+            'title' => 'data penduduk'
         ];
-        return view('data_penduduk/index', $data);
+        return view('frontend/data_penduduk', $data);
     }
 }

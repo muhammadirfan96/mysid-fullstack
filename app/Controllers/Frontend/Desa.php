@@ -12,6 +12,6 @@ class Desa extends BaseController
             'title' => 'desa'
         ];
 
-        return view('desa/index', $data);
+        return view('frontend/desa', $data);
     }
 }

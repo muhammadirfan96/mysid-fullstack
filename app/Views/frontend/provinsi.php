@@ -14,7 +14,7 @@
                 <p class="text-center font-medium text-lg" id="head_form"></p>
                 <div class="bg-red-50 rounded-md p-1 my-1 text-xs italic text-red-700 border border-red-900" id="err_msg"></div>
                 <form class="mt-2" enctype="multipart/form-data" id="form_input">
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nama kecamatan" type="text" id="kecamatan" autocomplete="off">
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nama provinsi" type="text" id="provinsi" autocomplete="off">
                     <div class="flex flex-wrap my-2">
                         <div>
                             <label class="p-1 border border-cyan-500 rounded-md" for="logo">logo</label>
@@ -61,7 +61,7 @@
                     <tr>
                         <th width="1%">action</th>
                         <th>logo</th>
-                        <th>kecamatan</th>
+                        <th>provinsi</th>
                         <th>created_at</th>
                         <th>created_by</th>
                         <th>updated_at</th>
@@ -75,8 +75,8 @@
 </div>
 
 <script>
-    const api = '<?= base_url('/kecamatans') ?>'
-    const kecamatan = document.querySelector('#kecamatan')
+    const api = '<?= base_url('/provinsis') ?>'
+    const provinsi = document.querySelector('#provinsi')
     const logo = document.querySelector('#logo')
     const modal_form = document.querySelector('#modal_form')
     const head_form = document.querySelector('#head_form')
@@ -96,10 +96,10 @@
                     </td>
                     <td>
                         <div class="w-16 mx-auto">
-                            <img class="w-16 h-16 rounded-full mx-auto" src="img/logo/kecamatan/${item.logo}" alt="${item.logo}">
+                            <img class="w-16 h-16 rounded-full mx-auto" src="img/logo/provinsi/${item.logo}" alt="${item.logo}">
                         </div>
                     </td>
-                    <td>${item.kecamatan}</td>
+                    <td>${item.provinsi}</td>
                     <td>${item.created_at}</td>
                     <td>${item.created_by}</td>
                     <td>${item.updated_at}</td>
@@ -197,7 +197,7 @@
     const tambah = event => {
         event.preventDefault()
         const formData = new FormData()
-        formData.append('kecamatan', kecamatan.value)
+        formData.append('provinsi', provinsi.value)
         formData.append('logo', logo.files[0])
         formData.append('created_by', 'admin')
         formData.append('updated_by', 'admin')
@@ -223,8 +223,8 @@
                 })
                 const result = await response.json()
 
-                kecamatan.value = result.kecamatan
-                img_preview.src = `img/logo/kecamatan/${result.logo}`
+                provinsi.value = result.provinsi
+                img_preview.src = `img/logo/provinsi/${result.logo}`
                 form_input.onsubmit = () => ubah(event, id)
             } catch (error) {
                 console.error("Error:", error)
@@ -236,7 +236,7 @@
     const ubah = (event, id) => {
         event.preventDefault()
         const formData = new FormData()
-        formData.append('kecamatan', kecamatan.value)
+        formData.append('provinsi', provinsi.value)
         formData.append('logo', logo.files[0])
         formData.append('created_by', 'admin')
         formData.append('updated_by', 'admin')
@@ -272,15 +272,6 @@
         }, () => {
             infoAlert('deleting data canceled')
         })
-    }
-
-    function getCookie(cookieName) {
-        let cookie = {};
-        document.cookie.split(';').forEach(function(el) {
-            let [key, value] = el.split('=');
-            cookie[key.trim()] = value;
-        })
-        return cookie[cookieName];
     }
 
     err_msg.style.display = 'none'

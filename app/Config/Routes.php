@@ -31,9 +31,9 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 
 // AUTH
-$routes->post('register', 'Auth\Register::index');
+$routes->post('register', 'Auth\Register::index', ['filter' => 'auth']);
 $routes->post('login', 'Auth\Login::index');
-$routes->get('me', 'Auth\Me::index');
+$routes->get('me', 'Auth\Me::index', ['filter' => 'auth']);
 
 
 // BACK END
@@ -86,6 +86,13 @@ $routes->get('datankk', 'Frontend\DataNkk::index');
 $routes->get('datadisabilitas', 'Frontend\DataDisabilitas::index');
 $routes->get('datapenduduk', 'Frontend\DataPenduduk::index');
 $routes->get('datawilayah', 'Frontend\DataWilayah::index');
+
+// MENUBAR
+$routes->get('/', 'Menubar\Home::index');
+$routes->get('infodesa', 'Menubar\Infodesa::index');
+$routes->get('statistik', 'Menubar\Statistik::index');
+$routes->get('adminweb', 'Menubar\Adminweb::index');
+
 
 /*
  * --------------------------------------------------------------------

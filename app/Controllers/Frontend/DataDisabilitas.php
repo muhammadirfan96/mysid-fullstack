@@ -9,8 +9,8 @@ class DataDisabilitas extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'data_disabilitas'
+            'title' => 'data disabilitas'
         ];
-        return view('data_disabilitas/index', $data);
+        return view('frontend/data_disabilitas', $data);
     }
 }

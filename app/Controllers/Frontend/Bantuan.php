@@ -11,6 +11,6 @@ class Bantuan extends BaseController
         $data = [
             'title' => 'bantuan'
         ];
-        return view('bantuan/index', $data);
+        return view('frontend/bantuan', $data);
     }
 }

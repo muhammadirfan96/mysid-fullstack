@@ -9,8 +9,8 @@ class DataWilayah extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'data_wilayah'
+            'title' => 'data wilayah'
         ];
-        return view('data_wilayah/index', $data);
+        return view('frontend/data_wilayah', $data);
     }
 }

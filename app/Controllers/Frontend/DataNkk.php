@@ -9,8 +9,8 @@ class DataNkk extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'data_nkk'
+            'title' => 'data nkk'
         ];
-        return view('data_nkk/index', $data);
+        return view('frontend/data_nkk', $data);
     }
 }

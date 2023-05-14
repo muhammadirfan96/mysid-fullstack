@@ -17,7 +17,7 @@
 </div>
 
 <script>
-    const api = '<?= base_url('/login') ?>'
+    const api_login = '<?= base_url('/login') ?>'
     const err_msg = document.querySelector('#err_msg')
     const head_form = document.querySelector('#head_form')
     err_msg.style.display = 'none'
@@ -31,7 +31,7 @@
         const formData = new FormData()
         formData.append('desa', desa.value)
         formData.append('password', password.value)
-        login(`${api}`, formData)
+        login(`${api_login}`, formData)
     }
 
     async function login(url, formData) {
@@ -42,7 +42,7 @@
             });
 
             const result = await response.json();
-            if (result.status == 400) {
+            if (result.status == 400 || result.status == 404) {
                 let all_err_msg = ``
                 for (message in result.messages) {
                     all_err_msg += `<p>${result.messages[message]}</p>`
@@ -50,8 +50,8 @@
                 err_msg.innerHTML = all_err_msg
                 err_msg.style.display = ''
             } else if (response.status == 200) {
-                console.log(result.token)
                 setCookie('token', result.token, 0.1)
+                window.location.href = '<?= base_url('/') ?>'
             }
 
         } catch (error) {
@@ -59,12 +59,7 @@
         }
     }
 
-    const setCookie = (cName, cValue, expDays) => {
-        let date = new Date()
-        date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000))
-        const expires = `expires=${date.toUTCString()}`
-        document.cookie = `${cName}=${cValue}; path=/`
-    }
+    if (getCookie('token')) window.location.href = '<?= base_url('/') ?>'
 </script>
 
 <?= $this->endSection(); ?>

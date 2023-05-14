@@ -3,6 +3,7 @@
 
 <div id="modal_form" class="fixed top-0 bottom-0 right-0 left-0 bg-slate-900 bg-opacity-50 z-10">
     <div class="bg-white rounded-md p-4 relative w-[95%] md:w-[40%] xl:w-[30%] my-4 max-h-[95%] mx-auto overflow-auto">
+        <button class="absolute right-1 top-0" onclick="window.history.back()" type="button"><i class="bi-x-square-fill text-red-700 rounded-md text-xl"></i></button>
         <p class="text-center font-medium text-lg" id="head_form"></p>
         <div class="bg-red-50 rounded-md p-1 my-1 text-xs italic text-red-700 border border-red-900" id="err_msg"></div>
         <form onsubmit="submitRegister(event)" class="mt-2" enctype="multipart/form-data" id="form_input">
@@ -19,7 +20,9 @@
 </div>
 
 <script>
-    const api = '<?= base_url('/register') ?>'
+    if (!getCookie('token')) window.location.href = '<?= base_url('/login') ?>'
+
+    const api_register = '<?= base_url('/register') ?>'
     const err_msg = document.querySelector('#err_msg')
     const head_form = document.querySelector('#head_form')
     err_msg.style.display = 'none'
@@ -39,7 +42,7 @@
         formData.append('passconf', passconf.value)
         formData.append('created_by', 'admin')
         formData.append('updated_by', 'admin')
-        upload(`${api}`, formData)
+        upload(`${api_register}`, formData)
     }
 
     async function upload(url, formData) {
@@ -48,9 +51,10 @@
                 method: "POST",
                 body: formData,
                 headers: {
-                    Authentication: `Bearer ${getCookie()}`
+                    Authorization: `Bearer ${getCookie('token')}`
                 }
             });
+
             const result = await response.json();
             if (result.status == 400) {
                 let all_err_msg = ``
@@ -66,15 +70,6 @@
         } catch (error) {
             console.error("Error:", error)
         }
-    }
-
-    function getCookie(cookieName) {
-        let cookie = {};
-        document.cookie.split(';').forEach(function(el) {
-            let [key, value] = el.split('=');
-            cookie[key.trim()] = value;
-        })
-        return cookie[cookieName];
     }
 </script>
 

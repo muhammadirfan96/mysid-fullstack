@@ -11,6 +11,6 @@ class Kabupaten extends BaseController
         $data = [
             'title' => 'kabupaten'
         ];
-        return view('kabupaten/index', $data);
+        return view('frontend/kabupaten', $data);
     }
 }

@@ -511,15 +511,6 @@
         })
     }
 
-    function getCookie(cookieName) {
-        let cookie = {};
-        document.cookie.split(';').forEach(function(el) {
-            let [key, value] = el.split('=');
-            cookie[key.trim()] = value;
-        })
-        return cookie[cookieName];
-    }
-
     err_msg.style.display = 'none'
     modal_form.style.display = 'none'
     generate_isi_page_list()

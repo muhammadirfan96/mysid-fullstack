@@ -11,6 +11,6 @@ class Provinsi extends BaseController
         $data = [
             'title' => 'provinsi'
         ];
-        return view('provinsi/index', $data);
+        return view('frontend/provinsi', $data);
     }
 }
