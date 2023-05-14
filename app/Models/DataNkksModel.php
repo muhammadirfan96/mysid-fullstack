@@ -15,6 +15,10 @@ class DataNkksModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id_provinsis',
+        'id_kabupatens',
+        'id_kecamatans',
+        'id_desas',
         'nkk',
         'id_tingkat_kesejahteraans',
         'id_sumber_penghasilan_utamas',

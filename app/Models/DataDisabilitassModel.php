@@ -15,6 +15,10 @@ class DataDisabilitassModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id_provinsis',
+        'id_kabupatens',
+        'id_kecamatans',
+        'id_desas',
         'disabilitas',
         'id_data_penduduks',
         'created_by',
