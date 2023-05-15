@@ -28,6 +28,7 @@
     err_msg.style.display = 'none'
     head_form.innerHTML = 'Registration Form'
 
+    const form_input = document.querySelector('#form_input')
     const desa = document.querySelector('#desa')
     const password = document.querySelector('#password')
     const passconf = document.querySelector('#passconf')
@@ -63,9 +64,9 @@
                 }
                 err_msg.innerHTML = all_err_msg
                 err_msg.style.display = ''
-            } else if (result.status == 200) {
+            } else if (result.status == 201) {
+                form_input.reset()
                 successAlert(result.messages.success)
-                console.log('ok')
             }
         } catch (error) {
             console.error("Error:", error)
