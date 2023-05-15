@@ -8,7 +8,8 @@
     <title>auth</title>
     <link rel="stylesheet" href="/fonts/andika/stylesheet.css">
     <link rel="stylesheet" href="/bi/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/build.css">
+    <!-- <link rel="stylesheet" href="/css/output.css"> -->
     <script>
         const setCookie = (cName, cValue, expDays) => {
             let date = new Date()
