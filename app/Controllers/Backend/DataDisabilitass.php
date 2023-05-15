@@ -61,16 +61,16 @@ class DataDisabilitass extends ResourceController
      */
     public function create()
     {
+        helper(['form']);
+
+        $rules = $this->model->myValidationRules;
+        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
         $currUser = $this->user->currLogin();
         $currDesa = $this->desa->currDesa($this->request->getVar('id_desas'));
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }
-
-        helper(['form']);
-
-        $rules = $this->model->myValidationRules;
-        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [
             'id_provinsis' => $this->request->getVar('id_provinsis'),
@@ -104,22 +104,21 @@ class DataDisabilitass extends ResourceController
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
+        helper(['form']);
+
+        $rules = $this->model->myValidationRules;
+        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas'], $rules['created_by']);
+        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
         $currUser = $this->user->currLogin();
-        $currDesa = $this->desa->currDesa($findData('id_desas'));
+        $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }
 
-        helper(['form']);
-
-        $rules = $this->model->myValidationRules;
-        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas']);
-        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
-
         $data = [
             'disabilitas' => $this->request->getVar('disabilitas'),
             'id_data_penduduks' => $this->request->getVar('id_data_penduduks'),
-            'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
 
@@ -145,7 +144,7 @@ class DataDisabilitass extends ResourceController
         if (!$findData) return $this->failNotFound('no data found');
 
         $currUser = $this->user->currLogin();
-        $currDesa = $this->desa->currDesa($findData('id_desas'));
+        $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }

@@ -250,6 +250,7 @@
     const btn_show_kabupaten = document.querySelector('#btn_show_kabupaten')
     const btn_show_kecamatan = document.querySelector('#btn_show_kecamatan')
     const btn_show_desa = document.querySelector('#btn_show_desa')
+    let crrDesa = ''
 
     const add_list_sumber_daya_alam = () => {
         const div_sumber_daya_alam = document.createElement("div")
@@ -759,8 +760,8 @@
                 });
         })
 
-        formData.append('created_by', 'admin')
-        formData.append('updated_by', 'admin')
+        formData.append('created_by', crrDesa)
+        formData.append('updated_by', crrDesa)
         upload(`${api}`, formData)
     }
 
@@ -881,8 +882,7 @@
                 });
         })
 
-        formData.append('created_by', 'admin')
-        formData.append('updated_by', 'admin')
+        formData.append('updated_by', crrDesa)
         formData.append('_method', 'PATCH')
         upload(`${api}/${id}`, formData)
     }
@@ -999,6 +999,20 @@
             infoAlert('deleting data canceled')
         })
     }
+
+    (async () => {
+        try {
+            const response = await fetch(`${api_me}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+            crrDesa = result.desa
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    })()
 
     err_msg.style.display = 'none'
     modal_form.style.display = 'none'

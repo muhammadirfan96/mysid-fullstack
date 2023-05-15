@@ -61,16 +61,16 @@ class Bantuans extends ResourceController
      */
     public function create()
     {
+        helper(['form']);
+
+        $rules = $this->model->myValidationRules;
+        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
         $currUser = $this->user->currLogin();
         $currDesa = $this->desa->currDesa($this->request->getVar('id_desas'));
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }
-
-        helper(['form']);
-
-        $rules = $this->model->myValidationRules;
-        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $foto = $this->request->getFile('foto');
         $namaFile = $foto->getRandomName();
@@ -114,23 +114,22 @@ class Bantuans extends ResourceController
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
-        $currUser = $this->user->currLogin();
-        $currDesa = $this->desa->currDesa($findData('id_desas'));
-        if ($currUser['desa'] != 'admin') {
-            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-        }
-
         helper(['form']);
 
         $foto = $this->request->getFile('foto');
         $rules = $this->model->myValidationRules;
-        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas']);
-        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas'], $rules['created_by']);
 
         if ($foto == '') {
             unset($rules['foto']);
         }
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
+        $currUser = $this->user->currLogin();
+        $currDesa = $this->desa->currDesa($findData['id_desas']);
+        if ($currUser['desa'] != 'admin') {
+            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        }
 
         $data = [
             'bantuan' => $this->request->getVar('bantuan'),
@@ -140,7 +139,6 @@ class Bantuans extends ResourceController
             'satuan' => $this->request->getVar('satuan'),
             'waktu_terima' => $this->request->getVar('waktu_terima'),
             'ket' => $this->request->getVar('ket'),
-            'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
 
@@ -175,7 +173,7 @@ class Bantuans extends ResourceController
         if (!$findData) return $this->failNotFound('no data found');
 
         $currUser = $this->user->currLogin();
-        $currDesa = $this->desa->currDesa($findData('id_desas'));
+        $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }

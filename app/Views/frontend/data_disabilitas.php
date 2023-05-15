@@ -117,6 +117,7 @@
     const per_page = document.querySelector('#per_page')
     const page_list = document.querySelector('#page_list')
     const tbody = document.querySelector('#tbody')
+    let crrDesa = ''
 
     const option_select_desa = item => {
         return `<option value="${item.id}">${item.desa}</option>`
@@ -354,8 +355,8 @@
         formData.append('id_desas', desa.value)
         formData.append('disabilitas', disabilitas.value)
         formData.append('id_data_penduduks', data_penduduk.value)
-        formData.append('created_by', 'admin')
-        formData.append('updated_by', 'admin')
+        formData.append('created_by', crrDesa)
+        formData.append('updated_by', crrDesa)
         upload(`${api}`, formData)
     }
 
@@ -428,8 +429,7 @@
         const formData = new FormData()
         formData.append('disabilitas', disabilitas.value)
         formData.append('id_data_penduduks', data_penduduk.value)
-        formData.append('created_by', 'admin')
-        formData.append('updated_by', 'admin')
+        formData.append('updated_by', crrDesa)
         formData.append('_method', 'PATCH')
         upload(`${api}/${id}`, formData)
     }
@@ -467,6 +467,20 @@
             infoAlert('deleting data canceled')
         })
     }
+
+    (async () => {
+        try {
+            const response = await fetch(`${api_me}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+            crrDesa = result.desa
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    })()
 
     err_msg.style.display = 'none'
     modal_form.style.display = 'none'

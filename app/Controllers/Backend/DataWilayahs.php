@@ -61,16 +61,16 @@ class DataWilayahs extends ResourceController
      */
     public function create()
     {
+        helper(['form']);
+
+        $rules = $this->model->myValidationRules;
+        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
         $currUser = $this->user->currLogin();
         $currDesa = $this->desa->currDesa($this->request->getVar('id_desas'));
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }
-
-        helper(['form']);
-
-        $rules = $this->model->myValidationRules;
-        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $aset_prasarana_ekonomi = '';
         if ($this->request->getVar('nama_aset_prasarana_ekonomi') == [""]) return $this->fail('The nama_aset_prasarana_ekonomi value is not null');
@@ -213,17 +213,17 @@ class DataWilayahs extends ResourceController
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
-        $currUser = $this->user->currLogin();
-        $currDesa = $this->desa->currDesa($findData('id_desas'));
-        if ($currUser['desa'] != 'admin') {
-            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-        }
-
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
-        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas']);
+        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas'], $rules['created_by']);
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
+        $currUser = $this->user->currLogin();
+        $currDesa = $this->desa->currDesa($findData['id_desas']);
+        if ($currUser['desa'] != 'admin') {
+            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        }
 
         $aset_prasarana_ekonomi = '';
         if ($this->request->getVar('nama_aset_prasarana_ekonomi') == [""]) return $this->fail('The nama_aset_prasarana_ekonomi value is not null');
@@ -337,7 +337,6 @@ class DataWilayahs extends ResourceController
             'kebiasaan' => $kebiasaan,
             'sumber_daya_milik_warga' => $sumber_daya_milik_warga,
             'sumber_daya_alam' => $sumber_daya_alam,
-            'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
 
@@ -363,7 +362,7 @@ class DataWilayahs extends ResourceController
         if (!$findData) return $this->failNotFound('no data found');
 
         $currUser = $this->user->currLogin();
-        $currDesa = $this->desa->currDesa($findData('id_desas'));
+        $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }

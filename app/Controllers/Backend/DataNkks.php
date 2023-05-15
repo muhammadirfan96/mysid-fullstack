@@ -62,16 +62,16 @@ class DataNkks extends ResourceController
      */
     public function create()
     {
+        helper(['form']);
+
+        $rules = $this->model->myValidationRules;
+        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
         $currUser = $this->user->currLogin();
         $currDesa = $this->desa->currDesa($this->request->getVar('id_desas'));
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }
-
-        helper(['form']);
-
-        $rules = $this->model->myValidationRules;
-        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $data = [
             'id_provinsis' => $this->request->getVar('id_provinsis'),
@@ -106,24 +106,23 @@ class DataNkks extends ResourceController
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
-        $currUser = $this->user->currLogin();
-        $currDesa = $this->desa->currDesa($findData('id_desas'));
-        if ($currUser['desa'] != 'admin') {
-            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-        }
-
         helper(['form']);
 
         $rules = $this->model->myValidationRules;
         $rules['nkk'] = 'required';
-        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas']);
+        unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas'], $rules['created_by']);
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+
+        $currUser = $this->user->currLogin();
+        $currDesa = $this->desa->currDesa($findData['id_desas']);
+        if ($currUser['desa'] != 'admin') {
+            if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        }
 
         $data = [
             'nkk' => $this->request->getVar('nkk'),
             'id_tingkat_kesejahteraans' => $this->request->getVar('id_tingkat_kesejahteraans'),
             'id_sumber_penghasilan_utamas' => $this->request->getVar('id_sumber_penghasilan_utamas'),
-            'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
 
@@ -149,7 +148,7 @@ class DataNkks extends ResourceController
         if (!$findData) return $this->failNotFound('no data found');
 
         $currUser = $this->user->currLogin();
-        $currDesa = $this->desa->currDesa($findData('id_desas'));
+        $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }
