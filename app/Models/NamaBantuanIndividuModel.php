@@ -4,19 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SumberPenghasilanUtamasModel extends Model
+class NamaBantuanIndividuModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'sumber_penghasilan_utamas';
+    protected $table            = 'nama_bantuan_individus';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [
-        'sumber_penghasilan_utama',
-    ];
+    protected $allowedFields    = [];
 
     // Dates
     protected $useTimestamps = false;
@@ -31,7 +28,7 @@ class SumberPenghasilanUtamasModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
-        'sumber_penghasilan_utama' => 'required',
+        'nama_bantuan_individu' => 'required',
     ];
 
     // Callbacks

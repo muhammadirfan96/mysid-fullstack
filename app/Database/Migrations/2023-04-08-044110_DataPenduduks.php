@@ -31,6 +31,13 @@ class DataPenduduks extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
             ],
+            'tempat_lahir' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '225',
+            ],
+            'tanggal_lahir' => [
+                'type' => 'DATETIME',
+            ],
             'id_golongan_darahs' => [
                 'type' => 'INT',
                 'constraint' => 11,
@@ -66,10 +73,6 @@ class DataPenduduks extends Migration
             'id_desas' => [
                 'type' => 'INT',
                 'constraint' => 11,
-            ],
-            'alamat_lengkap' => [
-                'type' => 'VARCHAR',
-                'constraint' => '255',
             ],
             'pekerjaan' => [
                 'type' => 'VARCHAR',

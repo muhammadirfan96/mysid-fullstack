@@ -79,6 +79,7 @@ class DataNkks extends ResourceController
             'id_kecamatans' => $this->request->getVar('id_kecamatans'),
             'id_desas' => $this->request->getVar('id_desas'),
             'nkk' => $this->request->getVar('nkk'),
+            'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
             'id_tingkat_kesejahteraans' => $this->request->getVar('id_tingkat_kesejahteraans'),
             'id_sumber_penghasilan_utamas' => $this->request->getVar('id_sumber_penghasilan_utamas'),
             'created_by' => $this->request->getVar('created_by'),
@@ -121,6 +122,7 @@ class DataNkks extends ResourceController
 
         $data = [
             'nkk' => $this->request->getVar('nkk'),
+            'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
             'id_tingkat_kesejahteraans' => $this->request->getVar('id_tingkat_kesejahteraans'),
             'id_sumber_penghasilan_utamas' => $this->request->getVar('id_sumber_penghasilan_utamas'),
             'updated_by' => $this->request->getVar('updated_by'),

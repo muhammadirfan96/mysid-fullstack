@@ -16,20 +16,24 @@ class DataNkks extends Migration
                 'auto_increment' => true,
             ],
             'id_provinsis' => [
-                'type'       => 'INT',
+                'type' => 'INT',
                 'constraint' => 11,
             ],
             'id_kabupatens' => [
-                'type'       => 'INT',
+                'type' => 'INT',
                 'constraint' => 11,
             ],
             'id_kecamatans' => [
-                'type'       => 'INT',
+                'type' => 'INT',
                 'constraint' => 11,
             ],
             'id_desas' => [
-                'type'       => 'INT',
+                'type' => 'INT',
                 'constraint' => 11,
+            ],
+            'alamat_lengkap' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
             ],
             'nkk' => [
                 'type'       => 'VARCHAR',

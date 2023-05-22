@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class StatusHubDlmKels extends Migration
+class NamaBantuanIndividu extends Migration
 {
     public function up()
     {
@@ -15,13 +15,13 @@ class StatusHubDlmKels extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'status_hub_dlm_kel' => [
+            'nama_bantuan_individu' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('status_hub_dlm_kels');
+        $this->forge->createTable('nama_bantuan_individus');
     }
 
     public function down()

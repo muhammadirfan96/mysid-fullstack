@@ -16,12 +16,10 @@ class KewarganegaraansModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'kewarganegaraan',
-        'created_by',
-        'updated_by',
     ];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -33,9 +31,7 @@ class KewarganegaraansModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
-        'kewarganegaraan' => 'required|is_unique[kewarganegaraans.kewarganegaraan]',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'kewarganegaraan' => 'required',
     ];
 
     // Callbacks

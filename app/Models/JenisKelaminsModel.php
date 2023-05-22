@@ -16,12 +16,10 @@ class JenisKelaminsModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'jenis_kelamin',
-        'created_by',
-        'updated_by',
     ];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -33,9 +31,7 @@ class JenisKelaminsModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
-        'jenis_kelamin' => 'required|is_unique[jenis_kelamins.jenis_kelamin]',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'jenis_kelamin' => 'required',
     ];
 
     // Callbacks

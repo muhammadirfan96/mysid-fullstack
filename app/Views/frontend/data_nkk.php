@@ -34,6 +34,8 @@
 
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nomor nkk" type="text" id="nkk" autocomplete="off">
 
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="alamat lengkap" type="text" id="alamat_lengkap" autocomplete="off">
+
                     <div class="flex">
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="tingkat_kesejahteraan"></select>
                         <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_tingkat_kesejahteraan()">show tingkat kesejahteraan</button>
@@ -86,6 +88,7 @@
                         <th>kabupaten</th>
                         <th>kecamatan</th>
                         <th>desa</th>
+                        <th>alamat_lengkap</th>
                         <th>nkk</th>
                         <th>tingkat kesejahteraan</th>
                         <th>sumber penghasilan utama</th>
@@ -110,6 +113,7 @@
     const provinsi = document.querySelector('#provinsi')
     const kabupaten = document.querySelector('#kabupaten')
     const kecamatan = document.querySelector('#kecamatan')
+    const alamat_lengkap = document.querySelector('#alamat_lengkap')
     const desa = document.querySelector('#desa')
     const api_tingkat_kesejahteraan = '<?= base_url('/tingkatkesejahteraans') ?>'
     const api_sumber_penghasilan_utama = '<?= base_url('/sumberpenghasilanutamas') ?>'
@@ -308,6 +312,7 @@
                     <td>${item.kecamatan}</td>
                     <td>${item.desa}</td>
                     <td>${item.nkk}</td>
+                    <td>${item.alamat_lengkap}</td>
                     <td>${item.tingkat_kesejahteraan}</td>
                     <td>${item.sumber_penghasilan_utama}</td>
                     <td>${item.created_at}</td>
@@ -385,6 +390,7 @@
         formData.append('id_kecamatans', kecamatan.value)
         formData.append('id_desas', desa.value)
         formData.append('nkk', nkk.value)
+        formData.append('alamat_lengkap', alamat_lengkap.value)
         formData.append('id_tingkat_kesejahteraans', tingkat_kesejahteraan.value)
         formData.append('id_sumber_penghasilan_utamas', sumber_penghasilan_utama.value)
         formData.append('created_by', crrDesa)
@@ -439,6 +445,7 @@
                 btn_show_desa.setAttribute('disabled', '')
 
                 nkk.value = result.nkk
+                alamat_lengkap.value = result.alamat_lengkap
 
                 const response_tingkat_kesejahteraan = await fetch(`${api_tingkat_kesejahteraan}/${result.id_tingkat_kesejahteraans}`, {
                     headers: {
@@ -468,6 +475,7 @@
         event.preventDefault()
         const formData = new FormData()
         formData.append('nkk', nkk.value)
+        formData.append('alamat_lengkap', alamat_lengkap.value)
         formData.append('id_tingkat_kesejahteraans', tingkat_kesejahteraan.value)
         formData.append('id_sumber_penghasilan_utamas', sumber_penghasilan_utama.value)
         formData.append('updated_by', crrDesa)

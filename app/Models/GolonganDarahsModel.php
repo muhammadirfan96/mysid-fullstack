@@ -16,12 +16,10 @@ class GolonganDarahsModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'golongan_darah',
-        'created_by',
-        'updated_by',
     ];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -33,9 +31,7 @@ class GolonganDarahsModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
-        'golongan_darah' => 'required|is_unique[golongan_darahs.golongan_darah]',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'golongan_darah' => 'required',
     ];
 
     // Callbacks

@@ -18,6 +18,10 @@
 
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nama_lengkap" type="text" id="nama_lengkap" autocomplete="off">
 
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan tempat_lahir" type="text" id="tempat_lahir" autocomplete="off">
+
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan tanggal_lahir" type="datetime-local" id="tanggal_lahir" autocomplete="off">
+
                     <div class="flex">
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="data_nkk"></select>
                         <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_data_nkk()">show nkk</button>
@@ -52,28 +56,6 @@
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="jenis_kelamin"></select>
                         <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_jenis_kelamin()">show jenis_kelamin</button>
                     </div>
-
-                    <div class="flex">
-                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="provinsi"></select>
-                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_provinsi()">show provinsi</button>
-                    </div>
-
-                    <div class="flex">
-                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="kabupaten"></select>
-                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_kabupaten()">show kabupaten</button>
-                    </div>
-
-                    <div class="flex">
-                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="kecamatan"></select>
-                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_kecamatan()">show kecamatan</button>
-                    </div>
-
-                    <div class="flex">
-                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="desa"></select>
-                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_desa()">show desa</button>
-                    </div>
-
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan alamat_lengkap" type="text" id="alamat_lengkap" autocomplete="off">
 
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan pekerjaan" type="text" id="pekerjaan" autocomplete="off">
 
@@ -127,6 +109,8 @@
                         <th>nik</th>
                         <th>nama lengkap</th>
                         <th>nkk</th>
+                        <th>tempat lahir</th>
+                        <th>tanggal lahir</th>
                         <th>agama</th>
                         <th>gol. darah</th>
                         <th>pendidikan</th>
@@ -137,7 +121,6 @@
                         <th>kabupaten</th>
                         <th>kecamatan</th>
                         <th>desa</th>
-                        <th>alamat lengkap</th>
                         <th>pekerjaan</th>
                         <th>created_at</th>
                         <th>created_by</th>
@@ -167,17 +150,14 @@
     const nik = document.querySelector('#nik')
     const nama_lengkap = document.querySelector('#nama_lengkap')
     const data_nkk = document.querySelector('#data_nkk')
+    const tempat_lahir = document.querySelector('#tempat_lahir')
+    const tanggal_lahir = document.querySelector('#tanggal_lahir')
     const agama = document.querySelector('#agama')
     const golongan_darah = document.querySelector('#golongan_darah')
     const pendidikan = document.querySelector('#pendidikan')
     const status_hub_dlm_kel = document.querySelector('#status_hub_dlm_kel')
     const kewarganegaraan = document.querySelector('#kewarganegaraan')
     const jenis_kelamin = document.querySelector('#jenis_kelamin')
-    const provinsi = document.querySelector('#provinsi')
-    const kabupaten = document.querySelector('#kabupaten')
-    const kecamatan = document.querySelector('#kecamatan')
-    const desa = document.querySelector('#desa')
-    const alamat_lengkap = document.querySelector('#alamat_lengkap')
     const pekerjaan = document.querySelector('#pekerjaan')
     const foto = document.querySelector('#foto')
     const modal_form = document.querySelector('#modal_form')
@@ -190,102 +170,6 @@
     const tbody = document.querySelector('#tbody')
     const img_preview = document.querySelector('#img_preview')
     let crrDesa = ''
-
-    const option_select_desa = item => {
-        return `<option value="${item.id}">${item.desa}</option>`
-    }
-
-    const generate_isi_option_select_desa = async () => {
-        try {
-            const response = await fetch(`${api_desa}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
-            const result = await response.json()
-
-            let all_option_select_desa = ``
-            result.forEach(item => {
-                all_option_select_desa += option_select_desa(item)
-            });
-
-            desa.innerHTML = all_option_select_desa
-        } catch (error) {
-            console.error("Error:", error)
-        }
-    }
-
-    const option_select_kecamatan = item => {
-        return `<option value="${item.id}">${item.kecamatan}</option>`
-    }
-
-    const generate_isi_option_select_kecamatan = async () => {
-        try {
-            const response = await fetch(`${api_kecamatan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
-            const result = await response.json()
-
-            let all_option_select_kecamatan = ``
-            result.forEach(item => {
-                all_option_select_kecamatan += option_select_kecamatan(item)
-            });
-
-            kecamatan.innerHTML = all_option_select_kecamatan
-        } catch (error) {
-            console.error("Error:", error)
-        }
-    }
-
-    const option_select_kabupaten = item => {
-        return `<option value="${item.id}">${item.kabupaten}</option>`
-    }
-
-    const generate_isi_option_select_kabupaten = async () => {
-        try {
-            const response = await fetch(`${api_kabupaten}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
-            const result = await response.json()
-
-            let all_option_select_kabupaten = ``
-            result.forEach(item => {
-                all_option_select_kabupaten += option_select_kabupaten(item)
-            });
-
-            kabupaten.innerHTML = all_option_select_kabupaten
-        } catch (error) {
-            console.error("Error:", error)
-        }
-    }
-
-    const option_select_provinsi = item => {
-        return `<option value="${item.id}">${item.provinsi}</option>`
-    }
-
-    const generate_isi_option_select_provinsi = async () => {
-        try {
-            const response = await fetch(`${api_provinsi}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
-            const result = await response.json()
-
-            let all_option_select_provinsi = ``
-            result.forEach(item => {
-                all_option_select_provinsi += option_select_provinsi(item)
-            });
-
-            provinsi.innerHTML = all_option_select_provinsi
-        } catch (error) {
-            console.error("Error:", error)
-        }
-    }
 
     const option_select_jenis_kelamin = item => {
         return `<option value="${item.id}">${item.jenis_kelamin}</option>`
@@ -431,7 +315,7 @@
         }
     }
     const option_select_data_nkk = item => {
-        return `<option value="${item.id}">${item.nkk}</option>`
+        return `<option value="${item.id}|${item.id_provinsis}|${item.id_kabupatens}|${item.id_kecamatans}|${item.id_desas}">${item.nkk}</option>`
     }
 
     const generate_isi_option_select_data_nkk = async () => {
@@ -495,6 +379,8 @@
                     <td>${item.nik}</td>
                     <td>${item.nama_lengkap}</td>
                     <td>${item.nkk}</td>
+                    <td>${item.tempat_lahir}</td>
+                    <td>${item.tanggal_lahir}</td>
                     <td>${item.agama}</td>
                     <td>${item.golongan_darah}</td>
                     <td>${item.pendidikan}</td>
@@ -505,7 +391,6 @@
                     <td>${item.kabupaten}</td>
                     <td>${item.kecamatan}</td>
                     <td>${item.desa}</td>
-                    <td>${item.alamat_lengkap}</td>
                     <td>${item.pekerjaan}</td>
                     <td>${item.created_at}</td>
                     <td>${item.created_by}</td>
@@ -577,20 +462,22 @@
     const tambah = event => {
         event.preventDefault()
         const formData = new FormData()
+        const item_data_nkk = data_nkk.value.split('|')
         formData.append('nik', nik.value)
         formData.append('nama_lengkap', nama_lengkap.value)
-        formData.append('id_data_nkks', data_nkk.value)
+        formData.append('id_data_nkks', item_data_nkk[0])
         formData.append('id_agamas', agama.value)
+        formData.append('tempat_lahir', tempat_lahir.value)
+        formData.append('tanggal_lahir', tanggal_lahir.value)
         formData.append('id_golongan_darahs', golongan_darah.value)
         formData.append('id_pendidikans', pendidikan.value)
         formData.append('id_status_hub_dlm_kels', status_hub_dlm_kel.value)
         formData.append('id_kewarganegaraans', kewarganegaraan.value)
         formData.append('id_jenis_kelamins', jenis_kelamin.value)
-        formData.append('id_provinsis', provinsi.value)
-        formData.append('id_kabupatens', kabupaten.value)
-        formData.append('id_kecamatans', kecamatan.value)
-        formData.append('id_desas', desa.value)
-        formData.append('alamat_lengkap', alamat_lengkap.value)
+        formData.append('id_provinsis', item_data_nkk[1])
+        formData.append('id_kabupatens', item_data_nkk[2])
+        formData.append('id_kecamatans', item_data_nkk[3])
+        formData.append('id_desas', item_data_nkk[4])
         formData.append('pekerjaan', pekerjaan.value)
         formData.append('foto', foto.files[0])
         formData.append('active', 1)
@@ -620,13 +507,15 @@
 
                 nik.value = result.nik
                 nama_lengkap.value = result.nama_lengkap
+                tempat_lahir.value = result.tempat_lahir
+                tanggal_lahir.value = result.tanggal_lahir
                 const response_data_nkk = await fetch(`${api_data_nkk}/${result.id_data_nkks}`, {
                     headers: {
                         Authorization: `Bearer ${getCookie('token')}`
                     }
                 })
                 const result_data_nkk = await response_data_nkk.json()
-                data_nkk.innerHTML = `<option value="${result_data_nkk.id}">${result_data_nkk.nkk}</option>`
+                data_nkk.innerHTML = `<option value="${result_data_nkk.id}|${result_data_nkk.id_provinsis}|${result_data_nkk.id_kabupatens}|${result_data_nkk.id_kecamatans}|${result_data_nkk.id_desas}">${result_data_nkk.nkk}</option>`
                 const response_agama = await fetch(`${api_agama}/${result.id_agamas}`, {
                     headers: {
                         Authorization: `Bearer ${getCookie('token')}`
@@ -669,36 +558,7 @@
                 })
                 const result_jenis_kelamin = await response_jenis_kelamin.json()
                 jenis_kelamin.innerHTML = `<option value="${result_jenis_kelamin.id}">${result_jenis_kelamin.jenis_kelamin}</option>`
-                const response_provinsi = await fetch(`${api_provinsi}/${result.id_provinsis}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
-                const result_provinsi = await response_provinsi.json()
-                provinsi.innerHTML = `<option value="${result_provinsi.id}">${result_provinsi.provinsi}</option>`
-                const response_kabupaten = await fetch(`${api_kabupaten}/${result.id_kabupatens}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
-                const result_kabupaten = await response_kabupaten.json()
-                kabupaten.innerHTML = `<option value="${result_kabupaten.id}">${result_kabupaten.kabupaten}</option>`
-                const response_kecamatan = await fetch(`${api_kecamatan}/${result.id_kecamatans}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
-                const result_kecamatan = await response_kecamatan.json()
-                kecamatan.innerHTML = `<option value="${result_kecamatan.id}">${result_kecamatan.kecamatan}</option>`
-                const response_desa = await fetch(`${api_desa}/${result.id_desas}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
-                const result_desa = await response_desa.json()
-                desa.innerHTML = `<option value="${result_desa.id}">${result_desa.desa}</option>`
 
-                alamat_lengkap.value = result.alamat_lengkap
                 pekerjaan.value = result.pekerjaan
                 img_preview.src = `img/data_penduduk/${result.foto}`
                 form_input.onsubmit = () => ubah(event, id)
@@ -712,20 +572,22 @@
     const ubah = (event, id) => {
         event.preventDefault()
         const formData = new FormData()
+        const item_data_nkk = data_nkk.value.split('|')
         formData.append('nik', nik.value)
         formData.append('nama_lengkap', nama_lengkap.value)
-        formData.append('id_data_nkks', data_nkk.value)
+        formData.append('id_data_nkks', item_data_nkk[0])
+        formData.append('tempat_lahir', tempat_lahir.value)
+        formData.append('tanggal_lahir', tanggal_lahir.value)
         formData.append('id_agamas', agama.value)
         formData.append('id_golongan_darahs', golongan_darah.value)
         formData.append('id_pendidikans', pendidikan.value)
         formData.append('id_status_hub_dlm_kels', status_hub_dlm_kel.value)
         formData.append('id_kewarganegaraans', kewarganegaraan.value)
         formData.append('id_jenis_kelamins', jenis_kelamin.value)
-        formData.append('id_provinsis', provinsi.value)
-        formData.append('id_kabupatens', kabupaten.value)
-        formData.append('id_kecamatans', kecamatan.value)
-        formData.append('id_desas', desa.value)
-        formData.append('alamat_lengkap', alamat_lengkap.value)
+        formData.append('id_provinsis', item_data_nkk[1])
+        formData.append('id_kabupatens', item_data_nkk[2])
+        formData.append('id_kecamatans', item_data_nkk[3])
+        formData.append('id_desas', item_data_nkk[4])
         formData.append('pekerjaan', pekerjaan.value)
         formData.append('active', 1)
         formData.append('foto', foto.files[0])
@@ -743,10 +605,6 @@
         status_hub_dlm_kel.innerHTML = ''
         kewarganegaraan.innerHTML = ''
         jenis_kelamin.innerHTML = ''
-        provinsi.innerHTML = ''
-        kabupaten.innerHTML = ''
-        kecamatan.innerHTML = ''
-        desa.innerHTML = ''
         img_preview.src = ''
         err_msg.innerHTML = ''
         err_msg.style.display = 'none'

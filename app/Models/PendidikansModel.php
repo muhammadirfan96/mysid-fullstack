@@ -16,20 +16,16 @@ class PendidikansModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'pendidikan',
-        'created_by',
-        'updated_by',
     ];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
     public $myValidationRules = [
-        'pendidikan' => 'required|is_unique[pendidikans.pendidikan]',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'pendidikan' => 'required',
     ];
 
     // Validation

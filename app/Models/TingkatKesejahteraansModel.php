@@ -16,8 +16,6 @@ class TingkatKesejahteraansModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'tingkat_kesejahteraan',
-        'created_by',
-        'updated_by',
     ];
 
     // Dates
@@ -33,9 +31,7 @@ class TingkatKesejahteraansModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
-        'tingkat_kesejahteraan' => 'required|is_unique[tingkat_kesejahteraans.tingkat_kesejahteraan]',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'tingkat_kesejahteraan' => 'required',
     ];
 
     // Callbacks

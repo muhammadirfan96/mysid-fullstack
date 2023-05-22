@@ -16,12 +16,10 @@ class AgamasModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'agama',
-        'created_by',
-        'updated_by',
     ];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -33,9 +31,7 @@ class AgamasModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
-        'agama' => 'required|is_unique[agamas.agama]',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'agama' => 'required',
     ];
 
     // Callbacks
