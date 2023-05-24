@@ -16,7 +16,6 @@ class DataAwal extends Seeder
         $this->call('StatusHubDlmKel');
         $this->call('SumberPenghasilanUtama');
         $this->call('TingkatKesejahteraan');
-        $this->call('NamaBantuanIndividu');
-        $this->call('NamaBantuanKelompok');
+        $this->call('BantuanIndividu');
     }
 }

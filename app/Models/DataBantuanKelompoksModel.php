@@ -4,13 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class BantuansModel extends Model
+class DataBantuanKelompoksModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'bantuans';
+    protected $table            = 'data_bantuan_kelompoks';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
@@ -19,12 +18,8 @@ class BantuansModel extends Model
         'id_kabupatens',
         'id_kecamatans',
         'id_desas',
-        'bantuan',
-        'sumber',
+        'bantuan_kelompoks',
         'penerima',
-        'jumlah',
-        'satuan',
-        'foto',
         'waktu_terima',
         'ket',
         'created_by',
@@ -48,16 +43,12 @@ class BantuansModel extends Model
         'id_kabupatens' => 'required|is_not_unique[kabupatens.id]',
         'id_kecamatans' => 'required|is_not_unique[kecamatans.id]',
         'id_desas' => 'required|is_not_unique[desas.id]',
-        'bantuan' => 'required',
-        'sumber' => 'required',
+        'bantuan_kelompoks' => 'required',
         'penerima' => 'required',
-        'jumlah' => 'required|integer',
-        'satuan' => 'required',
-        'foto' => 'uploaded[foto]|max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
         'waktu_terima' => 'required',
+        'foto' => 'uploaded[foto]|max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
         'created_by' => 'required',
         'updated_by' => 'required',
-
     ];
 
     // Callbacks

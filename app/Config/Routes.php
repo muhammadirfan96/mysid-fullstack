@@ -38,7 +38,6 @@ $routes->get('me', 'Auth\Me::index', ['filter' => 'auth']);
 
 // BACK END
 $routes->resource('agamas', ['controller' => 'Backend\Agamas', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
-$routes->resource('bantuans', ['controller' => 'Backend\Bantuans', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('datadisabilitass', ['controller' => 'Backend\DataDisabilitass', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('datankks', ['controller' => 'Backend\DataNkks', 'placeholder' => '(:num)', 'except' => 'new,edit']);
 $routes->resource('datapenduduks', ['controller' => 'Backend\DataPenduduks', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
@@ -54,10 +53,13 @@ $routes->resource('provinsis', ['controller' => 'Backend\Provinsis', 'placeholde
 $routes->resource('statushubdlmkels', ['controller' => 'Backend\StatusHubDlmKels', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('sumberpenghasilanutamas', ['controller' => 'Backend\SumberPenghasilanUtamas', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('tingkatkesejahteraans', ['controller' => 'Backend\TingkatKesejahteraans', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('bantuanindividus', ['controller' => 'Backend\BantuanIndividus', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('databantuanindividus', ['controller' => 'Backend\DataBantuanIndividus', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('kelompokmasyarakats', ['controller' => 'Backend\KelompokMasyarakats', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('databantuankelompoks', ['controller' => 'Backend\DataBantuanKelompoks', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 
 // find
 $routes->get('agamas/find/(:any)', 'Backend\Agamas::find/$1', ['filter' => 'auth']);
-$routes->get('bantuans/find/(:any)', 'Backend\Bantuans::find/$1', ['filter' => 'auth']);
 $routes->get('datadisabilitass/find/(:any)', 'Backend\DataDisabilitass::find/$1', ['filter' => 'auth']);
 $routes->get('datankks/find/(:any)', 'Backend\DataNkks::find/$1', ['filter' => 'auth']);
 $routes->get('datapenduduks/find/(:any)', 'Backend\DataPenduduks::find/$1', ['filter' => 'auth']);
@@ -72,7 +74,10 @@ $routes->get('pendidikans/find/(:any)', 'Backend\Pendidikans::find/$1', ['filter
 $routes->get('provinsis/find/(:any)', 'Backend\Provinsis::find/$1', ['filter' => 'auth']);
 $routes->get('statushubdlmkels/find/(:any)', 'Backend\StatusHubDlmKels::find/$1', ['filter' => 'auth']);
 $routes->get('sumberpenghasilanutamas/find/(:any)', 'Backend\SumberPenghasilanUtamas::find/$1', ['filter' => 'auth']);
-$routes->get('tingkatkesejahteraans/find/(:any)', 'Backend\TingkatKesejahteraans::find/$1', ['filter' => 'auth']);
+$routes->get('bantuanindividus/find/(:any)', 'Backend\BantuanIndividus::find/$1', ['filter' => 'auth']);
+$routes->get('databantuanindividus/find/(:any)', 'Backend\DataBantuanIndividus::find/$1', ['filter' => 'auth']);
+$routes->get('kelompokmasyarakats/find/(:any)', 'Backend\KelompokMasyarakats::find/$1', ['filter' => 'auth']);
+$routes->get('databantuankelompoks/find/(:any)', 'Backend\DataBantuanKelompoks::find/$1', ['filter' => 'auth']);
 
 // FRONT END
 $routes->get('login', 'Frontend\Login::index');
@@ -81,11 +86,13 @@ $routes->get('desa', 'Frontend\Desa::index');
 $routes->get('kecamatan', 'Frontend\Kecamatan::index');
 $routes->get('kabupaten', 'Frontend\Kabupaten::index');
 $routes->get('provinsi', 'Frontend\Provinsi::index');
-$routes->get('bantuan', 'Frontend\Bantuan::index');
 $routes->get('datankk', 'Frontend\DataNkk::index');
 $routes->get('datadisabilitas', 'Frontend\DataDisabilitas::index');
 $routes->get('datapenduduk', 'Frontend\DataPenduduk::index');
 $routes->get('datawilayah', 'Frontend\DataWilayah::index');
+$routes->get('databantuanindividu', 'Frontend\DataBantuanIndividu::index');
+$routes->get('kelompokmasyarakats', 'Frontend\KelompokMasyarakats::index');
+$routes->get('databantuankelompok', 'Frontend\DataBantuanKelompok::index');
 
 // MENUBAR
 $routes->get('/', 'Menubar\Home::index');

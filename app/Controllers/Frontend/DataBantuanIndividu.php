@@ -4,13 +4,13 @@ namespace App\Controllers\Frontend;
 
 use App\Controllers\BaseController;
 
-class Bantuan extends BaseController
+class DataBantuanIndividu extends BaseController
 {
     public function index()
     {
         $data = [
-            'title' => 'bantuan'
+            'title' => 'bantuan individu'
         ];
-        return view('frontend/bantuan', $data);
+        return view('frontend/data_bantuan_individu', $data);
     }
 }

@@ -7,10 +7,10 @@ use App\Libraries\GetUser;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class Bantuans extends ResourceController
+class DataBantuanKelompoks extends ResourceController
 {
     use ResponseTrait;
-    protected $modelName = 'App\Models\BantuansModel';
+    protected $modelName = 'App\Models\DataBantuanKelompoksModel';
     protected $format    = 'json';
     protected $db, $user, $desa;
 
@@ -74,21 +74,18 @@ class Bantuans extends ResourceController
 
         $foto = $this->request->getFile('foto');
         $namaFile = $foto->getRandomName();
-        $foto->move('img/bantuan', $namaFile);
+        $foto->move('img/bantuan_individu', $namaFile);
 
         $data = [
             'id_provinsis' => $this->request->getVar('id_provinsis'),
             'id_kabupatens' => $this->request->getVar('id_kabupatens'),
             'id_kecamatans' => $this->request->getVar('id_kecamatans'),
             'id_desas' => $this->request->getVar('id_desas'),
-            'bantuan' => $this->request->getVar('bantuan'),
-            'sumber' => $this->request->getVar('sumber'),
+            'bantuan_kelompoks' => $this->request->getVar('bantuan_kelompoks'),
             'penerima' => $this->request->getVar('penerima'),
-            'jumlah' => $this->request->getVar('jumlah'),
-            'satuan' => $this->request->getVar('satuan'),
-            'foto' => $namaFile,
             'waktu_terima' => $this->request->getVar('waktu_terima'),
             'ket' => $this->request->getVar('ket'),
+            'foto' => $namaFile,
             'created_by' => $this->request->getVar('created_by'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
@@ -132,11 +129,8 @@ class Bantuans extends ResourceController
         }
 
         $data = [
-            'bantuan' => $this->request->getVar('bantuan'),
-            'sumber' => $this->request->getVar('sumber'),
+            'bantuan_kelompoks' => $this->request->getVar('bantuan_kelompoks'),
             'penerima' => $this->request->getVar('penerima'),
-            'jumlah' => $this->request->getVar('jumlah'),
-            'satuan' => $this->request->getVar('satuan'),
             'waktu_terima' => $this->request->getVar('waktu_terima'),
             'ket' => $this->request->getVar('ket'),
             'updated_by' => $this->request->getVar('updated_by'),
@@ -145,10 +139,10 @@ class Bantuans extends ResourceController
         if ($foto != '') {
             $namaFile = $foto->getRandomName();
             $data['foto'] = $namaFile;
-            if (file_exists('img/bantuan/' . $findData['foto'])) {
-                unlink('img/bantuan/' . $findData['foto']);
+            if (file_exists('img/bantuan_kelompok/' . $findData['foto'])) {
+                unlink('img/bantuan_kelompok/' . $findData['foto']);
             }
-            $foto->move('img/bantuan', $namaFile);
+            $foto->move('img/bantuan_kelompok', $namaFile);
         }
 
         $this->model->update($id, $data);
@@ -178,8 +172,8 @@ class Bantuans extends ResourceController
             if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
         }
 
-        if (file_exists('img/bantuan/' . $findData['foto'])) {
-            unlink('img/bantuan/' . $findData['foto']);
+        if (file_exists('img/bantuan_kelompok/' . $findData['foto'])) {
+            unlink('img/bantuan_kelompok/' . $findData['foto']);
         }
 
         $this->model->delete($id);
@@ -240,8 +234,8 @@ class Bantuans extends ResourceController
             $where = "id_desas = '$desaId'";
         }
 
-        $bantuans = $this->db->table('bantuans')
-            ->orderBy('bantuans.id', 'DESC')
+        $data_bantuan_individus = $this->db->table('data_bantuan_individus')
+            ->orderBy('data_bantuan_individus.id', 'DESC')
             ->getWhere($where, $limit, $offset)
             ->getResultArray();
 
@@ -249,10 +243,10 @@ class Bantuans extends ResourceController
             ->get()
             ->getResultArray();
 
-        foreach ($bantuans as $key => $bantuan) {
+        foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($provinsis as $provinsi) {
-                if ($bantuan['id_provinsis'] == $provinsi['id']) {
-                    $bantuans[$key]['provinsi'] = $provinsi['provinsi'];
+                if ($data_bantuan_individu['id_provinsis'] == $provinsi['id']) {
+                    $data_bantuan_individus[$key]['provinsi'] = $provinsi['provinsi'];
                 }
             }
         }
@@ -261,10 +255,10 @@ class Bantuans extends ResourceController
             ->get()
             ->getResultArray();
 
-        foreach ($bantuans as $key => $bantuan) {
+        foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($kabupatens as $kabupaten) {
-                if ($bantuan['id_kabupatens'] == $kabupaten['id']) {
-                    $bantuans[$key]['kabupaten'] = $kabupaten['kabupaten'];
+                if ($data_bantuan_individu['id_kabupatens'] == $kabupaten['id']) {
+                    $data_bantuan_individus[$key]['kabupaten'] = $kabupaten['kabupaten'];
                 }
             }
         }
@@ -273,10 +267,10 @@ class Bantuans extends ResourceController
             ->get()
             ->getResultArray();
 
-        foreach ($bantuans as $key => $bantuan) {
+        foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($kecamatans as $kecamatan) {
-                if ($bantuan['id_kecamatans'] == $kecamatan['id']) {
-                    $bantuans[$key]['kecamatan'] = $kecamatan['kecamatan'];
+                if ($data_bantuan_individu['id_kecamatans'] == $kecamatan['id']) {
+                    $data_bantuan_individus[$key]['kecamatan'] = $kecamatan['kecamatan'];
                 }
             }
         }
@@ -285,10 +279,10 @@ class Bantuans extends ResourceController
             ->get()
             ->getResultArray();
 
-        foreach ($bantuans as $key => $bantuan) {
+        foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($desas as $desa) {
-                if ($bantuan['id_desas'] == $desa['id']) {
-                    $bantuans[$key]['desa'] = $desa['desa'];
+                if ($data_bantuan_individu['id_desas'] == $desa['id']) {
+                    $data_bantuan_individus[$key]['desa'] = $desa['desa'];
                 }
             }
         }
@@ -297,10 +291,10 @@ class Bantuans extends ResourceController
             ->get()
             ->getResultArray();
 
-        foreach ($bantuans as $key => $bantuan) {
+        foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($provinsis as $provinsi) {
-                if ($bantuan['id_provinsis'] == $provinsi['id']) {
-                    $bantuans[$key]['provinsi'] = $provinsi['provinsi'];
+                if ($data_bantuan_individu['id_provinsis'] == $provinsi['id']) {
+                    $data_bantuan_individus[$key]['provinsi'] = $provinsi['provinsi'];
                 }
             }
         }
@@ -309,10 +303,10 @@ class Bantuans extends ResourceController
             ->get()
             ->getResultArray();
 
-        foreach ($bantuans as $key => $bantuan) {
+        foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($kabupatens as $kabupaten) {
-                if ($bantuan['id_kabupatens'] == $kabupaten['id']) {
-                    $bantuans[$key]['kabupaten'] = $kabupaten['kabupaten'];
+                if ($data_bantuan_individu['id_kabupatens'] == $kabupaten['id']) {
+                    $data_bantuan_individus[$key]['kabupaten'] = $kabupaten['kabupaten'];
                 }
             }
         }
@@ -321,10 +315,10 @@ class Bantuans extends ResourceController
             ->get()
             ->getResultArray();
 
-        foreach ($bantuans as $key => $bantuan) {
+        foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($kecamatans as $kecamatan) {
-                if ($bantuan['id_kecamatans'] == $kecamatan['id']) {
-                    $bantuans[$key]['kecamatan'] = $kecamatan['kecamatan'];
+                if ($data_bantuan_individu['id_kecamatans'] == $kecamatan['id']) {
+                    $data_bantuan_individus[$key]['kecamatan'] = $kecamatan['kecamatan'];
                 }
             }
         }
@@ -333,14 +327,14 @@ class Bantuans extends ResourceController
             ->get()
             ->getResultArray();
 
-        foreach ($bantuans as $key => $bantuan) {
+        foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($desas as $desa) {
-                if ($bantuan['id_desas'] == $desa['id']) {
-                    $bantuans[$key]['desa'] = $desa['desa'];
+                if ($data_bantuan_individu['id_desas'] == $desa['id']) {
+                    $data_bantuan_individus[$key]['desa'] = $desa['desa'];
                 }
             }
         }
 
-        return $this->respond($bantuans);
+        return $this->respond($data_bantuan_individus);
     }
 }

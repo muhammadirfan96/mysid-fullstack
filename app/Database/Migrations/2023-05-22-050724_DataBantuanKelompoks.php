@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Bantuans extends Migration
+class DataBantuanKelompoks extends Migration
 {
     public function up()
     {
@@ -31,27 +31,11 @@ class Bantuans extends Migration
                 'type'       => 'INT',
                 'constraint' => 11,
             ],
-            'bantuan' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-            ],
-            'sumber' => [
+            'bantuan_kelompoks' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
             'penerima' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-            ],
-            'jumlah' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-            ],
-            'satuan' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-            ],
-            'foto' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
@@ -61,6 +45,10 @@ class Bantuans extends Migration
             'ket' => [
                 'type'       => 'TEXT',
                 'null' => true,
+            ],
+            'foto' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -78,7 +66,7 @@ class Bantuans extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('bantuans');
+        $this->forge->createTable('data_bantuan_kelompoks');
     }
 
     public function down()

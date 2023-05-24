@@ -4,8 +4,8 @@
 <?php
 
 $menuadminweb = [
-    'bantuan' => [
-        'link' => '/bantuan',
+    'data_bantuan_individu' => [
+        'link' => '/databantuanindividu',
         'bg_src' => "url('img/frontend/help.png')",
         'in_user' => 1,
     ],

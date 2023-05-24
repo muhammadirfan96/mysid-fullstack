@@ -31,12 +31,15 @@
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="desa"></select>
                         <button id="btn_show_desa" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_desa()">show desa</button>
                     </div>
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="bantuan_individu"></select>
+                        <button id="btn_show_bantuan_individu" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_bantuan_individu()">show bantuan individu</button>
+                    </div>
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="penerima"></select>
+                        <button id="btn_show_penerima" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_penerima()">show penerima</button>
+                    </div>
 
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nama bantuan" type="text" id="bantuan" autocomplete="off">
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan sumber bantuan" type="text" id="sumber" autocomplete="off">
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan penerima bantuan" type="text" id="penerima" autocomplete="off">
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan jumlah bantuan" type="number" min="1" id="jumlah" autocomplete="off">
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan satuan bantuan" type="text" id="satuan" autocomplete="off">
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan waktu_terima bantuan" type="datetime-local" id="waktu_terima" autocomplete="off">
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="keterangan" type="text" id="ket" autocomplete="off">
                     <div class="flex flex-wrap my-2">
@@ -90,11 +93,8 @@
                         <th>kabupaten</th>
                         <th>kecamatan</th>
                         <th>desa</th>
-                        <th>bantuan</th>
-                        <th>sumber</th>
+                        <th>bantuan individu</th>
                         <th>penerima</th>
-                        <th>jumlah</th>
-                        <th>satuan</th>
                         <th>waktu_terima</th>
                         <th>ket</th>
                         <th>created_at</th>
@@ -110,23 +110,24 @@
 </div>
 
 <script>
-    const api = '<?= base_url('/bantuans') ?>'
+    const api = '<?= base_url('/databantuanindividus') ?>'
     const api_provinsi = '<?= base_url('/provinsis') ?>'
     const api_kabupaten = '<?= base_url('/kabupatens') ?>'
     const api_kecamatan = '<?= base_url('/kecamatans') ?>'
     const api_desa = '<?= base_url('/desas') ?>'
+    const api_data_penduduk = '<?= base_url('/datapenduduks') ?>'
+    const api_bantuan_individu = '<?= base_url('/bantuanindividus') ?>'
+
     const provinsi = document.querySelector('#provinsi')
     const kabupaten = document.querySelector('#kabupaten')
     const kecamatan = document.querySelector('#kecamatan')
     const desa = document.querySelector('#desa')
-    const bantuan = document.querySelector('#bantuan')
-    const sumber = document.querySelector('#sumber')
+    const bantuan_individu = document.querySelector('#bantuan_individu')
     const penerima = document.querySelector('#penerima')
-    const jumlah = document.querySelector('#jumlah')
-    const satuan = document.querySelector('#satuan')
     const waktu_terima = document.querySelector('#waktu_terima')
     const ket = document.querySelector('#ket')
     const foto = document.querySelector('#foto')
+
     const modal_form = document.querySelector('#modal_form')
     const head_form = document.querySelector('#head_form')
     const err_msg = document.querySelector('#err_msg')
@@ -137,6 +138,54 @@
     const tbody = document.querySelector('#tbody')
     const img_preview = document.querySelector('#img_preview')
     let crrDesa = ''
+
+    const option_select_penerima = item => {
+        return `<option value="${item.id}">${item.nama_lengkap}</option>`
+    }
+
+    const generate_isi_option_select_penerima = async () => {
+        try {
+            const response = await fetch(`${api_data_penduduk}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_penerima = ``
+            result.forEach(item => {
+                all_option_select_penerima += option_select_penerima(item)
+            });
+
+            penerima.innerHTML = all_option_select_penerima
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_bantuan_individu = item => {
+        return `<option value="${item.id}">${item.bantuan_individu}</option>`
+    }
+
+    const generate_isi_option_select_bantuan_individu = async () => {
+        try {
+            const response = await fetch(`${api_bantuan_individu}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_bantuan_individu = ``
+            result.forEach(item => {
+                all_option_select_bantuan_individu += option_select_bantuan_individu(item)
+            });
+
+            bantuan_individu.innerHTML = all_option_select_bantuan_individu
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
 
     const option_select_desa = item => {
         return `<option value="${item.id}">${item.desa}</option>`
@@ -269,18 +318,15 @@
                     </td>
                     <td>
                         <div class="w-16 mx-auto">
-                            <img class="w-16 h-16 rounded-full mx-auto" src="img/bantuan/${item.foto}" alt="${item.foto}">
+                            <img class="w-16 h-16 rounded-full mx-auto" src="img/bantuan_individu/${item.foto}" alt="${item.foto}">
                         </div>
                     </td>
                     <td>${item.provinsi}</td>
                     <td>${item.kabupaten}</td>
                     <td>${item.kecamatan}</td>
                     <td>${item.desa}</td>
-                    <td>${item.bantuan}</td>
-                    <td>${item.sumber}</td>
-                    <td>${item.penerima}</td>
-                    <td>${item.jumlah}</td>
-                    <td>${item.satuan}</td>
+                    <td>${item.bantuan_individu}</td>
+                    <td>${item.nama_penerima}</td>
                     <td>${item.waktu_terima}</td>
                     <td>${item.ket}</td>
                     <td>${item.created_at}</td>
@@ -357,11 +403,8 @@
         formData.append('id_kabupatens', kabupaten.value)
         formData.append('id_kecamatans', kecamatan.value)
         formData.append('id_desas', desa.value)
-        formData.append('bantuan', bantuan.value)
-        formData.append('sumber', sumber.value)
+        formData.append('id_bantuan_individus', bantuan_individu.value)
         formData.append('penerima', penerima.value)
-        formData.append('jumlah', jumlah.value)
-        formData.append('satuan', satuan.value)
         formData.append('waktu_terima', waktu_terima.value)
         formData.append('ket', ket.value)
         formData.append('foto', foto.files[0])
@@ -422,15 +465,27 @@
                 desa.innerHTML = `<option value="${result_desa.id}">${result_desa.desa}</option>`
                 btn_show_desa.setAttribute('disabled', '')
 
-                bantuan.value = result.bantuan
-                sumber.value = result.sumber
-                penerima.value = result.penerima
-                jumlah.value = result.jumlah
-                satuan.value = result.satuan
+                const response_bantuan_individu = await fetch(`${api_bantuan_individu}/${result.id_bantuan_individus}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_bantuan_individu = await response_bantuan_individu.json()
+                bantuan_individu.innerHTML = `<option value="${result_bantuan_individu.id}">${result_bantuan_individu.bantuan_individu}</option>`
+                btn_show_bantuan_individu.setAttribute('disabled', '')
+                const response_penerima = await fetch(`${api_data_penduduk}/${result.penerima}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_penerima = await response_penerima.json()
+                penerima.innerHTML = `<option value="${result_penerima.id}">${result_penerima.nama_lengkap}</option>`
+                btn_show_penerima.setAttribute('disabled', '')
+
                 waktu_terima.value = result.waktu_terima
                 ket.value = result.ket
 
-                img_preview.src = `img/bantuan/${result.foto}`
+                img_preview.src = `img/bantuan_individu/${result.foto}`
                 form_input.onsubmit = () => ubah(event, id)
             } catch (error) {
                 console.error("Error:", error)
@@ -442,11 +497,8 @@
     const ubah = (event, id) => {
         event.preventDefault()
         const formData = new FormData()
-        formData.append('bantuan', bantuan.value)
-        formData.append('sumber', sumber.value)
+        formData.append('id_bantuan_individus', bantuan_individu.value)
         formData.append('penerima', penerima.value)
-        formData.append('jumlah', jumlah.value)
-        formData.append('satuan', satuan.value)
         formData.append('waktu_terima', waktu_terima.value)
         formData.append('ket', ket.value)
         formData.append('foto', foto.files[0])
@@ -461,6 +513,7 @@
         kabupaten.innerHTML = ''
         kecamatan.innerHTML = ''
         desa.innerHTML = ''
+        bantuan_individu.innerHTML = ''
         img_preview.src = ''
         err_msg.innerHTML = ''
         err_msg.style.display = 'none'
