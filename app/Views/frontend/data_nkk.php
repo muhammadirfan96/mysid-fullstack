@@ -110,16 +110,18 @@
     const api_kabupaten = '<?= base_url('/kabupatens') ?>'
     const api_kecamatan = '<?= base_url('/kecamatans') ?>'
     const api_desa = '<?= base_url('/desas') ?>'
+    const api_tingkat_kesejahteraan = '<?= base_url('/tingkatkesejahteraans') ?>'
+    const api_pekerjaan = '<?= base_url('/pekerjaans') ?>'
+
     const provinsi = document.querySelector('#provinsi')
     const kabupaten = document.querySelector('#kabupaten')
     const kecamatan = document.querySelector('#kecamatan')
     const alamat_lengkap = document.querySelector('#alamat_lengkap')
     const desa = document.querySelector('#desa')
-    const api_tingkat_kesejahteraan = '<?= base_url('/tingkatkesejahteraans') ?>'
-    const api_sumber_penghasilan_utama = '<?= base_url('/sumberpenghasilanutamas') ?>'
     const nkk = document.querySelector('#nkk')
     const tingkat_kesejahteraan = document.querySelector('#tingkat_kesejahteraan')
     const sumber_penghasilan_utama = document.querySelector('#sumber_penghasilan_utama')
+
     const modal_form = document.querySelector('#modal_form')
     const head_form = document.querySelector('#head_form')
     const err_msg = document.querySelector('#err_msg')
@@ -227,12 +229,12 @@
     }
 
     const option_select_sumber_penghasilan_utama = item => {
-        return `<option value="${item.id}">${item.sumber_penghasilan_utama}</option>`
+        return `<option value="${item.id}">${item.pekerjaan}</option>`
     }
 
     const generate_isi_option_select_sumber_penghasilan_utama = async () => {
         try {
-            const response = await fetch(`${api_sumber_penghasilan_utama}/find/*`, {
+            const response = await fetch(`${api_pekerjaan}/find/*`, {
                 headers: {
                     Authorization: `Bearer ${getCookie('token')}`
                 }
@@ -455,7 +457,7 @@
                 const result_tingkat_kesejahteraan = await response_tingkat_kesejahteraan.json()
                 tingkat_kesejahteraan.innerHTML = `<option value="${result_tingkat_kesejahteraan.id}">${result_tingkat_kesejahteraan.tingkat_kesejahteraan}</option>`
 
-                const response_sumber_penghasilan_utama = await fetch(`${api_sumber_penghasilan_utama}/${result.id_sumber_penghasilan_utamas}`, {
+                const response_sumber_penghasilan_utama = await fetch(`${pekerjaan}/${result.id_sumber_penghasilan_utamas}`, {
                     headers: {
                         Authorization: `Bearer ${getCookie('token')}`
                     }

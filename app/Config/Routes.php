@@ -75,6 +75,7 @@ $routes->get('pendidikans/find/(:any)', 'Backend\Pendidikans::find/$1', ['filter
 $routes->get('provinsis/find/(:any)', 'Backend\Provinsis::find/$1', ['filter' => 'auth']);
 $routes->get('statushubdlmkels/find/(:any)', 'Backend\StatusHubDlmKels::find/$1', ['filter' => 'auth']);
 $routes->get('sumberpenghasilanutamas/find/(:any)', 'Backend\SumberPenghasilanUtamas::find/$1', ['filter' => 'auth']);
+$routes->get('tingkatkesejahteraans/find/(:any)', 'Backend\TingkatKesejahteraans::find/$1', ['filter' => 'auth']);
 $routes->get('bantuanindividus/find/(:any)', 'Backend\BantuanIndividus::find/$1', ['filter' => 'auth']);
 $routes->get('databantuanindividus/find/(:any)', 'Backend\DataBantuanIndividus::find/$1', ['filter' => 'auth']);
 $routes->get('kelompokmasyarakats/find/(:any)', 'Backend\KelompokMasyarakats::find/$1', ['filter' => 'auth']);
