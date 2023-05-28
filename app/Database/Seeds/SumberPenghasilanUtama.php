@@ -10,28 +10,31 @@ class SumberPenghasilanUtama extends Seeder
     {
         $data = [
             [
-                'sumber_penghasilan_utama' => 'petani',
-            ],
-            [
-                'sumber_penghasilan_utama' => 'nelayan',
-            ],
-            [
-                'sumber_penghasilan_utama' => 'pedagang',
+                'sumber_penghasilan_utama' => 'PNS',
             ],
             [
                 'sumber_penghasilan_utama' => 'karyawan honorer',
             ],
             [
-                'sumber_penghasilan_utama' => 'karyawan swasta',
+                'sumber_penghasilan_utama' => 'petani',
             ],
             [
-                'sumber_penghasilan_utama' => 'pns',
+                'sumber_penghasilan_utama' => 'peternak',
             ],
             [
-                'sumber_penghasilan_utama' => 'tni',
+                'sumber_penghasilan_utama' => 'pedagang',
             ],
             [
-                'sumber_penghasilan_utama' => 'polri',
+                'sumber_penghasilan_utama' => 'nelayan',
+            ],
+            [
+                'sumber_penghasilan_utama' => 'teknisi',
+            ],
+            [
+                'sumber_penghasilan_utama' => 'mebel',
+            ],
+            [
+                'sumber_penghasilan_utama' => '-',
             ],
         ];
 

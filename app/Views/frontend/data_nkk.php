@@ -111,7 +111,7 @@
     const api_kecamatan = '<?= base_url('/kecamatans') ?>'
     const api_desa = '<?= base_url('/desas') ?>'
     const api_tingkat_kesejahteraan = '<?= base_url('/tingkatkesejahteraans') ?>'
-    const api_pekerjaan = '<?= base_url('/pekerjaans') ?>'
+    const api_sumber_penghasilan_utama = '<?= base_url('/sumberpenghasilanutamas') ?>'
 
     const provinsi = document.querySelector('#provinsi')
     const kabupaten = document.querySelector('#kabupaten')
@@ -229,12 +229,12 @@
     }
 
     const option_select_sumber_penghasilan_utama = item => {
-        return `<option value="${item.id}">${item.pekerjaan}</option>`
+        return `<option value="${item.id}">${item.sumber_penghasilan_utama}</option>`
     }
 
     const generate_isi_option_select_sumber_penghasilan_utama = async () => {
         try {
-            const response = await fetch(`${api_pekerjaan}/find/*`, {
+            const response = await fetch(`${api_sumber_penghasilan_utama}/find/*`, {
                 headers: {
                     Authorization: `Bearer ${getCookie('token')}`
                 }
@@ -457,13 +457,13 @@
                 const result_tingkat_kesejahteraan = await response_tingkat_kesejahteraan.json()
                 tingkat_kesejahteraan.innerHTML = `<option value="${result_tingkat_kesejahteraan.id}">${result_tingkat_kesejahteraan.tingkat_kesejahteraan}</option>`
 
-                const response_pekerjaan = await fetch(`${api_pekerjaan}/${result.id_sumber_penghasilan_utamas}`, {
+                const response_sumber_penghasilan_utama = await fetch(`${api_sumber_penghasilan_utama}/${result.id_sumber_penghasilan_utamas}`, {
                     headers: {
                         Authorization: `Bearer ${getCookie('token')}`
                     }
                 })
-                const result_pekerjaan = await response_pekerjaan.json()
-                sumber_penghasilan_utama.innerHTML = `<option value="${result_pekerjaan.id}">${result_pekerjaan.pekerjaan}</option>`
+                const result_sumber_penghasilan_utama = await response_sumber_penghasilan_utama.json()
+                sumber_penghasilan_utama.innerHTML = `<option value="${result_sumber_penghasilan_utama.id}">${result_sumber_penghasilan_utama.sumber_penghasilan_utama}</option>`
 
                 form_input.onsubmit = () => ubah(event, id)
             } catch (error) {
