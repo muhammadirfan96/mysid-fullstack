@@ -10,13 +10,25 @@ class BantuanIndividu extends Seeder
     {
         $data = [
             [
-                'bantuan_individu' => 'PKH',
-            ],
-            [
-                'bantuan_individu' => 'BNPT',
-            ],
-            [
                 'bantuan_individu' => 'BLT',
+            ],
+            [
+                'bantuan_individu' => 'bantuan nelayan',
+            ],
+            [
+                'bantuan_individu' => 'bantuan pertanian',
+            ],
+            [
+                'bantuan_individu' => 'bantuan peternakan',
+            ],
+            [
+                'bantuan_individu' => 'bantuan home industri',
+            ],
+            [
+                'bantuan_individu' => 'bantuan perbengkelan',
+            ],
+            [
+                'bantuan_individu' => 'bantuan usaha mebel',
             ],
         ];
 

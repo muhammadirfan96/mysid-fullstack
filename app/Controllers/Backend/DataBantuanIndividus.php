@@ -82,7 +82,7 @@ class DataBantuanIndividus extends ResourceController
             'id_kecamatans' => $this->request->getVar('id_kecamatans'),
             'id_desas' => $this->request->getVar('id_desas'),
             'id_bantuan_individus' => $this->request->getVar('id_bantuan_individus'),
-            'penerima' => $this->request->getVar('penerima'),
+            'id_data_penduduks' => $this->request->getVar('id_data_penduduks'),
             'waktu_terima' => $this->request->getVar('waktu_terima'),
             'ket' => $this->request->getVar('ket'),
             'foto' => $namaFile,
@@ -130,7 +130,7 @@ class DataBantuanIndividus extends ResourceController
 
         $data = [
             'id_bantuan_individus' => $this->request->getVar('id_bantuan_individus'),
-            'penerima' => $this->request->getVar('penerima'),
+            'id_data_penduduks' => $this->request->getVar('id_data_penduduks'),
             'waktu_terima' => $this->request->getVar('waktu_terima'),
             'ket' => $this->request->getVar('ket'),
             'updated_by' => $this->request->getVar('updated_by'),
@@ -353,7 +353,7 @@ class DataBantuanIndividus extends ResourceController
 
         foreach ($data_bantuan_individus as $key => $data_bantuan_individu) {
             foreach ($data_penduduks as $data_penduduk) {
-                if ($data_bantuan_individu['penerima'] == $data_penduduk['id']) {
+                if ($data_bantuan_individu['id_data_penduduks'] == $data_penduduk['id']) {
                     $data_bantuan_individus[$key]['nama_penerima'] = $data_penduduk['nama_lengkap'];
                 }
             }

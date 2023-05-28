@@ -92,7 +92,9 @@ class DataPenduduks extends ResourceController
             'id_kabupatens' => $this->request->getVar('id_kabupatens'),
             'id_kecamatans' => $this->request->getVar('id_kecamatans'),
             'id_desas' => $this->request->getVar('id_desas'),
-            'pekerjaan' => $this->request->getVar('pekerjaan'),
+            'id_pekerjaans1' => $this->request->getVar('id_pekerjaans1'),
+            'id_pekerjaans2' => $this->request->getVar('id_pekerjaans2'),
+            'id_pekerjaans3' => $this->request->getVar('id_pekerjaans3'),
             'foto' => $namaFile,
             'active' => $this->request->getVar('active'),
             'created_by' => $this->request->getVar('created_by'),
@@ -153,7 +155,9 @@ class DataPenduduks extends ResourceController
             'id_kabupatens' => $this->request->getVar('id_kabupatens'),
             'id_kecamatans' => $this->request->getVar('id_kecamatans'),
             'id_desas' => $this->request->getVar('id_desas'),
-            'pekerjaan' => $this->request->getVar('pekerjaan'),
+            'id_pekerjaans1' => $this->request->getVar('id_pekerjaans1'),
+            'id_pekerjaans2' => $this->request->getVar('id_pekerjaans2'),
+            'id_pekerjaans3' => $this->request->getVar('id_pekerjaans3'),
             'active' => $this->request->getVar('active'),
             'updated_by' => $this->request->getVar('updated_by'),
         ];
@@ -216,6 +220,9 @@ class DataPenduduks extends ResourceController
             $keys = explode("@", $key);
             if (str_contains($key, 'nama_lengkap')) $where = "nama_lengkap LIKE '%$keys[1]%'";
             if (str_contains($key, 'nik')) $where = "nik LIKE '%$keys[1]%'";
+            if (str_contains($key, 'pekerjaans1')) $where = "id_pekerjaans1 = '$keys[1]'";
+            if (str_contains($key, 'pekerjaans2')) $where = "id_pekerjaans2 = '$keys[1]'";
+            if (str_contains($key, 'pekerjaans3')) $where = "id_pekerjaans3 = '$keys[1]'";
             if (str_contains($key, 'nkk')) {
                 $data_nkksCrr = $this->db->table('data_nkks')
                     ->getWhere("nkk LIKE '%$keys[1]%'")
@@ -383,6 +390,42 @@ class DataPenduduks extends ResourceController
             foreach ($desas as $desa) {
                 if ($data_penduduk['id_desas'] == $desa['id']) {
                     $data_penduduks[$key]['desa'] = $desa['desa'];
+                }
+            }
+        }
+
+        $pekerjaans1 = $this->db->table('pekerjaans')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($pekerjaans1 as $pekerjaan1) {
+                if ($data_penduduk['id_pekerjaans1'] == $pekerjaan1['id']) {
+                    $data_penduduks[$key]['pekerjaan1'] = $pekerjaan1['pekerjaan'];
+                }
+            }
+        }
+
+        $pekerjaans2 = $this->db->table('pekerjaans')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($pekerjaans2 as $pekerjaan2) {
+                if ($data_penduduk['id_pekerjaans2'] == $pekerjaan2['id']) {
+                    $data_penduduks[$key]['pekerjaan2'] = $pekerjaan2['pekerjaan'];
+                }
+            }
+        }
+
+        $pekerjaans3 = $this->db->table('pekerjaans')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($pekerjaans3 as $pekerjaan3) {
+                if ($data_penduduk['id_pekerjaans3'] == $pekerjaan3['id']) {
+                    $data_penduduks[$key]['pekerjaan3'] = $pekerjaan3['pekerjaan'];
                 }
             }
         }

@@ -31,17 +31,43 @@
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="desa"></select>
                         <button id="btn_show_desa" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_desa()">show desa</button>
                     </div>
-                    <div class="flex">
-                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="bantuan_individu"></select>
-                        <button id="btn_show_bantuan_individu" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_bantuan_individu()">show bantuan individu</button>
+
+                    <!-- filter penerima berdasarkan pekerjaan -->
+
+                    <div id="filter_penerima" class="w-full p-1 mb-2 outline-none bg-red-50 border border-red-900 rounded-md">
+                        <p class="text-center p-1 rounded-md mb-2 bg-red-700 text-white">filter pekerjaan penerima</p>
+                        <div class="flex">
+                            <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="pekerjaan1"></select>
+                            <button id="btn_show_pekerjaan1" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 border border-l-0 border-cyan-500 rounded-r-md" type="button" onclick="generate_isi_option_select_pekerjaan1()">show pekerjaan1</button>
+                        </div>
+                        <div class="flex">
+                            <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="pekerjaan2"></select>
+                            <button id="btn_show_pekerjaan2" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 border border-l-0 border-cyan-500 rounded-r-md" type="button" onclick="generate_isi_option_select_pekerjaan2()">show pekerjaan2</button>
+                        </div>
+                        <div class="flex">
+                            <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="pekerjaan3"></select>
+                            <button id="btn_show_pekerjaan3" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 border border-l-0 border-cyan-500 rounded-r-md" type="button" onclick="generate_isi_option_select_pekerjaan3()">show pekerjaan3</button>
+                        </div>
                     </div>
+                    <!-- end filter penerima berdasarkan pekerjaan -->
+
+                    <!-- penerima -->
                     <div class="flex">
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="penerima"></select>
                         <button id="btn_show_penerima" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_penerima()">show penerima</button>
                     </div>
 
+                    <!-- end penerima -->
+
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="bantuan_individu"></select>
+                        <button id="btn_show_bantuan_individu" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_bantuan_individu()">show bantuan individu</button>
+                    </div>
+
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan waktu_terima bantuan" type="datetime-local" id="waktu_terima" autocomplete="off">
+
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="keterangan" type="text" id="ket" autocomplete="off">
+
                     <div class="flex flex-wrap my-2">
                         <div>
                             <label class="p-1 border border-cyan-500 rounded-md" for="foto">foto</label>
@@ -117,6 +143,7 @@
     const api_desa = '<?= base_url('/desas') ?>'
     const api_data_penduduk = '<?= base_url('/datapenduduks') ?>'
     const api_bantuan_individu = '<?= base_url('/bantuanindividus') ?>'
+    const api_pekerjaan = '<?= base_url('/pekerjaans') ?>'
 
     const provinsi = document.querySelector('#provinsi')
     const kabupaten = document.querySelector('#kabupaten')
@@ -127,6 +154,9 @@
     const waktu_terima = document.querySelector('#waktu_terima')
     const ket = document.querySelector('#ket')
     const foto = document.querySelector('#foto')
+    const pekerjaan1 = document.querySelector('#pekerjaan1')
+    const pekerjaan2 = document.querySelector('#pekerjaan2')
+    const pekerjaan3 = document.querySelector('#pekerjaan3')
 
     const modal_form = document.querySelector('#modal_form')
     const head_form = document.querySelector('#head_form')
@@ -137,23 +167,118 @@
     const page_list = document.querySelector('#page_list')
     const tbody = document.querySelector('#tbody')
     const img_preview = document.querySelector('#img_preview')
+    const filter_penerima = document.querySelector('#filter_penerima')
     let crrDesa = ''
 
-    const option_select_penerima = item => {
-        return `<option value="${item.id}">${item.nama_lengkap}</option>`
+    const option_select_pekerjaan1 = item => {
+        return `<option value="${item.id}">${item.pekerjaan}</option>`
     }
 
-    const generate_isi_option_select_penerima = async () => {
+    const generate_isi_option_select_pekerjaan1 = async () => {
         try {
-            const response = await fetch(`${api_data_penduduk}/find/*`, {
+            const response = await fetch(`${api_pekerjaan}/find/*`, {
                 headers: {
                     Authorization: `Bearer ${getCookie('token')}`
                 }
             })
             const result = await response.json()
 
-            let all_option_select_penerima = ``
+            let all_option_select_pekerjaan1 = ``
             result.forEach(item => {
+                all_option_select_pekerjaan1 += option_select_pekerjaan1(item)
+            });
+
+            pekerjaan1.innerHTML = all_option_select_pekerjaan1
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_pekerjaan2 = item => {
+        return `<option value="${item.id}">${item.pekerjaan}</option>`
+    }
+
+    const generate_isi_option_select_pekerjaan2 = async () => {
+        try {
+            const response = await fetch(`${api_pekerjaan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_pekerjaan2 = ``
+            result.forEach(item => {
+                all_option_select_pekerjaan2 += option_select_pekerjaan2(item)
+            });
+
+            pekerjaan2.innerHTML = all_option_select_pekerjaan2
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_pekerjaan3 = item => {
+        return `<option value="${item.id}">${item.pekerjaan}</option>`
+    }
+
+    const generate_isi_option_select_pekerjaan3 = async () => {
+        try {
+            const response = await fetch(`${api_pekerjaan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_pekerjaan3 = ``
+            result.forEach(item => {
+                all_option_select_pekerjaan3 += option_select_pekerjaan3(item)
+            });
+
+            pekerjaan3.innerHTML = all_option_select_pekerjaan3
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_penerima = item => {
+        return `<option value="${item.id}">${item.nama_lengkap}</option>`
+    }
+
+    const generate_isi_option_select_penerima = async () => {
+        penerima.innerHTML = ''
+        try {
+            let all_option_select_penerima = ``
+
+            const response_pekerjaan1 = await fetch(`${api_data_penduduk}/find/pekerjaans1@${pekerjaan1.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result_pekerjaan1 = await response_pekerjaan1.json()
+
+            result_pekerjaan1.forEach(item => {
+                all_option_select_penerima += option_select_penerima(item)
+            });
+            const response_pekerjaan2 = await fetch(`${api_data_penduduk}/find/pekerjaans2@${pekerjaan2.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result_pekerjaan2 = await response_pekerjaan2.json()
+
+            result_pekerjaan2.forEach(item => {
+                all_option_select_penerima += option_select_penerima(item)
+            });
+            const response_pekerjaan3 = await fetch(`${api_data_penduduk}/find/pekerjaans3@${pekerjaan3.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result_pekerjaan3 = await response_pekerjaan3.json()
+
+            result_pekerjaan3.forEach(item => {
                 all_option_select_penerima += option_select_penerima(item)
             });
 
@@ -393,6 +518,7 @@
         close_modal()
         modal_form.style.display = ''
         head_form.innerHTML = 'form tambah data'
+        filter_penerima.style.display = ''
         form_input.onsubmit = () => tambah(event)
     }
 
@@ -404,7 +530,7 @@
         formData.append('id_kecamatans', kecamatan.value)
         formData.append('id_desas', desa.value)
         formData.append('id_bantuan_individus', bantuan_individu.value)
-        formData.append('penerima', penerima.value)
+        formData.append('id_data_penduduks', penerima.value)
         formData.append('waktu_terima', waktu_terima.value)
         formData.append('ket', ket.value)
         formData.append('foto', foto.files[0])
@@ -424,6 +550,7 @@
             close_modal()
             modal_form.style.display = ''
             head_form.innerHTML = 'form ubah data'
+            filter_penerima.style.display = 'none'
             try {
                 const response = await fetch(`${api}/${id}`, {
                     headers: {
@@ -464,16 +591,7 @@
                 const result_desa = await response_desa.json()
                 desa.innerHTML = `<option value="${result_desa.id}">${result_desa.desa}</option>`
                 btn_show_desa.setAttribute('disabled', '')
-
-                const response_bantuan_individu = await fetch(`${api_bantuan_individu}/${result.id_bantuan_individus}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
-                const result_bantuan_individu = await response_bantuan_individu.json()
-                bantuan_individu.innerHTML = `<option value="${result_bantuan_individu.id}">${result_bantuan_individu.bantuan_individu}</option>`
-                btn_show_bantuan_individu.setAttribute('disabled', '')
-                const response_penerima = await fetch(`${api_data_penduduk}/${result.penerima}`, {
+                const response_penerima = await fetch(`${api_data_penduduk}/${result.id_data_penduduks}`, {
                     headers: {
                         Authorization: `Bearer ${getCookie('token')}`
                     }
@@ -481,6 +599,13 @@
                 const result_penerima = await response_penerima.json()
                 penerima.innerHTML = `<option value="${result_penerima.id}">${result_penerima.nama_lengkap}</option>`
                 btn_show_penerima.setAttribute('disabled', '')
+                const response_bantuan_individu = await fetch(`${api_bantuan_individu}/${result.id_bantuan_individus}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_bantuan_individu = await response_bantuan_individu.json()
+                bantuan_individu.innerHTML = `<option value="${result_bantuan_individu.id}">${result_bantuan_individu.bantuan_individu}</option>`
 
                 waktu_terima.value = result.waktu_terima
                 ket.value = result.ket
@@ -498,7 +623,7 @@
         event.preventDefault()
         const formData = new FormData()
         formData.append('id_bantuan_individus', bantuan_individu.value)
-        formData.append('penerima', penerima.value)
+        formData.append('id_data_penduduks', penerima.value)
         formData.append('waktu_terima', waktu_terima.value)
         formData.append('ket', ket.value)
         formData.append('foto', foto.files[0])
@@ -513,6 +638,10 @@
         kabupaten.innerHTML = ''
         kecamatan.innerHTML = ''
         desa.innerHTML = ''
+        pekerjaan1.innerHTML = ''
+        pekerjaan2.innerHTML = ''
+        pekerjaan3.innerHTML = ''
+        penerima.innerHTML = ''
         bantuan_individu.innerHTML = ''
         img_preview.src = ''
         err_msg.innerHTML = ''

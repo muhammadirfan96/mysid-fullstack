@@ -57,7 +57,18 @@
                         <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_jenis_kelamin()">show jenis_kelamin</button>
                     </div>
 
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan pekerjaan" type="text" id="pekerjaan" autocomplete="off">
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="pekerjaan1"></select>
+                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_pekerjaan1()">show pekerjaan1</button>
+                    </div>
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="pekerjaan2"></select>
+                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_pekerjaan2()">show pekerjaan2</button>
+                    </div>
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="pekerjaan3"></select>
+                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_pekerjaan3()">show pekerjaan3</button>
+                    </div>
 
                     <div class="flex flex-wrap my-2">
                         <div>
@@ -121,7 +132,9 @@
                         <th>kabupaten</th>
                         <th>kecamatan</th>
                         <th>desa</th>
-                        <th>pekerjaan</th>
+                        <th>pekerjaan1</th>
+                        <th>pekerjaan2</th>
+                        <th>pekerjaan3</th>
                         <th>created_at</th>
                         <th>created_by</th>
                         <th>updated_at</th>
@@ -147,6 +160,8 @@
     const api_kabupaten = '<?= base_url('/kabupatens') ?>'
     const api_kecamatan = '<?= base_url('/kecamatans') ?>'
     const api_desa = '<?= base_url('/desas') ?>'
+    const api_pekerjaan = '<?= base_url('/pekerjaans') ?>'
+
     const nik = document.querySelector('#nik')
     const nama_lengkap = document.querySelector('#nama_lengkap')
     const data_nkk = document.querySelector('#data_nkk')
@@ -158,8 +173,11 @@
     const status_hub_dlm_kel = document.querySelector('#status_hub_dlm_kel')
     const kewarganegaraan = document.querySelector('#kewarganegaraan')
     const jenis_kelamin = document.querySelector('#jenis_kelamin')
-    const pekerjaan = document.querySelector('#pekerjaan')
+    const pekerjaan1 = document.querySelector('#pekerjaan1')
+    const pekerjaan2 = document.querySelector('#pekerjaan2')
+    const pekerjaan3 = document.querySelector('#pekerjaan3')
     const foto = document.querySelector('#foto')
+
     const modal_form = document.querySelector('#modal_form')
     const head_form = document.querySelector('#head_form')
     const err_msg = document.querySelector('#err_msg')
@@ -170,6 +188,78 @@
     const tbody = document.querySelector('#tbody')
     const img_preview = document.querySelector('#img_preview')
     let crrDesa = ''
+
+    const option_select_pekerjaan1 = item => {
+        return `<option value="${item.id}">${item.pekerjaan}</option>`
+    }
+
+    const generate_isi_option_select_pekerjaan1 = async () => {
+        try {
+            const response = await fetch(`${api_pekerjaan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_pekerjaan1 = ``
+            result.forEach(item => {
+                all_option_select_pekerjaan1 += option_select_pekerjaan1(item)
+            });
+
+            pekerjaan1.innerHTML = all_option_select_pekerjaan1
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_pekerjaan2 = item => {
+        return `<option value="${item.id}">${item.pekerjaan}</option>`
+    }
+
+    const generate_isi_option_select_pekerjaan2 = async () => {
+        try {
+            const response = await fetch(`${api_pekerjaan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_pekerjaan2 = ``
+            result.forEach(item => {
+                all_option_select_pekerjaan2 += option_select_pekerjaan2(item)
+            });
+
+            pekerjaan2.innerHTML = all_option_select_pekerjaan2
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const option_select_pekerjaan3 = item => {
+        return `<option value="${item.id}">${item.pekerjaan}</option>`
+    }
+
+    const generate_isi_option_select_pekerjaan3 = async () => {
+        try {
+            const response = await fetch(`${api_pekerjaan}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_pekerjaan3 = ``
+            result.forEach(item => {
+                all_option_select_pekerjaan3 += option_select_pekerjaan3(item)
+            });
+
+            pekerjaan3.innerHTML = all_option_select_pekerjaan3
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
 
     const option_select_jenis_kelamin = item => {
         return `<option value="${item.id}">${item.jenis_kelamin}</option>`
@@ -391,7 +481,9 @@
                     <td>${item.kabupaten}</td>
                     <td>${item.kecamatan}</td>
                     <td>${item.desa}</td>
-                    <td>${item.pekerjaan}</td>
+                    <td>${item.pekerjaan1}</td>
+                    <td>${item.pekerjaan2}</td>
+                    <td>${item.pekerjaan3}</td>
                     <td>${item.created_at}</td>
                     <td>${item.created_by}</td>
                     <td>${item.updated_at}</td>
@@ -478,7 +570,9 @@
         formData.append('id_kabupatens', item_data_nkk[2])
         formData.append('id_kecamatans', item_data_nkk[3])
         formData.append('id_desas', item_data_nkk[4])
-        formData.append('pekerjaan', pekerjaan.value)
+        formData.append('id_pekerjaans1', pekerjaan1.value)
+        formData.append('id_pekerjaans2', pekerjaan2.value)
+        formData.append('id_pekerjaans3', pekerjaan3.value)
         formData.append('foto', foto.files[0])
         formData.append('active', 1)
         formData.append('created_by', crrDesa)
@@ -558,8 +652,28 @@
                 })
                 const result_jenis_kelamin = await response_jenis_kelamin.json()
                 jenis_kelamin.innerHTML = `<option value="${result_jenis_kelamin.id}">${result_jenis_kelamin.jenis_kelamin}</option>`
+                const response_pekerjaan1 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans1}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_pekerjaan1 = await response_pekerjaan1.json()
+                pekerjaan1.innerHTML = `<option value="${result_pekerjaan1.id}">${result_pekerjaan1.pekerjaan}</option>`
+                const response_pekerjaan2 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans2}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_pekerjaan2 = await response_pekerjaan2.json()
+                pekerjaan2.innerHTML = `<option value="${result_pekerjaan2.id}">${result_pekerjaan2.pekerjaan}</option>`
+                const response_pekerjaan3 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans3}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_pekerjaan3 = await response_pekerjaan3.json()
+                pekerjaan3.innerHTML = `<option value="${result_pekerjaan3.id}">${result_pekerjaan3.pekerjaan}</option>`
 
-                pekerjaan.value = result.pekerjaan
                 img_preview.src = `img/data_penduduk/${result.foto}`
                 form_input.onsubmit = () => ubah(event, id)
             } catch (error) {
@@ -588,7 +702,9 @@
         formData.append('id_kabupatens', item_data_nkk[2])
         formData.append('id_kecamatans', item_data_nkk[3])
         formData.append('id_desas', item_data_nkk[4])
-        formData.append('pekerjaan', pekerjaan.value)
+        formData.append('id_pekerjaans1', pekerjaan1.value)
+        formData.append('id_pekerjaans2', pekerjaan2.value)
+        formData.append('id_pekerjaans3', pekerjaan3.value)
         formData.append('active', 1)
         formData.append('foto', foto.files[0])
         formData.append('updated_by', crrDesa)
@@ -605,6 +721,9 @@
         status_hub_dlm_kel.innerHTML = ''
         kewarganegaraan.innerHTML = ''
         jenis_kelamin.innerHTML = ''
+        pekerjaan1.innerHTML = ''
+        pekerjaan2.innerHTML = ''
+        pekerjaan3.innerHTML = ''
         img_preview.src = ''
         err_msg.innerHTML = ''
         err_msg.style.display = 'none'
