@@ -88,8 +88,8 @@
                         <th>kabupaten</th>
                         <th>kecamatan</th>
                         <th>desa</th>
-                        <th>alamat_lengkap</th>
                         <th>nkk</th>
+                        <th>alamat_lengkap</th>
                         <th>tingkat kesejahteraan</th>
                         <th>sumber penghasilan utama</th>
                         <th>created_at</th>
@@ -457,13 +457,13 @@
                 const result_tingkat_kesejahteraan = await response_tingkat_kesejahteraan.json()
                 tingkat_kesejahteraan.innerHTML = `<option value="${result_tingkat_kesejahteraan.id}">${result_tingkat_kesejahteraan.tingkat_kesejahteraan}</option>`
 
-                const response_sumber_penghasilan_utama = await fetch(`${pekerjaan}/${result.id_sumber_penghasilan_utamas}`, {
+                const response_pekerjaan = await fetch(`${api_pekerjaan}/${result.id_sumber_penghasilan_utamas}`, {
                     headers: {
                         Authorization: `Bearer ${getCookie('token')}`
                     }
                 })
-                const result_sumber_penghasilan_utama = await response_sumber_penghasilan_utama.json()
-                sumber_penghasilan_utama.innerHTML = `<option value="${result_sumber_penghasilan_utama.id}">${result_sumber_penghasilan_utama.sumber_penghasilan_utama}</option>`
+                const result_pekerjaan = await response_pekerjaan.json()
+                sumber_penghasilan_utama.innerHTML = `<option value="${result_pekerjaan.id}">${result_pekerjaan.pekerjaan}</option>`
 
                 form_input.onsubmit = () => ubah(event, id)
             } catch (error) {
