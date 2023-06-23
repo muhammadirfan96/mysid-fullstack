@@ -32,6 +32,11 @@
                         <button id="btn_show_desa" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_desa()">show desa</button>
                     </div>
 
+                    <div class="flex">
+                        <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="rt_rw"></select>
+                        <button id="btn_show_rt_rw" class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_rt_rw()">show rt_rw</button>
+                    </div>
+
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan nomor nkk" type="text" id="nkk" autocomplete="off">
 
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="alamat lengkap" type="text" id="alamat_lengkap" autocomplete="off">
@@ -89,6 +94,7 @@
                         <th>kecamatan</th>
                         <th>desa</th>
                         <th>nkk</th>
+                        <th>rt_rw</th>
                         <th>alamat_lengkap</th>
                         <th>tingkat kesejahteraan</th>
                         <th>sumber penghasilan utama</th>
@@ -110,6 +116,7 @@
     const api_kabupaten = '<?= base_url('/kabupatens') ?>'
     const api_kecamatan = '<?= base_url('/kecamatans') ?>'
     const api_desa = '<?= base_url('/desas') ?>'
+    const api_rt_rw = '<?= base_url('/rtrws') ?>'
     const api_tingkat_kesejahteraan = '<?= base_url('/tingkatkesejahteraans') ?>'
     const api_sumber_penghasilan_utama = '<?= base_url('/sumberpenghasilanutamas') ?>'
 
@@ -118,6 +125,7 @@
     const kecamatan = document.querySelector('#kecamatan')
     const alamat_lengkap = document.querySelector('#alamat_lengkap')
     const desa = document.querySelector('#desa')
+    const rt_rw = document.querySelector('#rt_rw')
     const nkk = document.querySelector('#nkk')
     const tingkat_kesejahteraan = document.querySelector('#tingkat_kesejahteraan')
     const sumber_penghasilan_utama = document.querySelector('#sumber_penghasilan_utama')
@@ -131,6 +139,30 @@
     const page_list = document.querySelector('#page_list')
     const tbody = document.querySelector('#tbody')
     let crrDesa = ''
+
+    const option_select_rt_rw = item => {
+        return `<option value="${item.id}">${item.rt_rw}</option>`
+    }
+
+    const generate_isi_option_select_rt_rw = async () => {
+        try {
+            const response = await fetch(`${api_rt_rw}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select_rt_rw = ``
+            result.forEach(item => {
+                all_option_select_rt_rw += option_select_rt_rw(item)
+            });
+
+            rt_rw.innerHTML = all_option_select_rt_rw
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
 
     const option_select_desa = item => {
         return `<option value="${item.id}">${item.desa}</option>`
@@ -314,6 +346,7 @@
                     <td>${item.kecamatan}</td>
                     <td>${item.desa}</td>
                     <td>${item.nkk}</td>
+                    <td>${item.rt_rw}</td>
                     <td>${item.alamat_lengkap}</td>
                     <td>${item.tingkat_kesejahteraan}</td>
                     <td>${item.sumber_penghasilan_utama}</td>
@@ -391,6 +424,7 @@
         formData.append('id_kabupatens', kabupaten.value)
         formData.append('id_kecamatans', kecamatan.value)
         formData.append('id_desas', desa.value)
+        formData.append('id_rt_rws', rt_rw.value)
         formData.append('nkk', nkk.value)
         formData.append('alamat_lengkap', alamat_lengkap.value)
         formData.append('id_tingkat_kesejahteraans', tingkat_kesejahteraan.value)
@@ -445,6 +479,13 @@
                 const result_desa = await response_desa.json()
                 desa.innerHTML = `<option value="${result_desa.id}">${result_desa.desa}</option>`
                 btn_show_desa.setAttribute('disabled', '')
+                const response_rt_rw = await fetch(`${api_rt_rw}/${result.id_rt_rws}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result_rt_rw = await response_rt_rw.json()
+                rt_rw.innerHTML = `<option value="${result_rt_rw.id}">${result_rt_rw.rt_rw}</option>`
 
                 nkk.value = result.nkk
                 alamat_lengkap.value = result.alamat_lengkap
@@ -476,6 +517,7 @@
     const ubah = (event, id) => {
         event.preventDefault()
         const formData = new FormData()
+        formData.append('id_rt_rws', rt_rw.value)
         formData.append('nkk', nkk.value)
         formData.append('alamat_lengkap', alamat_lengkap.value)
         formData.append('id_tingkat_kesejahteraans', tingkat_kesejahteraan.value)
@@ -491,6 +533,7 @@
         kabupaten.innerHTML = ''
         kecamatan.innerHTML = ''
         desa.innerHTML = ''
+        rt_rw.innerHTML = ''
         tingkat_kesejahteraan.innerHTML = ''
         sumber_penghasilan_utama.innerHTML = ''
         err_msg.innerHTML = ''

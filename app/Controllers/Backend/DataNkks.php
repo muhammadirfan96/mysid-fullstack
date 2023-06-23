@@ -78,6 +78,7 @@ class DataNkks extends ResourceController
             'id_kabupatens' => $this->request->getVar('id_kabupatens'),
             'id_kecamatans' => $this->request->getVar('id_kecamatans'),
             'id_desas' => $this->request->getVar('id_desas'),
+            'id_rt_rws' => $this->request->getVar('id_rt_rws'),
             'nkk' => $this->request->getVar('nkk'),
             'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
             'id_tingkat_kesejahteraans' => $this->request->getVar('id_tingkat_kesejahteraans'),
@@ -122,6 +123,7 @@ class DataNkks extends ResourceController
         }
 
         $data = [
+            'id_rt_rws' => $this->request->getVar('id_rt_rws'),
             'nkk' => $this->request->getVar('nkk'),
             'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
             'id_tingkat_kesejahteraans' => $this->request->getVar('id_tingkat_kesejahteraans'),
@@ -288,6 +290,18 @@ class DataNkks extends ResourceController
             foreach ($desas as $desa) {
                 if ($data_nkk['id_desas'] == $desa['id']) {
                     $data_nkks[$key]['desa'] = $desa['desa'];
+                }
+            }
+        }
+
+        $rt_rws = $this->db->table('rt_rws')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_nkks as $key => $data_nkk) {
+            foreach ($rt_rws as $rt_rw) {
+                if ($data_nkk['id_rt_rws'] == $rt_rw['id']) {
+                    $data_nkks[$key]['rt_rw'] = $rt_rw['rt_rw'];
                 }
             }
         }

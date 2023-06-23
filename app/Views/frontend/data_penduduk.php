@@ -20,7 +20,7 @@
 
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan tempat_lahir" type="text" id="tempat_lahir" autocomplete="off">
 
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan tanggal_lahir" type="datetime-local" id="tanggal_lahir" autocomplete="off">
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan tanggal_lahir" type="date" id="tanggal_lahir" autocomplete="off">
 
                     <div class="flex">
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="data_nkk"></select>

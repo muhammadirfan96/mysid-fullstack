@@ -42,10 +42,10 @@ class Desas extends ResourceController
         $data = $this->model->find($id);
         if (!$data) return $this->failNotFound('no data found');
 
-        $currUser = $this->user->currLogin();
-        if ($currUser['desa'] != 'admin') {
-            $data = $this->model->where('desa', $currUser['desa'])->first();
-        }
+        // $currUser = $this->user->currLogin();
+        // if ($currUser['desa'] != 'admin') {
+        //     $data = $this->model->where('desa', $currUser['desa'])->first();
+        // }
 
         return $this->respond($data);
     }

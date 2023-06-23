@@ -52,7 +52,7 @@ class DataPenduduksModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     public $myValidationRules = [
-        'nik' => 'required|is_unique[data_penduduks.nik]',
+        'nik' => 'required|is_unique[data_penduduks.nik]|exact_length[16]',
         'nama_lengkap' => 'required',
         'id_data_nkks' => 'required|is_not_unique[data_nkks.id]',
         'id_agamas' => 'required|is_not_unique[agamas.id]',

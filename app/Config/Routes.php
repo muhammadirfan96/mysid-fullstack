@@ -58,6 +58,7 @@ $routes->resource('databantuanindividus', ['controller' => 'Backend\DataBantuanI
 $routes->resource('kelompokmasyarakats', ['controller' => 'Backend\KelompokMasyarakats', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('databantuankelompoks', ['controller' => 'Backend\DataBantuanKelompoks', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('pekerjaans', ['controller' => 'Backend\Pekerjaans', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+$routes->resource('rtrws', ['controller' => 'Backend\RtRws', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 
 // find
 $routes->get('agamas/find/(:any)', 'Backend\Agamas::find/$1', ['filter' => 'auth']);
@@ -81,6 +82,7 @@ $routes->get('databantuanindividus/find/(:any)', 'Backend\DataBantuanIndividus::
 $routes->get('kelompokmasyarakats/find/(:any)', 'Backend\KelompokMasyarakats::find/$1', ['filter' => 'auth']);
 $routes->get('databantuankelompoks/find/(:any)', 'Backend\DataBantuanKelompoks::find/$1', ['filter' => 'auth']);
 $routes->get('pekerjaans/find/(:any)', 'Backend\Pekerjaans::find/$1', ['filter' => 'auth']);
+$routes->get('rtrws/find/(:any)', 'Backend\RtRws::find/$1', ['filter' => 'auth']);
 
 // FRONT END
 $routes->get('login', 'Frontend\Login::index');
