@@ -232,6 +232,24 @@ class DataPenduduks extends ResourceController
                 $data_nkksId = $data_nkksCrr[0]['id'];
                 $where = "id_data_nkks = '$data_nkksId'";
             }
+            if (str_contains($key, 'rtrw')) {
+                $data_rt_rwsCrr = $this->db->table('rt_rws')
+                    ->getWhere("rt_rw LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $data_rt_rwId = $data_rt_rwsCrr[0]['id'];
+
+                $data_nkksCrr = $this->db->table('data_nkks')
+                    ->getWhere("id_rt_rws = '$data_rt_rwId'")
+                    ->getResultArray();
+
+                $wheres = [];
+                foreach ($data_nkksCrr as $key => $value) {
+                    $valueId = $value['id'];
+                    $wheres[] = "id_data_nkks = '$valueId'";
+                }
+                $wheresnya = implode(" OR ", $wheres);
+                $where = "$wheresnya";
+            }
         } else {
             $where = null;
         }

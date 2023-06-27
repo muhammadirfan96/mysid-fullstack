@@ -2,7 +2,12 @@
 <?= $this->section('page'); ?>
 
 <div>
-    <div class="bg-cyan-200 rounded-md m-2 p-2">
+    <div class="bg-cyan-200 rounded-md m-2 p-2 relative">
+        <div class="absolute right-0">
+            <button onclick="open_modal_resume()" class="text-2xl mr-2 text-cyan-700" type="button">
+                <i class="bi-menu-button-wide-fill"></i>
+            </button>
+        </div>
         <p class="text-center text-lg font-semibold uppercase"><?= $title; ?></p>
     </div>
 
@@ -83,13 +88,66 @@
             </div>
         </div>
 
+        <div id="modal_resume" class="fixed top-0 bottom-0 right-0 left-0 bg-slate-900 bg-opacity-50 z-10" style="display: none;">
+            <div class="bg-white rounded-md p-4 relative w-[95%] md:w-[50%] my-4 max-h-[95%] mx-auto overflow-auto">
+                <button class="absolute right-1 top-0" onclick="close_modal_resume()" type="button"><i class="bi-x-square-fill text-red-700 rounded-md text-xl"></i></button>
+                <p class="text-center font-medium text-lg" id="head_resume">Resume</p>
+                <table>
+                    <tr>
+                        <td>jumlah penduduk</td>
+                        <td id="jumlah_penduduk">0 orang</td>
+                    </tr>
+                    <tr>
+                        <td>jumlah laki laki</td>
+                        <td id="jumlah_laki_laki">0 orang</td>
+                    </tr>
+                    <tr>
+                        <td>jumlah perempuan</td>
+                        <td id="jumlah_perempuan">0 orang</td>
+                    </tr>
+                </table>
+                <hr>
+                <table>
+                    <tr>
+                        <td>umur 0 - 5 tahun (balita)</td>
+                        <td id="umur_0_5">0 orang</td>
+                    </tr>
+                    <tr>
+                        <td>umur 6 - 11 tahun (kanak-kanak)</td>
+                        <td id="umur_6_11">0 orang</td>
+                    </tr>
+                    <tr>
+                        <td>umur 12 - 25 tahun (remaja)</td>
+                        <td id="umur_12_25">0 orang</td>
+                    </tr>
+                    <tr>
+                        <td>umur 26 - 45 tahun (dewasa)</td>
+                        <td id="umur_26_45">0 orang</td>
+                    </tr>
+                    <tr>
+                        <td>umur 46 - 65 tahun (lansia)</td>
+                        <td id="umur_46_65">0 orang</td>
+                    </tr>
+                    <tr>
+                        <td>umur diatas 65 tahun (sangat lansia)</td>
+                        <td id="umur_lebih_65">0 orang</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
         <div class="flex flex-wrap justify-evenly">
-            <div class="w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 text-cyan-700">
+            <div class="w-[42%] md:w-[23%] border-2 border-cyan-700 rounded-md m-2 text-cyan-700">
                 <!-- tombol tambah data -->
                 <button class="p-2 outline-none w-full" onclick="show_tambah()" type="button">+ tambah data</button>
             </div>
 
-            <div class="w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 p-2 text-cyan-700 text-center">
+            <div class="w-[42%] md:w-[23%] border-2 border-cyan-700 rounded-md m-2 text-cyan-700">
+                <!-- >>>> cari data -->
+                <input class="p-2 outline-none w-full" onkeyup="update_page()" key type="text" id="key_pencarian" value="*" placeholder="key_pencarian" autocomplete="off" autofocus>
+            </div>
+
+            <div class="w-[42%] md:w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 p-2 text-cyan-700 text-center">
                 <!-- pagination -->
                 <select class="outline-none" onchange="update_page()" id="per_page">
                     <option value="5">5</option>
@@ -100,13 +158,8 @@
                 per page
             </div>
 
-            <div class="w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 p-2 text-cyan-700 text-center" id="page_list">
+            <div class="w-[42%] md:w-[23%] flex overflow-auto border-2 border-cyan-700 rounded-md m-2 p-2 text-cyan-700 text-center" id="page_list">
                 <!-- isi page list -->
-            </div>
-
-            <div class="w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 text-cyan-700">
-                <!-- >>>> cari data -->
-                <input class="p-2 outline-none w-full" onkeyup="update_page()" key type="text" id="key_pencarian" value="*" placeholder="key_pencarian" autocomplete="off" autofocus>
             </div>
         </div>
 
@@ -188,6 +241,92 @@
     const tbody = document.querySelector('#tbody')
     const img_preview = document.querySelector('#img_preview')
     let crrDesa = ''
+
+    const modal_resume = document.querySelector('#modal_resume')
+    const head_resume = document.querySelector('#head_resume')
+    const jumlah_penduduk = document.querySelector('#jumlah_penduduk')
+    const jumlah_laki_laki = document.querySelector('#jumlah_laki_laki')
+    const jumlah_perempuan = document.querySelector('#jumlah_perempuan')
+    const umur_0_5 = document.querySelector('#umur_0_5')
+    const umur_6_11 = document.querySelector('#umur_6_11')
+    const umur_12_25 = document.querySelector('#umur_12_25')
+    const umur_26_45 = document.querySelector('#umur_26_45')
+    const umur_46_65 = document.querySelector('#umur_46_65')
+    const umur_lebih_65 = document.querySelector('#umur_lebih_65')
+
+    const open_modal_resume = () => {
+        modal_resume.style.display = ''
+        isi_modal_resume()
+    }
+    const close_modal_resume = () => modal_resume.style.display = 'none'
+
+    const isi_modal_resume = async () => {
+        try {
+            const response = await fetch(`${api}/find/${key_pencarian.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            if (result == null) alert('null')
+
+            // berdasarkan jenis kelamin
+            let total_jumlah_penduduk = 0
+            let total_jumlah_laki_laki = 0
+            let total_jumlah_perempuan = 0
+
+            // berdasarkan umur
+            let total_umur_0_5 = 0
+            let total_umur_6_11 = 0
+            let total_umur_12_25 = 0
+            let total_umur_26_45 = 0
+            let total_umur_46_65 = 0
+            let total_umur_lebih_65 = 0
+
+            const response_jenis_kelamin = await fetch(`${api_jenis_kelamin}/find/perempuan`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result_jenis_kelamin = await response_jenis_kelamin.json()
+
+
+            result.forEach(item => {
+                total_jumlah_penduduk++
+                if (item.id_jenis_kelamins == result_jenis_kelamin[0].id) total_jumlah_perempuan++
+
+                const date1 = new Date(item.tanggal_lahir)
+                const date2 = new Date()
+                let timeDiff = Math.abs(date2.getTime() - date1.getTime())
+                let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
+                let age = Math.round(diffDays / 365)
+
+                if (age >= 0 && age <= 5) total_umur_0_5++
+                if (age >= 6 && age <= 11) total_umur_6_11++
+                if (age >= 12 && age <= 25) total_umur_12_25++
+                if (age >= 26 && age <= 45) total_umur_26_45++
+                if (age >= 46 && age <= 65) total_umur_46_65++
+                if (age >= 65) total_umur_lebih_65++
+            });
+            total_jumlah_laki_laki = total_jumlah_penduduk - total_jumlah_perempuan
+
+            // masukkan ke element
+            jumlah_penduduk.innerHTML = total_jumlah_penduduk + ' orang'
+            jumlah_laki_laki.innerHTML = total_jumlah_laki_laki + ' orang'
+            jumlah_perempuan.innerHTML = total_jumlah_perempuan + ' orang'
+
+            umur_0_5.innerHTML = total_umur_0_5 + ' orang'
+            umur_6_11.innerHTML = total_umur_6_11 + ' orang'
+            umur_12_25.innerHTML = total_umur_12_25 + ' orang'
+            umur_26_45.innerHTML = total_umur_26_45 + ' orang'
+            umur_46_65.innerHTML = total_umur_46_65 + ' orang'
+            umur_lebih_65.innerHTML = total_umur_lebih_65 + ' orang'
+
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
 
     const option_select_pekerjaan1 = item => {
         return `<option value="${item.id}">${item.pekerjaan}</option>`
@@ -602,7 +741,7 @@
                 nik.value = result.nik
                 nama_lengkap.value = result.nama_lengkap
                 tempat_lahir.value = result.tempat_lahir
-                tanggal_lahir.value = result.tanggal_lahir
+                tanggal_lahir.value = result.tanggal_lahir.split(" ")[0]
                 const response_data_nkk = await fetch(`${api_data_nkk}/${result.id_data_nkks}`, {
                     headers: {
                         Authorization: `Bearer ${getCookie('token')}`

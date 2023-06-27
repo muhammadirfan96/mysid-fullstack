@@ -82,12 +82,17 @@
         </div>
 
         <div class="flex flex-wrap justify-evenly">
-            <div class="w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 text-cyan-700">
+            <div class="w-[42%] md:w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 text-cyan-700">
                 <!-- tombol tambah data -->
                 <button class="p-2 outline-none w-full" onclick="show_tambah()" type="button">+ tambah data</button>
             </div>
 
-            <div class="w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 p-2 text-cyan-700 text-center">
+            <div class="w-[42%] md:w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 text-cyan-700">
+                <!-- >>>> cari data -->
+                <input class="p-2 outline-none w-full" onkeyup="update_page()" key type="text" id="key_pencarian" value="*" placeholder="key_pencarian" autocomplete="off" autofocus>
+            </div>
+
+            <div class="w-[42%] md:w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 p-2 text-cyan-700 text-center">
                 <!-- pagination -->
                 <select class="outline-none" onchange="update_page()" id="per_page">
                     <option value="5">5</option>
@@ -98,13 +103,8 @@
                 per page
             </div>
 
-            <div class="w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 p-2 text-cyan-700 text-center" id="page_list">
+            <div class="w-[42%] md:w-[23%] flex overflow-auto border-2 border-cyan-700 rounded-md m-2 p-2 text-cyan-700 text-center" id="page_list">
                 <!-- isi page list -->
-            </div>
-
-            <div class="w-[23%] overflow-auto border-2 border-cyan-700 rounded-md m-2 text-cyan-700">
-                <!-- >>>> cari data -->
-                <input class="p-2 outline-none w-full" onkeyup="update_page()" key type="text" id="key_pencarian" value="*" placeholder="key_pencarian" autocomplete="off" autofocus>
             </div>
         </div>
 
@@ -607,7 +607,7 @@
                 const result_bantuan_individu = await response_bantuan_individu.json()
                 bantuan_individu.innerHTML = `<option value="${result_bantuan_individu.id}">${result_bantuan_individu.bantuan_individu}</option>`
 
-                waktu_terima.value = result.waktu_terima
+                waktu_terima.value = result.waktu_terima.split(" ")[0]
                 ket.value = result.ket
 
                 img_preview.src = `img/bantuan_individu/${result.foto}`

@@ -169,11 +169,11 @@ class Desas extends ResourceController
         $where = "desa LIKE '%$key%'";
         if ($key == '*') $where = '1=1';
 
-        $currUser = $this->user->currLogin();
-        if ($currUser['desa'] != 'admin') {
-            $currDesa = $currUser['desa'];
-            $where = "desa = '$currDesa'";
-        }
+        // $currUser = $this->user->currLogin();
+        // if ($currUser['desa'] != 'admin') {
+        //     $currDesa = $currUser['desa'];
+        //     $where = "desa = '$currDesa'";
+        // }
 
         $data = $this->model->where($where)->orderBy('id', 'DESC')->findAll($limit, $offset);
         return $this->respond($data);
