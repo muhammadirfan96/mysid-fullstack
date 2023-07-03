@@ -54,6 +54,11 @@ $menuadminweb = [
         'bg_src' => "url('img/frontend/help.png')",
         'in_user' => 1,
     ],
+    'berita' => [
+        'link' => '/berita',
+        'bg_src' => "url('img/frontend/help.png')",
+        'in_user' => 1,
+    ],
 ];
 
 ?>
