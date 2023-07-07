@@ -20,14 +20,9 @@
                         <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_kategori_berita()">show kategori_berita</button>
                     </div>
 
-                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan judul berita" type="text" id="judul" autocomplete="off">
+                    <input id="judul" class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan judul berita" type="text" autocomplete="off">
 
-                    <div class="flex">
-                        <button class="w-[50%] p-1 mb-2 outline-none bg-green-300 rounded-l-md" type="button" onclick="add_paragraf()">+ paragraf</button>
-                        <button class="w-[50%] p-1 mb-2 outline-none bg-red-300 rounded-r-md" type="button" onclick="remove_paragraf()">- paragraf</button>
-                    </div>
-
-                    <div id="paragraf"></div>
+                    <textarea id="paragraf" class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="masukkan konten berita, setiap paragraf dipisahkan oleh tanda |" autocomplete="off"></textarea>
 
                     <div class="flex">
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="active"></select>
@@ -116,20 +111,6 @@
     const per_page = document.querySelector('#per_page')
     const page_list = document.querySelector('#page_list')
     const tbody = document.querySelector('#tbody')
-
-    const remove_paragraf = () => {
-        paragraf.removeChild(paragraf.lastElementChild)
-    }
-
-    const add_paragraf = () => {
-        const textarea_paragraf = document.createElement("textarea")
-
-        textarea_paragraf.classList.add("paragraf", "w-[100%]", "p-1", "mb-2", "outline-none", "border", "border", "border-cyan-500", "rounded-md")
-        textarea_paragraf.placeholder = "paragraf baru isi berita"
-        textarea_paragraf.autocomplete = "off"
-
-        paragraf.appendChild(textarea_paragraf)
-    }
 
     const option_select_active = item => {
         return `<option value="${item}">${item}</option>`
@@ -281,12 +262,7 @@
         event.preventDefault()
         const formData = new FormData()
         formData.append('judul', judul.value)
-
-        let paragraf_value_arr = []
-        paragraf.querySelectorAll('.paragraf')
-            .forEach(node => paragraf_value_arr.push(node.value))
-        paragraf_value = paragraf_value_arr.join(' | ')
-        formData.append('paragraf', paragraf_value)
+        formData.append('paragraf', paragraf.value)
 
         formData.append('id_kategori_beritas', kategori_berita.value)
         formData.append('active', active.value)
@@ -316,13 +292,7 @@
                 const result = await response.json()
 
                 judul.value = result.judul
-
-                const isi_paragraf = result.paragraf.split(" | ")
-
-                isi_paragraf.forEach(isi => {
-                    add_paragraf()
-                    paragraf.lastElementChild.value = isi
-                });
+                paragraf.value = result.paragraf
 
                 const response_kategori_berita = await fetch(`${api_kategori_berita}/${result.id_kategori_beritas}`, {
                     headers: {
@@ -347,11 +317,7 @@
         event.preventDefault()
         const formData = new FormData()
         formData.append('judul', judul.value)
-
-        const paragraf_value = ''
-        paragraf.querySelectorAll('.paragraf')
-            .forEach(node => paragraf_value + ' | ' + node.value)
-        formData.append('paragraf', paragraf_value.value)
+        formData.append('paragraf', paragraf.value)
 
         formData.append('id_kategori_beritas', kategori_berita.value)
         formData.append('active', active.value)
