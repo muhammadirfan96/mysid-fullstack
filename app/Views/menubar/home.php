@@ -66,11 +66,7 @@
 
     const generate_berita = async (targetElement, key, limit) => {
         try {
-            const response = await fetch(`${api}/find/${key}/${limit}`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api}/find/${key}/${limit}`)
             const result = await response.json()
 
             let all_berita = ``
@@ -86,18 +82,10 @@
 
     const generate_div_all_kategori_berita = async () => {
         try {
-            const response = await fetch(`${api}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api}/find/*`)
             const result = await response.json()
 
-            const response_kategori_berita = await fetch(`${api_kategori_berita}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response_kategori_berita = await fetch(`${api_kategori_berita}/find/*`)
             const result_kategori_berita = await response_kategori_berita.json()
 
             // unique
@@ -132,11 +120,7 @@
     const open_modal_berita = async (id) => {
         modal_berita.style.display = ''
         try {
-            const response = await fetch(`${api}/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api}/${id}`)
             const result = await response.json()
 
             judul.innerHTML = result.judul

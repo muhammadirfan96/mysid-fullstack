@@ -41,7 +41,6 @@ $routes->resource('agamas', ['controller' => 'Backend\Agamas', 'placeholder' => 
 $routes->resource('datadisabilitass', ['controller' => 'Backend\DataDisabilitass', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('datankks', ['controller' => 'Backend\DataNkks', 'placeholder' => '(:num)', 'except' => 'new,edit']);
 $routes->resource('datapenduduks', ['controller' => 'Backend\DataPenduduks', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
-$routes->resource('datawilayahs', ['controller' => 'Backend\DataWilayahs', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('desas', ['controller' => 'Backend\Desas', 'placeholder' => '(:num)', 'except' => 'new,edit']);
 $routes->resource('golongandarahs', ['controller' => 'Backend\GolonganDarahs', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('jeniskelamins', ['controller' => 'Backend\JenisKelamins', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
@@ -59,15 +58,22 @@ $routes->resource('kelompokmasyarakats', ['controller' => 'Backend\KelompokMasya
 $routes->resource('databantuankelompoks', ['controller' => 'Backend\DataBantuanKelompoks', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('pekerjaans', ['controller' => 'Backend\Pekerjaans', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
 $routes->resource('rtrws', ['controller' => 'Backend\RtRws', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
-$routes->resource('beritas', ['controller' => 'Backend\Beritas', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
-$routes->resource('kategoriberitas', ['controller' => 'Backend\KategoriBeritas', 'placeholder' => '(:num)', 'except' => 'new,edit', 'filter' => 'auth']);
+
+
+// no filter
+$routes->resource('beritas', ['controller' => 'Backend\Beritas', 'placeholder' => '(:num)', 'except' => 'new,edit',]);
+$routes->get('beritas/find/(:any)', 'Backend\Beritas::find/$1');
+$routes->resource('kategoriberitas', ['controller' => 'Backend\KategoriBeritas', 'placeholder' => '(:num)', 'except' => 'new,edit']);
+$routes->get('kategoriberitas/find/(:any)', 'Backend\KategoriBeritas::find/$1');
+$routes->resource('resumedatapenduduks', ['controller' => 'Backend\ResumeDataPenduduks', 'placeholder' => '(:num)', 'except' => 'new,edit']);
+$routes->resource('datawilayahs', ['controller' => 'Backend\DataWilayahs', 'placeholder' => '(:num)', 'except' => 'new,edit']);
+$routes->get('datawilayahs/find/(:any)', 'Backend\DataWilayahs::find/$1');
 
 // find
 $routes->get('agamas/find/(:any)', 'Backend\Agamas::find/$1', ['filter' => 'auth']);
 $routes->get('datadisabilitass/find/(:any)', 'Backend\DataDisabilitass::find/$1', ['filter' => 'auth']);
 $routes->get('datankks/find/(:any)', 'Backend\DataNkks::find/$1', ['filter' => 'auth']);
 $routes->get('datapenduduks/find/(:any)', 'Backend\DataPenduduks::find/$1', ['filter' => 'auth']);
-$routes->get('datawilayahs/find/(:any)', 'Backend\DataWilayahs::find/$1', ['filter' => 'auth']);
 $routes->get('desas/find/(:any)', 'Backend\Desas::find/$1', ['filter' => 'auth']);
 $routes->get('golongandarahs/find/(:any)', 'Backend\GolonganDarahs::find/$1', ['filter' => 'auth']);
 $routes->get('jeniskelamins/find/(:any)', 'Backend\JenisKelamins::find/$1', ['filter' => 'auth']);
@@ -85,8 +91,7 @@ $routes->get('kelompokmasyarakats/find/(:any)', 'Backend\KelompokMasyarakats::fi
 $routes->get('databantuankelompoks/find/(:any)', 'Backend\DataBantuanKelompoks::find/$1', ['filter' => 'auth']);
 $routes->get('pekerjaans/find/(:any)', 'Backend\Pekerjaans::find/$1', ['filter' => 'auth']);
 $routes->get('rtrws/find/(:any)', 'Backend\RtRws::find/$1', ['filter' => 'auth']);
-$routes->get('beritas/find/(:any)', 'Backend\Beritas::find/$1', ['filter' => 'auth']);
-$routes->get('kategoriberitas/find/(:any)', 'Backend\KategoriBeritas::find/$1', ['filter' => 'auth']);
+
 
 // FRONT END
 $routes->get('login', 'Frontend\Login::index');

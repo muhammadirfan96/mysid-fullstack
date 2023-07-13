@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Desas extends Migration
+class ResumeDataPenduduk extends Migration
 {
     public function up()
     {
@@ -15,31 +15,45 @@ class Desas extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'desa' => [
+            'jumlah_penduduk' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'logo' => [
+            'jumlah_laki_laki' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'created_at' => [
-                'type'       => 'DATETIME',
-            ],
-            'updated_at' => [
-                'type'       => 'DATETIME',
-            ],
-            'created_by' => [
+            'jumlah_perempuan' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'updated_by' => [
+            'umur_kurang_dari_1' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'umur_1_sd_4' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'umur_5_sd_14' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'umur_15_sd_39' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'umur_40_sd_65' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'umur_lebih_dari_65' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('desas');
+        $this->forge->createTable('resume_data_penduduks');
     }
 
     public function down()

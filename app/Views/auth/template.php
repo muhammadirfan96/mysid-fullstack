@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>auth</title>
-    <link rel="stylesheet" href="/fonts/andika/stylesheet.css">
-    <link rel="stylesheet" href="/bi/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/build.css">
-    <!-- <link rel="stylesheet" href="/css/output.css"> -->
+    <link rel="stylesheet" href="<?= base_url(); ?>/fonts/andika/stylesheet.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/bi/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/css/output.css">
     <script>
         const setCookie = (cName, cValue, expDays) => {
             let date = new Date()
@@ -33,8 +32,8 @@
     <?= $this->renderSection('auth') ?>
 
     <!-- sweet alert -->
-    <script src="/js/sweetalert/script.js"></script>
-    <script src="/js/sweetalert/alert.js"></script>
+    <script src="<?= base_url(); ?>/js/sweetalert/script.js"></script>
+    <script src="<?= base_url(); ?>/js/sweetalert/alert.js"></script>
 </body>
 
 </html>

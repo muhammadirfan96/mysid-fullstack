@@ -51,7 +51,7 @@
                 err_msg.style.display = ''
             } else if (response.status == 200) {
                 setCookie('token', result.token, 0.1)
-                window.location.href = '<?= base_url('/') ?>'
+                window.location.href = '<?= base_url('/adminweb') ?>'
             }
 
         } catch (error) {
@@ -59,7 +59,7 @@
         }
     }
 
-    if (getCookie('token')) window.location.href = '<?= base_url('/') ?>'
+    if (getCookie('token')) window.location.href = '<?= base_url('/adminweb') ?>'
 </script>
 
 <?= $this->endSection(); ?>

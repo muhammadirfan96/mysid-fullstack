@@ -36,6 +36,28 @@ $menubar = [
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 
+<script>
+    const api_me = '<?= base_url('/me') ?>'
+
+    const setCookie = (cName, cValue, expDays) => {
+        let date = new Date()
+        date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000))
+        const expires = `expires=${date.toUTCString()}`
+        document.cookie = `${cName}=${cValue}; path=/`
+    }
+
+    function getCookie(cookieName) {
+        let cookie = {};
+        document.cookie.split(';').forEach(function(el) {
+            let [key, value] = el.split('=');
+            cookie[key.trim()] = value;
+        })
+        return cookie[cookieName];
+    }
+
+    if (!getCookie('token')) window.location.href = '<?= base_url('/login') ?>'
+</script>
+
 <body class="mx-2 md:mx-1 font-andika">
     <div class='border-b-2 border-cyan-900 z-10 p-4 bg-cyan-700 fixed top-0 right-0 left-0'>
         <button onclick="setSidebar()" class="absolute left-6 top-6 hidden md:inline">
@@ -46,6 +68,10 @@ $menubar = [
         <p class='text-center text-3xl md:text-4xl font-bold text-white'>
             <a class="font-din" href="/">MySID</a>
         </p>
+        <div class="md:hidden absolute right-6 top-3 text-white">
+            <button onclick="logout()"><i class="bi-box-arrow-right"></i></button>
+            <p id="loginAs" class="text-xs italic"></p>
+        </div>
     </div>
 
     <div id="container" class="mx-auto md:ml-60 mt-[78px]">
@@ -68,10 +94,10 @@ $menubar = [
             </a>
         <?php endforeach ?>
 
-        <!-- <div class="absolute left-6 bottom-3 hidden md:inline text-right text-red-700 bg-white rounded-md py-1 px-2 m-1 text-sm  font-thin">
+        <div class="absolute left-6 bottom-3 hidden md:inline text-right text-red-700 bg-white rounded-md py-1 px-2 m-1 text-sm  font-thin">
             <button onclick="logout()" class="border border-red-700 px-1 rounded-md italic">logout</button>
             <p id="md_loginAs" class="italic"></p>
-        </div> -->
+        </div>
 
     </div>
 
@@ -121,6 +147,32 @@ $menubar = [
             first.classList.toggle('translate-x-2')
             second.classList.toggle('-translate-x-2')
         };
+
+        const md_loginAs = document.querySelector('#md_loginAs')
+        const login_as = document.querySelector('#loginAs')
+
+        const setMe = async () => {
+            try {
+                const response = await fetch(`${api_me}`, {
+                    headers: {
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                })
+                const result = await response.json()
+
+                md_loginAs.innerHTML = `logged in as: ${result.desa}`
+                login_as.innerHTML = result.desa
+            } catch (error) {
+                console.error("Error:", error)
+            }
+        }
+
+        setMe()
+
+        const logout = () => {
+            setCookie('token', '', 0)
+            window.location.href = '<?= base_url('/') ?>'
+        }
     </script>
 
     <!-- sweet alert -->

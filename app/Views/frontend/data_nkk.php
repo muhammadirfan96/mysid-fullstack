@@ -1,4 +1,4 @@
-<?= $this->extend('index'); ?>
+<?= $this->extend('index_admin'); ?>
 <?= $this->section('page'); ?>
 
 <div>

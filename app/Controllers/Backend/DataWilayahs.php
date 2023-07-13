@@ -12,13 +12,13 @@ class DataWilayahs extends ResourceController
     use ResponseTrait;
     protected $modelName = 'App\Models\DataWilayahsModel';
     protected $format    = 'json';
-    protected $db, $user, $desa;
+    protected $db;
 
     public function __construct()
     {
         $this->db = \Config\Database::connect();
-        $this->user = new GetUser();
-        $this->desa = new GetDesa();
+        // $this->user = new GetUser();
+        // $this->desa = new GetDesa();
     }
 
     /**
@@ -219,12 +219,12 @@ class DataWilayahs extends ResourceController
         unset($rules['id_provinsis'], $rules['id_kabupatens'], $rules['id_kecamatans'], $rules['id_desas'], $rules['created_by']);
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
-        $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($findData['id_desas']);
-        if ($currUser['desa'] != 'admin') {
-            // if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-            return $this->fail('user not allowed');
-        }
+        // $currUser = $this->user->currLogin();
+        // // $currDesa = $this->desa->currDesa($findData['id_desas']);
+        // if ($currUser['desa'] != 'admin') {
+        //     // if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        //     return $this->fail('user not allowed');
+        // }
 
         $aset_prasarana_ekonomi = '';
         if ($this->request->getVar('nama_aset_prasarana_ekonomi') == [""]) return $this->fail('The nama_aset_prasarana_ekonomi value is not null');
@@ -362,12 +362,12 @@ class DataWilayahs extends ResourceController
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
 
-        $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($findData['id_desas']);
-        if ($currUser['desa'] != 'admin') {
-            // if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-            return $this->fail('user not allowed');
-        }
+        // $currUser = $this->user->currLogin();
+        // // $currDesa = $this->desa->currDesa($findData['id_desas']);
+        // if ($currUser['desa'] != 'admin') {
+        //     // if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
+        //     return $this->fail('user not allowed');
+        // }
 
         $this->model->delete($id);
         $response = [

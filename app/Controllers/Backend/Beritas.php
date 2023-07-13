@@ -11,12 +11,12 @@ class Beritas extends ResourceController
     use ResponseTrait;
     protected $modelName = 'App\Models\BeritasModel';
     protected $format    = 'json';
-    protected $db, $user;
+    protected $db;
 
     public function __construct()
     {
         $this->db = \Config\Database::connect();
-        $this->user = new GetUser();
+        // $this->user = new GetUser();
     }
 
     /**
@@ -26,8 +26,8 @@ class Beritas extends ResourceController
      */
     public function index()
     {
-        $currUser = $this->user->currLogin();
-        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+        // $currUser = $this->user->currLogin();
+        // if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
 
         $data = $this->model->orderBy('id', 'DESC')->findAll();
         return $this->respond($data);
@@ -52,8 +52,8 @@ class Beritas extends ResourceController
      */
     public function create()
     {
-        $currUser = $this->user->currLogin();
-        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+        // $currUser = $this->user->currLogin();
+        // if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
 
         helper(['form']);
 
@@ -92,8 +92,8 @@ class Beritas extends ResourceController
      */
     public function update($id = null)
     {
-        $currUser = $this->user->currLogin();
-        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+        // $currUser = $this->user->currLogin();
+        // if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
 
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
@@ -142,8 +142,8 @@ class Beritas extends ResourceController
      */
     public function delete($id = null)
     {
-        $currUser = $this->user->currLogin();
-        if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+        // $currUser = $this->user->currLogin();
+        // if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
 
         $findData = $this->model->find($id);
         if (!$findData) return $this->failNotFound('no data found');
@@ -179,22 +179,22 @@ class Beritas extends ResourceController
         } else {
             $where = null;
         }
-        $currUser = $this->user->currLogin();
-        if (!$currUser) {
-            if (str_contains($key, '@')) {
-                $keys = explode("@", $key);
-                if (str_contains($key, 'judul')) $where = "judul LIKE '%$keys[1]%' AND active = '1'";
-                if (str_contains($key, 'kategori_berita')) {
-                    $kategori_beritasCrr = $this->db->table('kategori_beritas')
-                        ->getWhere("kategori_berita LIKE '%$keys[1]%'")
-                        ->getResultArray();
-                    $kategori_beritaId = $kategori_beritasCrr[0]['id'];
-                    $where = "id_kategori_beritas = '$kategori_beritaId' AND active = '1'";
-                }
-            } else {
-                $where = "active = '1'";
-            }
-        }
+        // $currUser = $this->user->currLogin();
+        // if (!$currUser) {
+        //     if (str_contains($key, '@')) {
+        //         $keys = explode("@", $key);
+        //         if (str_contains($key, 'judul')) $where = "judul LIKE '%$keys[1]%' AND active = '1'";
+        //         if (str_contains($key, 'kategori_berita')) {
+        //             $kategori_beritasCrr = $this->db->table('kategori_beritas')
+        //                 ->getWhere("kategori_berita LIKE '%$keys[1]%'")
+        //                 ->getResultArray();
+        //             $kategori_beritaId = $kategori_beritasCrr[0]['id'];
+        //             $where = "id_kategori_beritas = '$kategori_beritaId' AND active = '1'";
+        //         }
+        //     } else {
+        //         $where = "active = '1'";
+        //     }
+        // }
 
         $beritas = $this->db->table('beritas')
             ->orderBy('beritas.id', 'DESC')

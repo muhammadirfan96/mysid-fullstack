@@ -1,4 +1,4 @@
-<?= $this->extend('index'); ?>
+<?= $this->extend('index_admin'); ?>
 <?= $this->section('page'); ?>
 
 <div>
@@ -630,11 +630,7 @@
 
     const generate_isi_page_list = async () => {
         try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api}/find/${key_pencarian.value}`)
             const result = await response.json()
             let total_data = 0
             result.forEach(item => total_data++);
@@ -679,11 +675,7 @@
 
     const generate_isi_tr_tbody = async (offset = 0) => {
         try {
-            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api}/find/${key_pencarian.value}/${per_page.value}/${offset}`)
             const result = await response.json()
 
             let all_tr_tbody = ``
@@ -706,10 +698,7 @@
         try {
             const response = await fetch(url, {
                 method: "POST",
-                body: formData,
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
+                body: formData
             });
             const result = await response.json();
             if (result.status == 400) {
@@ -771,11 +760,7 @@
             modal_form.style.display = ''
             head_form.innerHTML = 'form ubah data'
             try {
-                const response = await fetch(`${api}/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+                const response = await fetch(`${api}/${id}`)
                 const result = await response.json()
 
                 const response_provinsi = await fetch(`${api_provinsi}/${result.id_provinsis}`, {
@@ -983,10 +968,7 @@
         questionAlert('the selected data will be permanently deleted. are you sure?', async () => {
             try {
                 const response = await fetch(`${api}/${id}`, {
-                    method: "DELETE",
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
+                    method: "DELETE"
                 })
                 const result = await response.json()
                 successAlert(result.messages.success)
