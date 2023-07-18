@@ -2,19 +2,28 @@
 <?= $this->section('page'); ?>
 <div>
     <div class="bg-cyan-200 rounded-md m-2 p-2">
-        <p class="text-center text-lg font-semibold uppercase"><?= $title; ?></p>
+        <p class="text-center text-lg font-semibold uppercase"><span class="tanggal">dd</span>-<span class="bulan">mm</span>-<span class="tahun">yy</span> <span class="jam">H</span>:<span class="menit">i</span>:<span class="detik">s</span></p>
     </div>
 
-    <div class="m-2">
-        <div class="flex flex-wrap gap-2">
-            <div class="w-full md:w-[48%] m-2 p-2">
-                <p>TERKINI</p>
-                <div id="terkini"></div>
-            </div>
-            <div id="all_kategori_berita" class="w-full md:w-[48%] border-l-2 border-cyan-700 m-2 p-2">
-            </div>
+    <div class="m-3 flex flex-wrap gap-3 justify-center">
+        <button onclick="generate_berita('kategori_berita@berita', 6)" id="berita" class="p-2 text-sm text-white bg-cyan-700 rounded w-[47%] md:w-[30%] lg:w-[15%]" type="button">berita</button>
+        <button onclick="generate_berita('kategori_berita@olahraga', 6)" id="olahraga" class="p-2 text-sm text-white bg-cyan-700 rounded w-[47%] md:w-[30%] lg:w-[15%]" type="button">olahraga</button>
+        <button onclick="generate_berita('kategori_berita@acara', 6)" id="acara" class="p-2 text-sm text-white bg-cyan-700 rounded w-[47%] md:w-[30%] lg:w-[15%]" type="button">acara</button>
+        <button onclick="generate_berita('kategori_berita@undangan', 6)" id="undangan" class="p-2 text-sm text-white bg-cyan-700 rounded w-[47%] md:w-[30%] lg:w-[15%]" type="button">undangan</button>
+        <button onclick="generate_berita('kategori_berita@pengumuman', 6)" id="pengumuman" class="p-2 text-sm text-white bg-cyan-700 rounded w-[47%] md:w-[30%] lg:w-[15%]" type="button">pengumuman</button>
+        <button onclick="generate_berita('kategori_berita@progres_kegiatan', 6)" id="progres_kegiatan" class="p-2 text-sm text-white bg-cyan-700 rounded w-[47%] md:w-[30%] lg:w-[15%]" type="button">progres_kegiatan</button>
+    </div>
+
+    <div class="m-3 flex flex-wrap gap-1 justify-center">
+        <p id="heade" class="uppercase border-2 border-cyan-700 rounded text-cyan-700 w-[72%] text-center p-2 font-semibold"></p>
+        <div class="w-[22%] overflow-auto border-2 border-cyan-700 rounded text-cyan-700">
+            <input class="p-2 outline-none w-full" onkeyup="update_konten_berita()" type="text" id="key_pencarian" placeholder="cari" autocomplete="off">
         </div>
     </div>
+
+    <div id="konten_berita" class="m-3 flex flex-wrap justify-center gap-3">
+    </div>
+
 </div>
 
 <div id="modal_berita" class="fixed top-0 bottom-0 right-0 left-0 bg-slate-900 bg-opacity-50 z-10" style="display: none;">
@@ -37,8 +46,9 @@
     const api = '<?= base_url('/beritas') ?>'
     const api_kategori_berita = '<?= base_url('/kategoriberitas') ?>'
 
-    const terkini = document.querySelector('#terkini')
-    const all_kategori_berita = document.querySelector('#all_kategori_berita')
+    const konten_berita = document.querySelector('#konten_berita')
+    const heade = document.querySelector('#heade')
+    const key_pencarian = document.querySelector('#key_pencarian')
 
     const judul = document.querySelector('#judul')
     const foto = document.querySelector('#foto')
@@ -46,25 +56,25 @@
 
     const modal_berita = document.querySelector('#modal_berita')
 
+    const jam = document.querySelector('.jam')
+    const menit = document.querySelector('.menit')
+    const detik = document.querySelector('.detik')
+    const tanggal = document.querySelector('.tanggal')
+    const bulan = document.querySelector('.bulan')
+    const tahun = document.querySelector('.tahun')
+
     const div_berita = (item) => {
-        return `<div class="w-full border-2 border-cyan-400 mb-2"></div>
-                <div class="">
-                    <img id="terkini_foto" class="w-[100%] h-80 md:w-[24%] md:h-32 mb-2" src="img/berita/${item.foto}" alt="img/berita/${item.foto}">
-                </div>
-                <div class="w-full mb-3">
-                    <p class="text-base font-semibold mb-2"><a onclick="open_modal_berita(${item.id})">${item.judul}</a></p>
-                    <p class="text-xs font-medium mb-1">${item.kategori_berita}</p>
-                    <p class="text-xs font-light">${item.created_at}</p>
+        return `<div class="border border-cyan-700 rounded-md m-2 w-full md:w-[45%] lg:w-[30%]" onclick="open_modal_berita(${item.id})">
+                    <img class="w-full h-80 mb-2 rounded-t" src="img/berita/${item.foto}" alt="img/berita/${item.foto}">
+                    <div class="w-full mb-3 p-2 overflow-hidden">
+                        <p class="text-base font-semibold mb-2">${item.judul}</p>
+                        <p class="text-xs font-medium mb-1">${item.kategori_berita}</p>
+                        <p class="text-xs font-light">${item.created_at}</p>
+                    </div>
                 </div>`
     }
 
-    const div_all_kategori_berita = (un) => {
-        return `<p class="uppercase">${un}</p>
-                <div id="${un}"></div>
-                <div class="w-full border-2 border-cyan-700 mb-3"></div>`
-    }
-
-    const generate_berita = async (targetElement, key, limit) => {
+    const generate_berita = async (key, limit) => {
         try {
             const response = await fetch(`${api}/find/${key}/${limit}`)
             const result = await response.json()
@@ -74,40 +84,28 @@
                 all_berita += div_berita(item)
             });
 
-            targetElement.innerHTML = all_berita
+            // bikin head
+            let head = key.split("@")[1]
+
+            heade.innerHTML = head
+            konten_berita.innerHTML = all_berita
         } catch (error) {
             console.error("Error:", error)
         }
     }
 
-    const generate_div_all_kategori_berita = async () => {
+    const update_konten_berita = async () => {
         try {
-            const response = await fetch(`${api}/find/*`)
+            const response = await fetch(`${api}/find/judul@${key_pencarian.value}/6`)
             const result = await response.json()
 
-            const response_kategori_berita = await fetch(`${api_kategori_berita}/find/*`)
-            const result_kategori_berita = await response_kategori_berita.json()
-
-            // unique
-            function onlyUniqeu(value, index, array) {
-                return array.indexOf(value) === index
-            }
-            let arr = []
-            result.forEach(item => arr.push(item.kategori_berita))
-            // end unique
-
-            let unique = arr.filter(onlyUniqeu)
-            let kategori_berita = ``
-            unique.forEach(un => {
-                kategori_berita += div_all_kategori_berita(un)
-            })
-
-            all_kategori_berita.innerHTML = kategori_berita
-
+            let all_berita = ``
             result.forEach(item => {
-                let el = all_kategori_berita.querySelector(`#${item.kategori_berita}`)
-                generate_berita(el, `kategori_berita@${item.kategori_berita}`, 2)
-            })
+                all_berita += div_berita(item)
+            });
+
+            heade.innerHTML = key_pencarian.value
+            konten_berita.innerHTML = all_berita
         } catch (error) {
             console.error("Error:", error)
         }
@@ -138,8 +136,20 @@
         }
     }
 
-    generate_div_all_kategori_berita()
-    generate_berita(terkini, '*', 2)
+    setTimeout("waktu()", 1000);
+
+    function waktu() {
+        var waktu = new Date();
+        setTimeout("waktu()", 1000);
+        jam.innerHTML = waktu.getHours();
+        menit.innerHTML = waktu.getMinutes();
+        detik.innerHTML = waktu.getSeconds();
+        tanggal.innerHTML = waktu.getDate();
+        bulan.innerHTML = waktu.getMonth();
+        tahun.innerHTML = waktu.getFullYear();
+    }
+
+    generate_berita('kategori_berita@progres_kegiatan', 6)
 </script>
 
 <?= $this->endSection(); ?>

@@ -176,11 +176,7 @@
 
     const generate_isi_option_select_pekerjaan1 = async () => {
         try {
-            const response = await fetch(`${api_pekerjaan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_pekerjaan}/find/*`)
             const result = await response.json()
 
             let all_option_select_pekerjaan1 = ``
@@ -200,11 +196,7 @@
 
     const generate_isi_option_select_pekerjaan2 = async () => {
         try {
-            const response = await fetch(`${api_pekerjaan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_pekerjaan}/find/*`)
             const result = await response.json()
 
             let all_option_select_pekerjaan2 = ``
@@ -224,11 +216,7 @@
 
     const generate_isi_option_select_pekerjaan3 = async () => {
         try {
-            const response = await fetch(`${api_pekerjaan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_pekerjaan}/find/*`)
             const result = await response.json()
 
             let all_option_select_pekerjaan3 = ``

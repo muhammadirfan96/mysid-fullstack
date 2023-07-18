@@ -232,6 +232,20 @@ class DataPenduduks extends ResourceController
                 $data_nkksId = $data_nkksCrr[0]['id'];
                 $where = "id_data_nkks = '$data_nkksId'";
             }
+            if (str_contains($key, 'work')) {
+                $pekerjaansCrr = $this->db->table('pekerjaans')
+                    ->getWhere("pekerjaan LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $pekerjaansId = $pekerjaansCrr[0]['id'];
+                $where = "id_pekerjaans1 = '$pekerjaansId'";
+            }
+            if (str_contains($key, 'pendidikan')) {
+                $pendidikansCrr = $this->db->table('pendidikans')
+                    ->getWhere("pendidikan LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $pendidikansId = $pendidikansCrr[0]['id'];
+                $where = "id_pendidikans = '$pendidikansId'";
+            }
             if (str_contains($key, 'rtrw')) {
                 $data_rt_rwsCrr = $this->db->table('rt_rws')
                     ->getWhere("rt_rw LIKE '%$keys[1]%'")

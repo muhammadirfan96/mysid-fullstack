@@ -32,20 +32,22 @@ $menubar = [
     <link rel="stylesheet" href="<?= base_url(); ?>/fonts/andika/stylesheet.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/fonts/ff-din/black/stylesheet.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/bi/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>/css/output.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>/css/output.css"> -->
+    <link rel="stylesheet" href="<?= base_url(); ?>/css/build.css">
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 
 <body class="mx-2 md:mx-1 font-andika">
-    <div class='border-b-2 border-cyan-900 z-10 p-4 bg-cyan-700 fixed top-0 right-0 left-0'>
+    <div class='border-b-2 border-cyan-900 z-10 p-4 pt-3 bg-cyan-700 fixed top-0 right-0 left-0'>
         <button onclick="setSidebar()" class="absolute left-6 top-6 hidden md:inline">
             <div id="one" class="w-8 mb-[5px] border-2 rounded-sm border-black bg-black origin-left rotate-[35deg] transition delay-500"></div>
             <div id="two" class="w-8 mb-[5px] border-2 rounded-sm border-red-700 bg-red-700 opacity-0 transition delay-500"></div>
             <div id="three" class="w-8 mb-[5px] border-2 rounded-sm border-white bg-white origin-left -rotate-[35deg] transition delay-500"></div>
         </button>
-        <p class='text-center text-3xl md:text-4xl font-bold text-white'>
+        <p class='text-center text-3xl md:text-4xl font-bold text-white mb-1'>
             <a class="font-din" href="/">MySID</a>
         </p>
+        <p class="text-xs md:text-sm text-white absolute right-0 left-0 bottom-0 text-center">desa latompa kecamatan maligano kabupaten muna - sulawesi tenggara</p>
     </div>
 
     <div id="container" class="mx-auto md:ml-60 mt-[78px]">
@@ -67,11 +69,6 @@ $menubar = [
                 </p>
             </a>
         <?php endforeach ?>
-
-        <!-- <div class="absolute left-6 bottom-3 hidden md:inline text-right text-red-700 bg-white rounded-md py-1 px-2 m-1 text-sm  font-thin">
-            <button onclick="logout()" class="border border-red-700 px-1 rounded-md italic">logout</button>
-            <p id="md_loginAs" class="italic"></p>
-        </div> -->
 
     </div>
 

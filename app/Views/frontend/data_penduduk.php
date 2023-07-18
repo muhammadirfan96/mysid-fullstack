@@ -89,62 +89,205 @@
         </div>
 
         <div id="modal_resume" class="fixed top-0 bottom-0 right-0 left-0 bg-slate-900 bg-opacity-50 z-10" style="display: none;">
-            <div class="bg-white rounded-md p-4 relative w-[95%] md:w-[50%] lg:w-[30%] my-4 max-h-[95%] mx-auto overflow-auto">
+            <div class="bg-white rounded-md p-4 relative w-[95%] md:w-[70%] lg:w-[60%] my-4 max-h-[95%] mx-auto overflow-auto">
                 <button class="absolute right-1 top-0" onclick="close_modal_resume()" type="button"><i class="bi-x-square-fill text-red-700 rounded-md text-xl"></i></button>
                 <p class="text-center font-medium text-lg" id="head_resume">Resume</p>
-                <div class="m-2">
-                    <table class="w-full">
-                        <tr>
-                            <table class="w-full">
-                                <tr>
-                                    <td colspan="2" class="text-cyan-900 uppercase text-base underline">total</td>
-                                </tr>
-                                <tr>
-                                    <td class="w-[60%]">jumlah penduduk</td>
-                                    <td id="jumlah_penduduk" class="w-[40%] text-right">0 orang</td>
-                                </tr>
-                                <tr>
-                                    <td>jumlah laki laki</td>
-                                    <td id="jumlah_laki_laki" class="text-right">0 orang</td>
-                                </tr>
-                                <tr>
-                                    <td>jumlah perempuan</td>
-                                    <td id="jumlah_perempuan" class="text-right">0 orang</td>
-                                </tr>
-                            </table>
-                        </tr>
-                        <tr>
-                            <table class="w-full">
-                                <tr>
-                                    <td colspan="2" class="text-cyan-900 uppercase text-base underline">klasifikasi berdasarkan usia</td>
-                                </tr>
-                                <tr>
-                                    <td class="w-[60%]">dibawah 1 tahun</td>
-                                    <td id="umur_kurang_dari_1" class="w-[40%] text-right">0 orang</td>
-                                </tr>
-                                <tr>
-                                    <td>1 sampai 4 tahun</td>
-                                    <td id="umur_1_sd_4" class="text-right">0 orang</td>
-                                </tr>
-                                <tr>
-                                    <td>5 sampai 14 tahun</td>
-                                    <td id="umur_5_sd_14" class="text-right">0 orang</td>
-                                </tr>
-                                <tr>
-                                    <td>15 sampai 39 tahun</td>
-                                    <td id="umur_15_sd_39" class="text-right">0 orang</td>
-                                </tr>
-                                <tr>
-                                    <td>40 sampai 64 tahun</td>
-                                    <td id="umur_40_sd_65" class="text-right">0 orang</td>
-                                </tr>
-                                <tr>
-                                    <td>diatas 65 tahun</td>
-                                    <td id="umur_lebih_dari_65" class="text-right">0 orang</td>
-                                </tr>
-                            </table>
-                        </tr>
-                    </table>
+                <div class="m-2 flex flex-wrap gap-1 justify-between">
+                    <div class="w-full md:w-[32%]">
+                        <table class="w-full">
+                            <tr>
+                                <table class="w-full">
+                                    <tr>
+                                        <td colspan="2" class="text-cyan-900 uppercase text-base underline">total</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-[60%]">jumlah penduduk</td>
+                                        <td id="jumlah_penduduk" class="w-[40%] text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>jumlah laki laki</td>
+                                        <td id="jumlah_laki_laki" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>jumlah perempuan</td>
+                                        <td id="jumlah_perempuan" class="text-right">0 orang</td>
+                                    </tr>
+                                </table>
+                            </tr>
+                            <tr>
+                                <table class="w-full">
+                                    <tr>
+                                        <td colspan="2" class="text-cyan-900 uppercase text-base underline">klasifikasi berdasarkan KK</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-[60%]">jumlah kk</td>
+                                        <td id="jumlah_kk" class="w-[40%] text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>kk laki laki</td>
+                                        <td id="jumlah_kk_laki_laki" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>kk perempuan</td>
+                                        <td id="jumlah_kk_perempuan" class="text-right">0 orang</td>
+                                    </tr>
+                                </table>
+                            </tr>
+                            <tr>
+                                <table class="w-full">
+                                    <tr>
+                                        <td colspan="2" class="text-cyan-900 uppercase text-base underline">klasifikasi berdasarkan usia</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-[60%]">dibawah 1 tahun</td>
+                                        <td id="umur_kurang_dari_1" class="w-[40%] text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1 sampai 4 tahun</td>
+                                        <td id="umur_1_sd_4" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5 sampai 14 tahun</td>
+                                        <td id="umur_5_sd_14" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15 sampai 39 tahun</td>
+                                        <td id="umur_15_sd_39" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40 sampai 64 tahun</td>
+                                        <td id="umur_40_sd_65" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>diatas 65 tahun</td>
+                                        <td id="umur_lebih_dari_65" class="text-right">0 orang</td>
+                                    </tr>
+                                </table>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="w-full md:w-[32%]">
+                        <table class="w-full">
+                            <tr>
+                                <table class="w-full">
+                                    <tr>
+                                        <td colspan="2" class="text-cyan-900 uppercase text-base underline">klasifikasi berdasarkan pekerjaan</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-[60%]">PNS</td>
+                                        <td id="pns" class="w-[40%] text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>karyawan_honorer</td>
+                                        <td id="karyawan_honorer" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>petani</td>
+                                        <td id="petani" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>peternak</td>
+                                        <td id="peternak" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>pedagang</td>
+                                        <td id="pedagang" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>nelayan</td>
+                                        <td id="nelayan" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>teknisi</td>
+                                        <td id="teknisi" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>tukang</td>
+                                        <td id="tukang" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-</td>
+                                        <td id="kosong" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ibu_rumah_tangga</td>
+                                        <td id="ibu_rumah_tangga" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>pelajar</td>
+                                        <td id="pelajar" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>pekerja_lepas</td>
+                                        <td id="pekerja_lepas" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>karyawan_swasta</td>
+                                        <td id="karyawan_swasta" class="text-right">0 orang</td>
+                                    </tr>
+                                </table>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="w-full md:w-[32%]">
+                        <table class="w-full">
+                            <tr>
+                                <table class="w-full">
+                                    <tr>
+                                        <td colspan="2" class="text-cyan-900 uppercase text-base underline">klasifikasi berdasarkan pendidikan</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-[60%]">sdtt</td>
+                                        <td id="sdtt" class="w-[40%] text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>tk</td>
+                                        <td id="tk" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sd</td>
+                                        <td id="sd" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>smp</td>
+                                        <td id="smp" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sma</td>
+                                        <td id="sma" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>s1</td>
+                                        <td id="s1" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>s2</td>
+                                        <td id="s2" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>s3</td>
+                                        <td id="s3" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>belum_sekolah</td>
+                                        <td id="belum_sekolah" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>d1</td>
+                                        <td id="d1" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>d2</td>
+                                        <td id="d2" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>d3</td>
+                                        <td id="d3" class="text-right">0 orang</td>
+                                    </tr>
+                                </table>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <button onclick="save_resume()" class="bg-cyan-500 text-lg text-white font-medium py-1 rounded-md w-full">save</button>
             </div>
@@ -268,7 +411,35 @@
     const umur_15_sd_39 = document.querySelector('#umur_15_sd_39')
     const umur_40_sd_65 = document.querySelector('#umur_40_sd_65')
     const umur_lebih_dari_65 = document.querySelector('#umur_lebih_dari_65')
+    const jumlah_kk = document.querySelector('#jumlah_kk')
+    const jumlah_kk_laki_laki = document.querySelector('#jumlah_kk_laki_laki')
+    const jumlah_kk_perempuan = document.querySelector('#jumlah_kk_perempuan')
 
+    const pns = document.querySelector('#pns')
+    const karyawan_honorer = document.querySelector('#karyawan_honorer')
+    const petani = document.querySelector('#petani')
+    const peternak = document.querySelector('#peternak')
+    const pedagang = document.querySelector('#pedagang')
+    const nelayan = document.querySelector('#nelayan')
+    const teknisi = document.querySelector('#teknisi')
+    const tukang = document.querySelector('#tukang')
+    const kosong = document.querySelector('#kosong')
+    const ibu_rumah_tangga = document.querySelector('#ibu_rumah_tangga')
+    const pelajar = document.querySelector('#pelajar')
+    const pekerja_lepas = document.querySelector('#pekerja_lepas')
+    const karyawan_swasta = document.querySelector('#karyawan_swasta')
+    const sdtt = document.querySelector('#sdtt')
+    const tk = document.querySelector('#tk')
+    const sd = document.querySelector('#sd')
+    const smp = document.querySelector('#smp')
+    const sma = document.querySelector('#sma')
+    const s1 = document.querySelector('#s1')
+    const s2 = document.querySelector('#s2')
+    const s3 = document.querySelector('#s3')
+    const belum_sekolah = document.querySelector('#belum_sekolah')
+    const d1 = document.querySelector('#d1')
+    const d2 = document.querySelector('#d2')
+    const d3 = document.querySelector('#d3')
 
     const save_resume = async () => {
         try {
@@ -282,6 +453,34 @@
             formData.append('umur_15_sd_39', umur_15_sd_39.innerHTML)
             formData.append('umur_40_sd_65', umur_40_sd_65.innerHTML)
             formData.append('umur_lebih_dari_65', umur_lebih_dari_65.innerHTML)
+            formData.append('jumlah_kk', jumlah_kk.innerHTML)
+            formData.append('jumlah_kk_laki_laki', jumlah_kk_laki_laki.innerHTML)
+            formData.append('jumlah_kk_perempuan', jumlah_kk_perempuan.innerHTML)
+            formData.append('pns', pns.innerHTML)
+            formData.append('karyawan_honorer', karyawan_honorer.innerHTML)
+            formData.append('petani', petani.innerHTML)
+            formData.append('peternak', peternak.innerHTML)
+            formData.append('pedagang', pedagang.innerHTML)
+            formData.append('nelayan', nelayan.innerHTML)
+            formData.append('teknisi', teknisi.innerHTML)
+            formData.append('tukang', tukang.innerHTML)
+            formData.append('kosong', kosong.innerHTML)
+            formData.append('ibu_rumah_tangga', ibu_rumah_tangga.innerHTML)
+            formData.append('pelajar', pelajar.innerHTML)
+            formData.append('pekerja_lepas', pekerja_lepas.innerHTML)
+            formData.append('karyawan_swasta', karyawan_swasta.innerHTML)
+            formData.append('sdtt', sdtt.innerHTML)
+            formData.append('tk', tk.innerHTML)
+            formData.append('sd', sd.innerHTML)
+            formData.append('smp', smp.innerHTML)
+            formData.append('sma', sma.innerHTML)
+            formData.append('s1', s1.innerHTML)
+            formData.append('s2', s2.innerHTML)
+            formData.append('s3', s3.innerHTML)
+            formData.append('belum_sekolah', belum_sekolah.innerHTML)
+            formData.append('d1', d1.innerHTML)
+            formData.append('d2', d2.innerHTML)
+            formData.append('d3', d3.innerHTML)
             formData.append('_method', 'PATCH')
 
             const response = await fetch(`${api_resume_data_penduduk}/1`, {
@@ -333,17 +532,160 @@
             let total_40_sd_65 = 0
             let total_lebih_dari_65 = 0
 
-            const response_jenis_kelamin = await fetch(`${api_jenis_kelamin}/find/perempuan`, {
+            // berdasarkan KK
+            let total_jumlah_kk = 0
+            let total_jumlah_kk_perempuan = 0
+            let total_jumlah_kk_laki_laki = 0
+
+            // berdasarkan pekerjaan & pendidikan
+            let total_pns = 0
+            let total_karyawan_honorer = 0
+            let total_petani = 0
+            let total_peternak = 0
+            let total_pedagang = 0
+            let total_nelayan = 0
+            let total_teknisi = 0
+            let total_tukang = 0
+            let total_kosong = 0
+            let total_ibu_rumah_tangga = 0
+            let total_pelajar = 0
+            let total_pekerja_lepas = 0
+            let total_karyawan_swasta = 0
+            let total_sdtt = 0
+            let total_tk = 0
+            let total_sd = 0
+            let total_smp = 0
+            let total_sma = 0
+            let total_s1 = 0
+            let total_s2 = 0
+            let total_s3 = 0
+            let total_belum_sekolah = 0
+            let total_d1 = 0
+            let total_d2 = 0
+            let total_d3 = 0
+
+            const response_jenis_kelamin = await fetch(`${api_jenis_kelamin}/find/perempuan`)
+            const result_jenis_kelamin = await response_jenis_kelamin.json()
+
+            const response_status_hub_dlm_kels = await fetch(`${api_status_hub_dlm_kel}/find/kepala_keluarga`)
+            const result_status_hub_dlm_kels = await response_status_hub_dlm_kels.json()
+
+            const response_data_nkks = await fetch(`${api_data_nkk}/find/*`, {
                 headers: {
                     Authorization: `Bearer ${getCookie('token')}`
                 }
             })
-            const result_jenis_kelamin = await response_jenis_kelamin.json()
+            const result_data_nkks = await response_data_nkks.json()
 
+            const response_pekerjaan_pns = await fetch(`${api_pekerjaan}/find/pns`)
+            const result_pekerjaan_pns = await response_pekerjaan_pns.json()
+
+            const response_pekerjaan_karyawan_honorer = await fetch(`${api_pekerjaan}/find/karyawan_honorer`)
+            const result_pekerjaan_karyawan_honorer = await response_pekerjaan_karyawan_honorer.json()
+
+            const response_pekerjaan_petani = await fetch(`${api_pekerjaan}/find/petani`)
+            const result_pekerjaan_petani = await response_pekerjaan_petani.json()
+
+            const response_pekerjaan_peternak = await fetch(`${api_pekerjaan}/find/peternak`)
+            const result_pekerjaan_peternak = await response_pekerjaan_peternak.json()
+
+            const response_pekerjaan_pedagang = await fetch(`${api_pekerjaan}/find/pedagang`)
+            const result_pekerjaan_pedagang = await response_pekerjaan_pedagang.json()
+
+            const response_pekerjaan_nelayan = await fetch(`${api_pekerjaan}/find/nelayan`)
+            const result_pekerjaan_nelayan = await response_pekerjaan_nelayan.json()
+
+            const response_pekerjaan_teknisi = await fetch(`${api_pekerjaan}/find/teknisi`)
+            const result_pekerjaan_teknisi = await response_pekerjaan_teknisi.json()
+
+            const response_pekerjaan_tukang = await fetch(`${api_pekerjaan}/find/tukang_kayu_&_batu`)
+            const result_pekerjaan_tukang = await response_pekerjaan_tukang.json()
+
+            const response_pekerjaan_kosong = await fetch(`${api_pekerjaan}/find/-`)
+            const result_pekerjaan_kosong = await response_pekerjaan_kosong.json()
+
+            const response_pekerjaan_ibu_rumah_tangga = await fetch(`${api_pekerjaan}/find/ibu_rumah_tangga`)
+            const result_pekerjaan_ibu_rumah_tangga = await response_pekerjaan_ibu_rumah_tangga.json()
+
+            const response_pekerjaan_pelajar = await fetch(`${api_pekerjaan}/find/pelajar`)
+            const result_pekerjaan_pelajar = await response_pekerjaan_pelajar.json()
+
+            const response_pekerjaan_pekerja_lepas = await fetch(`${api_pekerjaan}/find/pekerja_lepas`)
+            const result_pekerjaan_pekerja_lepas = await response_pekerjaan_pekerja_lepas.json()
+
+            const response_pekerjaan_karyawan_swasta = await fetch(`${api_pekerjaan}/find/karyawan_swasta`)
+            const result_pekerjaan_karyawan_swasta = await response_pekerjaan_karyawan_swasta.json()
+
+
+            const response_pendidikan_sdtt = await fetch(`${api_pendidikan}/find/sdtt`)
+            const result_pendidikan_sdtt = await response_pendidikan_sdtt.json()
+
+            const response_pendidikan_tk = await fetch(`${api_pendidikan}/find/tk`)
+            const result_pendidikan_tk = await response_pendidikan_tk.json()
+
+            const response_pendidikan_sd = await fetch(`${api_pendidikan}/find/sd`)
+            const result_pendidikan_sd = await response_pendidikan_sd.json()
+
+            const response_pendidikan_smp = await fetch(`${api_pendidikan}/find/smp`)
+            const result_pendidikan_smp = await response_pendidikan_smp.json()
+
+            const response_pendidikan_sma = await fetch(`${api_pendidikan}/find/sma`)
+            const result_pendidikan_sma = await response_pendidikan_sma.json()
+
+            const response_pendidikan_s1 = await fetch(`${api_pendidikan}/find/s1`)
+            const result_pendidikan_s1 = await response_pendidikan_s1.json()
+
+            const response_pendidikan_s2 = await fetch(`${api_pendidikan}/find/s2`)
+            const result_pendidikan_s2 = await response_pendidikan_s2.json()
+
+            const response_pendidikan_s3 = await fetch(`${api_pendidikan}/find/s3`)
+            const result_pendidikan_s3 = await response_pendidikan_s3.json()
+
+            const response_pendidikan_belum_sekolah = await fetch(`${api_pendidikan}/find/belum_sekolah`)
+            const result_pendidikan_belum_sekolah = await response_pendidikan_belum_sekolah.json()
+
+            const response_pendidikan_d1 = await fetch(`${api_pendidikan}/find/d1`)
+            const result_pendidikan_d1 = await response_pendidikan_d1.json()
+
+            const response_pendidikan_d2 = await fetch(`${api_pendidikan}/find/d2`)
+            const result_pendidikan_d2 = await response_pendidikan_d2.json()
+
+            const response_pendidikan_d3 = await fetch(`${api_pendidikan}/find/d3`)
+            const result_pendidikan_d3 = await response_pendidikan_d3.json()
 
             result.forEach(item => {
                 total_jumlah_penduduk++
                 if (item.id_jenis_kelamins == result_jenis_kelamin[0].id) total_jumlah_perempuan++
+
+                if (item.id_status_hub_dlm_kels == result_status_hub_dlm_kels[0].id) total_jumlah_kk++
+                if (item.id_status_hub_dlm_kels == result_status_hub_dlm_kels[0].id && item.id_jenis_kelamins == result_jenis_kelamin[0].id) total_jumlah_kk_perempuan++
+
+                if (item.id_pekerjaans1 == result_pekerjaan_pns[0].id) total_pns++
+                if (item.id_pekerjaans1 == result_pekerjaan_karyawan_honorer[0].id) total_karyawan_honorer++
+                if (item.id_pekerjaans1 == result_pekerjaan_petani[0].id) total_petani++
+                if (item.id_pekerjaans1 == result_pekerjaan_peternak[0].id) total_peternak++
+                if (item.id_pekerjaans1 == result_pekerjaan_pedagang[0].id) total_pedagang++
+                if (item.id_pekerjaans1 == result_pekerjaan_nelayan[0].id) total_nelayan++
+                if (item.id_pekerjaans1 == result_pekerjaan_teknisi[0].id) total_teknisi++
+                if (item.id_pekerjaans1 == result_pekerjaan_tukang[0].id) total_tukang++
+                if (item.id_pekerjaans1 == result_pekerjaan_kosong[0].id) total_kosong++
+                if (item.id_pekerjaans1 == result_pekerjaan_ibu_rumah_tangga[0].id) total_ibu_rumah_tangga++
+                if (item.id_pekerjaans1 == result_pekerjaan_pelajar[0].id) total_pelajar++
+                if (item.id_pekerjaans1 == result_pekerjaan_pekerja_lepas[0].id) total_pekerja_lepas++
+                if (item.id_pekerjaans1 == result_pekerjaan_karyawan_swasta[0].id) total_karyawan_swasta++
+
+                if (item.id_pendidikans == result_pendidikan_sdtt[0].id) total_sdtt++
+                if (item.id_pendidikans == result_pendidikan_tk[0].id) total_tk++
+                if (item.id_pendidikans == result_pendidikan_sd[0].id) total_sd++
+                if (item.id_pendidikans == result_pendidikan_smp[0].id) total_smp++
+                if (item.id_pendidikans == result_pendidikan_sma[0].id) total_sma++
+                if (item.id_pendidikans == result_pendidikan_s1[0].id) total_s1++
+                if (item.id_pendidikans == result_pendidikan_s2[0].id) total_s2++
+                if (item.id_pendidikans == result_pendidikan_s3[0].id) total_s3++
+                if (item.id_pendidikans == result_pendidikan_belum_sekolah[0].id) total_belum_sekolah++
+                if (item.id_pendidikans == result_pendidikan_d1[0].id) total_d1++
+                if (item.id_pendidikans == result_pendidikan_d2[0].id) total_d2++
+                if (item.id_pendidikans == result_pendidikan_d3[0].id) total_d3++
 
                 const date1 = new Date(item.tanggal_lahir)
                 const date2 = new Date()
@@ -359,6 +701,7 @@
                 if (age > 65) total_lebih_dari_65++
             });
             total_jumlah_laki_laki = total_jumlah_penduduk - total_jumlah_perempuan
+            total_jumlah_kk_laki_laki = total_jumlah_kk - total_jumlah_kk_perempuan
 
             // masukkan ke element
             jumlah_penduduk.innerHTML = total_jumlah_penduduk + ' orang'
@@ -372,6 +715,36 @@
             umur_40_sd_65.innerHTML = total_40_sd_65 + ' orang'
             umur_lebih_dari_65.innerHTML = total_lebih_dari_65 + ' orang'
 
+            jumlah_kk.innerHTML = total_jumlah_kk + ' orang'
+            jumlah_kk_laki_laki.innerHTML = total_jumlah_kk_laki_laki + ' orang'
+            jumlah_kk_perempuan.innerHTML = total_jumlah_kk_perempuan + ' orang'
+
+            pns.innerHTML = total_pns + ' orang'
+            karyawan_honorer.innerHTML = total_karyawan_honorer + ' orang'
+            petani.innerHTML = total_petani + ' orang'
+            peternak.innerHTML = total_peternak + ' orang'
+            pedagang.innerHTML = total_pedagang + ' orang'
+            nelayan.innerHTML = total_nelayan + ' orang'
+            teknisi.innerHTML = total_teknisi + ' orang'
+            tukang.innerHTML = total_tukang + ' orang'
+            kosong.innerHTML = total_kosong + ' orang'
+            ibu_rumah_tangga.innerHTML = total_ibu_rumah_tangga + ' orang'
+            pelajar.innerHTML = total_pelajar + ' orang'
+            pekerja_lepas.innerHTML = total_pekerja_lepas + ' orang'
+            karyawan_swasta.innerHTML = total_karyawan_swasta + ' orang'
+            sdtt.innerHTML = total_sdtt + ' orang'
+            tk.innerHTML = total_tk + ' orang'
+            sd.innerHTML = total_sd + ' orang'
+            smp.innerHTML = total_smp + ' orang'
+            sma.innerHTML = total_sma + ' orang'
+            s1.innerHTML = total_s1 + ' orang'
+            s2.innerHTML = total_s2 + ' orang'
+            s3.innerHTML = total_s3 + ' orang'
+            belum_sekolah.innerHTML = total_belum_sekolah + ' orang'
+            d1.innerHTML = total_d1 + ' orang'
+            d2.innerHTML = total_d2 + ' orang'
+            d3.innerHTML = total_d3 + ' orang'
+
         } catch (error) {
             console.error("Error:", error)
         }
@@ -383,11 +756,7 @@
 
     const generate_isi_option_select_pekerjaan1 = async () => {
         try {
-            const response = await fetch(`${api_pekerjaan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_pekerjaan}/find/*`)
             const result = await response.json()
 
             let all_option_select_pekerjaan1 = ``
@@ -407,11 +776,7 @@
 
     const generate_isi_option_select_pekerjaan2 = async () => {
         try {
-            const response = await fetch(`${api_pekerjaan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_pekerjaan}/find/*`)
             const result = await response.json()
 
             let all_option_select_pekerjaan2 = ``
@@ -431,11 +796,7 @@
 
     const generate_isi_option_select_pekerjaan3 = async () => {
         try {
-            const response = await fetch(`${api_pekerjaan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_pekerjaan}/find/*`)
             const result = await response.json()
 
             let all_option_select_pekerjaan3 = ``
@@ -455,11 +816,7 @@
 
     const generate_isi_option_select_jenis_kelamin = async () => {
         try {
-            const response = await fetch(`${api_jenis_kelamin}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_jenis_kelamin}/find/*`)
             const result = await response.json()
 
             let all_option_select_jenis_kelamin = ``
@@ -479,11 +836,7 @@
 
     const generate_isi_option_select_kewarganegaraan = async () => {
         try {
-            const response = await fetch(`${api_kewarganegaraan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_kewarganegaraan}/find/*`)
             const result = await response.json()
 
             let all_option_select_kewarganegaraan = ``
@@ -503,11 +856,7 @@
 
     const generate_isi_option_select_status_hub_dlm_kel = async () => {
         try {
-            const response = await fetch(`${api_status_hub_dlm_kel}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_status_hub_dlm_kel}/find/*`)
             const result = await response.json()
 
             let all_option_select_status_hub_dlm_kel = ``
@@ -527,11 +876,7 @@
 
     const generate_isi_option_select_pendidikan = async () => {
         try {
-            const response = await fetch(`${api_pendidikan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_pendidikan}/find/*`)
             const result = await response.json()
 
             let all_option_select_pendidikan = ``
@@ -551,11 +896,7 @@
 
     const generate_isi_option_select_golongan_darah = async () => {
         try {
-            const response = await fetch(`${api_golongan_darah}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_golongan_darah}/find/*`)
             const result = await response.json()
 
             let all_option_select_golongan_darah = ``
@@ -575,11 +916,7 @@
 
     const generate_isi_option_select_agama = async () => {
         try {
-            const response = await fetch(`${api_agama}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_agama}/find/*`)
             const result = await response.json()
 
             let all_option_select_agama = ``
@@ -798,67 +1135,40 @@
                 })
                 const result_data_nkk = await response_data_nkk.json()
                 data_nkk.innerHTML = `<option value="${result_data_nkk.id}|${result_data_nkk.id_provinsis}|${result_data_nkk.id_kabupatens}|${result_data_nkk.id_kecamatans}|${result_data_nkk.id_desas}">${result_data_nkk.nkk}</option>`
-                const response_agama = await fetch(`${api_agama}/${result.id_agamas}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_agama = await fetch(`${api_agama}/${result.id_agamas}`)
                 const result_agama = await response_agama.json()
                 agama.innerHTML = `<option value="${result_agama.id}">${result_agama.agama}</option>`
-                const response_golongan_darah = await fetch(`${api_golongan_darah}/${result.id_golongan_darahs}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_golongan_darah = await fetch(`${api_golongan_darah}/${result.id_golongan_darahs}`)
                 const result_golongan_darah = await response_golongan_darah.json()
                 golongan_darah.innerHTML = `<option value="${result_golongan_darah.id}">${result_golongan_darah.golongan_darah}</option>`
-                const response_pendidikan = await fetch(`${api_pendidikan}/${result.id_pendidikans}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_pendidikan = await fetch(`${api_pendidikan}/${result.id_pendidikans}`)
                 const result_pendidikan = await response_pendidikan.json()
                 pendidikan.innerHTML = `<option value="${result_pendidikan.id}">${result_pendidikan.pendidikan}</option>`
-                const response_status_hub_dlm_kel = await fetch(`${api_status_hub_dlm_kel}/${result.id_status_hub_dlm_kels}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_status_hub_dlm_kel = await fetch(`${api_status_hub_dlm_kel}/${result.id_status_hub_dlm_kels}`)
                 const result_status_hub_dlm_kel = await response_status_hub_dlm_kel.json()
                 status_hub_dlm_kel.innerHTML = `<option value="${result_status_hub_dlm_kel.id}">${result_status_hub_dlm_kel.status_hub_dlm_kel}</option>`
-                const response_kewarganegaraan = await fetch(`${api_kewarganegaraan}/${result.id_kewarganegaraans}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_kewarganegaraan = await fetch(`${api_kewarganegaraan}/${result.id_kewarganegaraans}`)
                 const result_kewarganegaraan = await response_kewarganegaraan.json()
                 kewarganegaraan.innerHTML = `<option value="${result_kewarganegaraan.id}">${result_kewarganegaraan.kewarganegaraan}</option>`
-                const response_jenis_kelamin = await fetch(`${api_jenis_kelamin}/${result.id_jenis_kelamins}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_jenis_kelamin = await fetch(`${api_jenis_kelamin}/${result.id_jenis_kelamins}`)
                 const result_jenis_kelamin = await response_jenis_kelamin.json()
                 jenis_kelamin.innerHTML = `<option value="${result_jenis_kelamin.id}">${result_jenis_kelamin.jenis_kelamin}</option>`
-                const response_pekerjaan1 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans1}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_pekerjaan1 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans1}`)
                 const result_pekerjaan1 = await response_pekerjaan1.json()
                 pekerjaan1.innerHTML = `<option value="${result_pekerjaan1.id}">${result_pekerjaan1.pekerjaan}</option>`
-                const response_pekerjaan2 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans2}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_pekerjaan2 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans2}`)
                 const result_pekerjaan2 = await response_pekerjaan2.json()
                 pekerjaan2.innerHTML = `<option value="${result_pekerjaan2.id}">${result_pekerjaan2.pekerjaan}</option>`
-                const response_pekerjaan3 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans3}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_pekerjaan3 = await fetch(`${api_pekerjaan}/${result.id_pekerjaans3}`)
                 const result_pekerjaan3 = await response_pekerjaan3.json()
                 pekerjaan3.innerHTML = `<option value="${result_pekerjaan3.id}">${result_pekerjaan3.pekerjaan}</option>`
 

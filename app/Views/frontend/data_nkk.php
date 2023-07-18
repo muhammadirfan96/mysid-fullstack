@@ -146,11 +146,7 @@
 
     const generate_isi_option_select_rt_rw = async () => {
         try {
-            const response = await fetch(`${api_rt_rw}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_rt_rw}/find/*`)
             const result = await response.json()
 
             let all_option_select_rt_rw = ``
@@ -266,11 +262,7 @@
 
     const generate_isi_option_select_sumber_penghasilan_utama = async () => {
         try {
-            const response = await fetch(`${api_sumber_penghasilan_utama}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_sumber_penghasilan_utama}/find/*`)
             const result = await response.json()
 
             let all_option_select_sumber_penghasilan_utama = ``
@@ -290,11 +282,7 @@
 
     const generate_isi_option_select_tingkat_kesejahteraan = async () => {
         try {
-            const response = await fetch(`${api_tingkat_kesejahteraan}/find/*`, {
-                headers: {
-                    Authorization: `Bearer ${getCookie('token')}`
-                }
-            })
+            const response = await fetch(`${api_tingkat_kesejahteraan}/find/*`)
             const result = await response.json()
 
             let all_option_select_tingkat_kesejahteraan = ``
@@ -479,30 +467,19 @@
                 const result_desa = await response_desa.json()
                 desa.innerHTML = `<option value="${result_desa.id}">${result_desa.desa}</option>`
                 btn_show_desa.setAttribute('disabled', '')
-                const response_rt_rw = await fetch(`${api_rt_rw}/${result.id_rt_rws}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+
+                const response_rt_rw = await fetch(`${api_rt_rw}/${result.id_rt_rws}`)
                 const result_rt_rw = await response_rt_rw.json()
                 rt_rw.innerHTML = `<option value="${result_rt_rw.id}">${result_rt_rw.rt_rw}</option>`
 
                 nkk.value = result.nkk
                 alamat_lengkap.value = result.alamat_lengkap
 
-                const response_tingkat_kesejahteraan = await fetch(`${api_tingkat_kesejahteraan}/${result.id_tingkat_kesejahteraans}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+                const response_tingkat_kesejahteraan = await fetch(`${api_tingkat_kesejahteraan}/${result.id_tingkat_kesejahteraans}`)
                 const result_tingkat_kesejahteraan = await response_tingkat_kesejahteraan.json()
                 tingkat_kesejahteraan.innerHTML = `<option value="${result_tingkat_kesejahteraan.id}">${result_tingkat_kesejahteraan.tingkat_kesejahteraan}</option>`
 
-                const response_sumber_penghasilan_utama = await fetch(`${api_sumber_penghasilan_utama}/${result.id_sumber_penghasilan_utamas}`, {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                })
+                const response_sumber_penghasilan_utama = await fetch(`${api_sumber_penghasilan_utama}/${result.id_sumber_penghasilan_utamas}`)
                 const result_sumber_penghasilan_utama = await response_sumber_penghasilan_utama.json()
                 sumber_penghasilan_utama.innerHTML = `<option value="${result_sumber_penghasilan_utama.id}">${result_sumber_penghasilan_utama.sumber_penghasilan_utama}</option>`
 

@@ -179,22 +179,6 @@ class Beritas extends ResourceController
         } else {
             $where = null;
         }
-        // $currUser = $this->user->currLogin();
-        // if (!$currUser) {
-        //     if (str_contains($key, '@')) {
-        //         $keys = explode("@", $key);
-        //         if (str_contains($key, 'judul')) $where = "judul LIKE '%$keys[1]%' AND active = '1'";
-        //         if (str_contains($key, 'kategori_berita')) {
-        //             $kategori_beritasCrr = $this->db->table('kategori_beritas')
-        //                 ->getWhere("kategori_berita LIKE '%$keys[1]%'")
-        //                 ->getResultArray();
-        //             $kategori_beritaId = $kategori_beritasCrr[0]['id'];
-        //             $where = "id_kategori_beritas = '$kategori_beritaId' AND active = '1'";
-        //         }
-        //     } else {
-        //         $where = "active = '1'";
-        //     }
-        // }
 
         $beritas = $this->db->table('beritas')
             ->orderBy('beritas.id', 'DESC')
