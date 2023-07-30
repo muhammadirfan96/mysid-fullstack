@@ -32,8 +32,8 @@ $menubar = [
     <link rel="stylesheet" href="<?= base_url(); ?>/fonts/andika/stylesheet.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/fonts/ff-din/black/stylesheet.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/bi/font/bootstrap-icons.css">
-    <!-- <link rel="stylesheet" href="<?= base_url(); ?>/css/output.css"> -->
-    <link rel="stylesheet" href="<?= base_url(); ?>/css/build.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/css/output.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>/css/build.css"> -->
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 

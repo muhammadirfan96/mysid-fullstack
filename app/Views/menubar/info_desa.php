@@ -23,12 +23,12 @@
     </div>
 
     <div class="m-2">
-        <div class="mb-4 flex flex-wrap flex-col gap-2 w-full h-36 border-2 border-cyan-700 rounded p-2 overflow-x-scroll">
-            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
+        <div class="mb-4 flex flex-wrap flex-col gap-2 w-full h-60 border-2 border-cyan-700 rounded p-2 overflow-x-scroll">
+            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/liston.jpg'); background-size: cover;">
                 <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Liston, S.S., B.Th.</p>
             </div>
-            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">muhammad izar, ST.</p>
+            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/izar.jpg'); background-size: cover;">
+                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Muhammad Izar, ST.</p>
             </div>
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
                 <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Redi Alexander</p>
@@ -39,7 +39,7 @@
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
                 <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Mei Maria, SM.</p>
             </div>
-            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
+            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/karti.jpg'); background-size: cover;">
                 <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Karti Apriani G., S.Si.</p>
             </div>
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="border border-cyan-700 rounded-md w-full md:w-[47%]">
-                <p class="bg-cyan-700 rounded-t-sm p-2 text-white text-base text-center uppercase font-semibold">Penjelasan dan MISI
+                <p class="bg-cyan-700 rounded-t-sm p-2 text-white text-base text-center uppercase font-semibold">MISI
                 </p>
                 <div class="p-4">
                     <table>

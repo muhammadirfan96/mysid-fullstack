@@ -29,9 +29,6 @@ class DataNkks extends ResourceController
      */
     public function index()
     {
-        // $currUser = $this->user->currLogin();
-        // if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
-
         $data = $this->model->orderBy('id', 'DESC')->findAll();
         return $this->respond($data);
     }
@@ -45,12 +42,6 @@ class DataNkks extends ResourceController
     {
         $data = $this->model->find($id);
         if (!$data) return $this->failNotFound('no data found');
-
-        // $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($data['id_desas']);
-        // if ($currUser['desa'] != 'admin') {
-        //     if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-        // }
 
         return $this->respond($data);
     }
@@ -66,12 +57,6 @@ class DataNkks extends ResourceController
 
         $rules = $this->model->myValidationRules;
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
-
-        // $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($this->request->getVar('id_desas'));
-        // if ($currUser['desa'] != 'admin') {
-        //     if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-        // }
 
         $data = [
             'id_provinsis' => $this->request->getVar('id_provinsis'),
@@ -116,9 +101,7 @@ class DataNkks extends ResourceController
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
-            // if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
             return $this->fail('user not allowed');
         }
 
@@ -153,9 +136,7 @@ class DataNkks extends ResourceController
         if (!$findData) return $this->failNotFound('no data found');
 
         $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
-            // if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
             return $this->fail('user not allowed');
         }
 
@@ -175,6 +156,7 @@ class DataNkks extends ResourceController
     {
         if (str_contains($key, '@')) {
             $keys = explode("@", $key);
+            if (str_contains($key, 'nkk')) $where = "nkk LIKE '%$keys[1]%'";
             if (str_contains($key, 'provinsi')) {
                 $provinsisCrr = $this->db->table('provinsis')
                     ->getWhere("provinsi LIKE '%$keys[1]%'")
@@ -206,16 +188,6 @@ class DataNkks extends ResourceController
         } else {
             $where = null;
         }
-
-        // $currUser = $this->user->currLogin();
-        // if ($currUser['desa'] != 'admin') {
-        //     $currDesa = $currUser['desa'];
-        //     $desasCrr = $this->db->table('desas')
-        //         ->getWhere("desa = '$currDesa'")
-        //         ->getResultArray();
-        //     $desaId = $desasCrr[0]['id'];
-        //     $where = "id_desas = '$desaId'";
-        // }
 
         $data_nkks = $this->db->table('data_nkks')
             ->orderBy('data_nkks.id', 'DESC')

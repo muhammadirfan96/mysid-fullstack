@@ -36,7 +36,7 @@
 
                     <div class="flex">
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="data_penduduk"></select>
-                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_data_penduduk()">show penduduk</button>
+                        <input id="cari_penduduk" class="w-[50%] p-1 mb-2 outline-none border border-l-0 border-cyan-500 rounded-r-md text-sm" type="text" placeholder="cari_penduduk" onkeyup="generate_isi_option_select_data_penduduk()" autocomplete="off">
                     </div>
 
                     <button class="bg-cyan-500 text-lg text-white font-medium py-1 rounded-md w-full" type="submit">submit</button>
@@ -117,6 +117,8 @@
     const per_page = document.querySelector('#per_page')
     const page_list = document.querySelector('#page_list')
     const tbody = document.querySelector('#tbody')
+
+    const cari_penduduk = document.querySelector('#cari_penduduk')
     let crrDesa = ''
 
     const option_select_desa = item => {
@@ -221,7 +223,7 @@
 
     const generate_isi_option_select_data_penduduk = async () => {
         try {
-            const response = await fetch(`${api_data_penduduk}/find/*`, {
+            const response = await fetch(`${api_data_penduduk}/find/${cari_penduduk.value}`, {
                 headers: {
                     Authorization: `Bearer ${getCookie('token')}`
                 }

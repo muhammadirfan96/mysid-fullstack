@@ -29,7 +29,7 @@
 
                     <div class="flex">
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="data_nkk"></select>
-                        <button class="w-[50%] p-1 mb-2 outline-none bg-cyan-100 rounded-r-md" type="button" onclick="generate_isi_option_select_data_nkk()">show nkk</button>
+                        <input id="cari_nkk" class="w-[50%] p-1 mb-2 outline-none border border-l-0 border-cyan-500 rounded-r-md text-sm" type="text" placeholder="cari_nkk" onkeyup="generate_isi_option_select_data_nkk()" autocomplete="off">
                     </div>
 
                     <div class="flex">
@@ -88,6 +88,7 @@
             </div>
         </div>
 
+        <!-- modal resume -->
         <div id="modal_resume" class="fixed top-0 bottom-0 right-0 left-0 bg-slate-900 bg-opacity-50 z-10" style="display: none;">
             <div class="bg-white rounded-md p-4 relative w-[95%] md:w-[70%] lg:w-[60%] my-4 max-h-[95%] mx-auto overflow-auto">
                 <button class="absolute right-1 top-0" onclick="close_modal_resume()" type="button"><i class="bi-x-square-fill text-red-700 rounded-md text-xl"></i></button>
@@ -398,6 +399,8 @@
     const page_list = document.querySelector('#page_list')
     const tbody = document.querySelector('#tbody')
     const img_preview = document.querySelector('#img_preview')
+
+    const cari_nkk = document.querySelector('#cari_nkk')
     let crrDesa = ''
 
     const modal_resume = document.querySelector('#modal_resume')
@@ -935,7 +938,7 @@
 
     const generate_isi_option_select_data_nkk = async () => {
         try {
-            const response = await fetch(`${api_data_nkk}/find/*`, {
+            const response = await fetch(`${api_data_nkk}/find/${cari_nkk.value}`, {
                 headers: {
                     Authorization: `Bearer ${getCookie('token')}`
                 }

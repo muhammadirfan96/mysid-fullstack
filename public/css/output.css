@@ -774,6 +774,10 @@ video {
   height: 100%;
 }
 
+.h-60 {
+  height: 15rem;
+}
+
 .max-h-\[95\%\] {
   max-height: 95%;
 }
@@ -852,6 +856,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[10\%\] {
+  width: 10%;
 }
 
 .origin-left {
