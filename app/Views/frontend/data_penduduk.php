@@ -152,8 +152,12 @@
                                         <td id="umur_5_sd_14" class="text-right">0 orang</td>
                                     </tr>
                                     <tr>
-                                        <td>15 sampai 39 tahun</td>
-                                        <td id="umur_15_sd_39" class="text-right">0 orang</td>
+                                        <td>15 sampai 17 tahun</td>
+                                        <td id="umur_15_sd_17" class="text-right">0 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18 sampai 39 tahun</td>
+                                        <td id="umur_18_sd_39" class="text-right">0 orang</td>
                                     </tr>
                                     <tr>
                                         <td>40 sampai 64 tahun</td>
@@ -411,7 +415,8 @@
     const umur_kurang_dari_1 = document.querySelector('#umur_kurang_dari_1')
     const umur_1_sd_4 = document.querySelector('#umur_1_sd_4')
     const umur_5_sd_14 = document.querySelector('#umur_5_sd_14')
-    const umur_15_sd_39 = document.querySelector('#umur_15_sd_39')
+    const umur_15_sd_17 = document.querySelector('#umur_15_sd_17')
+    const umur_18_sd_39 = document.querySelector('#umur_18_sd_39')
     const umur_40_sd_65 = document.querySelector('#umur_40_sd_65')
     const umur_lebih_dari_65 = document.querySelector('#umur_lebih_dari_65')
     const jumlah_kk = document.querySelector('#jumlah_kk')
@@ -453,7 +458,8 @@
             formData.append('umur_kurang_dari_1', umur_kurang_dari_1.innerHTML)
             formData.append('umur_1_sd_4', umur_1_sd_4.innerHTML)
             formData.append('umur_5_sd_14', umur_5_sd_14.innerHTML)
-            formData.append('umur_15_sd_39', umur_15_sd_39.innerHTML)
+            formData.append('umur_15_sd_17', umur_15_sd_17.innerHTML)
+            formData.append('umur_18_sd_39', umur_18_sd_39.innerHTML)
             formData.append('umur_40_sd_65', umur_40_sd_65.innerHTML)
             formData.append('umur_lebih_dari_65', umur_lebih_dari_65.innerHTML)
             formData.append('jumlah_kk', jumlah_kk.innerHTML)
@@ -531,7 +537,8 @@
             let total_kurang_dari_1 = 0
             let total_1_sd_4 = 0
             let total_5_sd_14 = 0
-            let total_15_sd_39 = 0
+            let total_15_sd_17 = 0
+            let total_18_sd_39 = 0
             let total_40_sd_65 = 0
             let total_lebih_dari_65 = 0
 
@@ -699,7 +706,8 @@
                 if (age <= 0) total_kurang_dari_1++
                 if (age >= 1 && age <= 4) total_1_sd_4++
                 if (age >= 5 && age <= 14) total_5_sd_14++
-                if (age >= 15 && age <= 39) total_15_sd_39++
+                if (age >= 15 && age <= 17) total_15_sd_17++
+                if (age >= 18 && age <= 39) total_18_sd_39++
                 if (age >= 40 && age <= 65) total_40_sd_65++
                 if (age > 65) total_lebih_dari_65++
             });
@@ -714,7 +722,8 @@
             umur_kurang_dari_1.innerHTML = total_kurang_dari_1 + ' orang'
             umur_1_sd_4.innerHTML = total_1_sd_4 + ' orang'
             umur_5_sd_14.innerHTML = total_5_sd_14 + ' orang'
-            umur_15_sd_39.innerHTML = total_15_sd_39 + ' orang'
+            umur_15_sd_17.innerHTML = total_15_sd_17 + ' orang'
+            umur_18_sd_39.innerHTML = total_18_sd_39 + ' orang'
             umur_40_sd_65.innerHTML = total_40_sd_65 + ' orang'
             umur_lebih_dari_65.innerHTML = total_lebih_dari_65 + ' orang'
 

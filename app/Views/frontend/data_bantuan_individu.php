@@ -145,8 +145,8 @@
     const cari_penerima = document.querySelector('#cari_penerima')
     let crrDesa = ''
 
-    const option_select_penerima = item => {
-        return `<option value="${item.id}">${item.nama_lengkap}</option>`
+    const option_select_penerima = (item_penerima, boolBantuan) => {
+        return `<option class="${boolBantuan.blt == true ? 'text-red-700' : ''} ${boolBantuan.pkh == true ? 'text-red-700' : ''} ${boolBantuan.bpnt == true ? 'text-red-700' : ''}" value="${item_penerima.id}">${item_penerima.nama_lengkap} ${boolBantuan.blt == true ? '(blt)' : ''} ${boolBantuan.pkh == true ? '(pkh)' : ''} ${boolBantuan.bpnt == true ? '(bpnt)' : ''}</option>`
     }
 
     const generate_isi_option_select_penerima = async () => {
@@ -154,14 +154,47 @@
         try {
             let all_option_select_penerima = ``
 
-            const response_work = await fetch(`${api_data_penduduk}/find/${cari_penerima.value}`, {
+            const response_penerima = await fetch(`${api_data_penduduk}/find/${cari_penerima.value}`, {
                 headers: {
                     Authorization: `Bearer ${getCookie('token')}`
                 }
             })
-            const result_work = await response_work.json()
-            result_work.forEach(item => {
-                all_option_select_penerima += option_select_penerima(item)
+            const result_penerima = await response_penerima.json()
+
+            const response = await fetch(`${api}/find/*`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            const response_bantuan_individu = await fetch(`${api_bantuan_individu}/find/*`)
+            const result_bantuan_individu = await response_bantuan_individu.json()
+
+            result_penerima.forEach(item_penerima => {
+                let boolBantuan = {
+                    blt: false,
+                    pkh: false,
+                    bpnt: false,
+                }
+
+                result.forEach(item => {
+                    if (item_penerima.id == item.id_data_penduduks) {
+                        result_bantuan_individu.forEach(item_bantuan_individu => {
+                            if (item_bantuan_individu.bantuan_individu == 'BLT') {
+                                if (item_bantuan_individu.id == item.id_bantuan_individus) boolBantuan.blt = true
+                            }
+                            if (item_bantuan_individu.bantuan_individu == 'BPNT') {
+                                if (item_bantuan_individu.id == item.id_bantuan_individus) boolBantuan.bpnt = true
+                            }
+                            if (item_bantuan_individu.bantuan_individu == 'PKH') {
+                                if (item_bantuan_individu.id == item.id_bantuan_individus) boolBantuan.pkh = true
+                            }
+                        })
+                    }
+                })
+
+                all_option_select_penerima += option_select_penerima(item_penerima, boolBantuan)
             });
 
             penerima.innerHTML = all_option_select_penerima

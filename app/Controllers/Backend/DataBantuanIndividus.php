@@ -28,9 +28,6 @@ class DataBantuanIndividus extends ResourceController
      */
     public function index()
     {
-        // $currUser = $this->user->currLogin();
-        // if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
-
         $data = $this->model->orderBy('id', 'DESC')->findAll();
         return $this->respond($data);
     }
@@ -44,12 +41,6 @@ class DataBantuanIndividus extends ResourceController
     {
         $data = $this->model->find($id);
         if (!$data) return $this->failNotFound('no data found');
-
-        // $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($data['id_desas']);
-        // if ($currUser['desa'] != 'admin') {
-        //     if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-        // }
 
         return $this->respond($data);
     }
@@ -65,12 +56,6 @@ class DataBantuanIndividus extends ResourceController
 
         $rules = $this->model->myValidationRules;
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
-
-        // $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($this->request->getVar('id_desas'));
-        // if ($currUser['desa'] != 'admin') {
-        //     if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
-        // }
 
         $foto = $this->request->getFile('foto');
         $namaFile = $foto->getRandomName();
@@ -123,9 +108,7 @@ class DataBantuanIndividus extends ResourceController
         if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
 
         $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
-            // if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
             return $this->fail('user not allowed');
         }
 
@@ -168,9 +151,7 @@ class DataBantuanIndividus extends ResourceController
         if (!$findData) return $this->failNotFound('no data found');
 
         $currUser = $this->user->currLogin();
-        // $currDesa = $this->desa->currDesa($findData['id_desas']);
         if ($currUser['desa'] != 'admin') {
-            // if ($currUser['desa'] != $currDesa['desa']) return $this->fail('desa not allowed');
             return $this->fail('user not allowed');
         }
 
@@ -222,19 +203,23 @@ class DataBantuanIndividus extends ResourceController
                 $desaId = $desasCrr[0]['id'];
                 $where = "id_desas = '$desaId'";
             }
+            if (str_contains($key, 'bantuan_individu')) {
+                $bantuan_individusCrr = $this->db->table('bantuan_individus')
+                    ->getWhere("bantuan_individu LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $bantuan_individuId = $bantuan_individusCrr[0]['id'];
+                $where = "id_bantuan_individus = '$bantuan_individuId'";
+            }
+            if (str_contains($key, 'nama_lengkap')) {
+                $data_penduduksCrr = $this->db->table('data_penduduks')
+                    ->getWhere("nama_lengkap LIKE '%$keys[1]%'")
+                    ->getResultArray();
+                $data_pendudukId = $data_penduduksCrr[0]['id'];
+                $where = "id_data_penduduks = '$data_pendudukId'";
+            }
         } else {
             $where = null;
         }
-
-        // $currUser = $this->user->currLogin();
-        // if ($currUser['desa'] != 'admin') {
-        //     $currDesa = $currUser['desa'];
-        //     $desasCrr = $this->db->table('desas')
-        //         ->getWhere("desa = '$currDesa'")
-        //         ->getResultArray();
-        //     $desaId = $desasCrr[0]['id'];
-        //     $where = "id_desas = '$desaId'";
-        // }
 
         $data_bantuan_individus = $this->db->table('data_bantuan_individus')
             ->orderBy('data_bantuan_individus.id', 'DESC')

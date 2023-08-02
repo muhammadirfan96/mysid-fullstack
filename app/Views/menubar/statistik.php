@@ -67,8 +67,12 @@
                                     <td id="umur_5_sd_14" class="text-right">0 orang</td>
                                 </tr>
                                 <tr>
-                                    <td>15 sampai 39 tahun</td>
-                                    <td id="umur_15_sd_39" class="text-right">0 orang</td>
+                                    <td>15 sampai 17 tahun</td>
+                                    <td id="umur_15_sd_17" class="text-right">0 orang</td>
+                                </tr>
+                                <tr>
+                                    <td>18 sampai 39 tahun</td>
+                                    <td id="umur_18_sd_39" class="text-right">0 orang</td>
                                 </tr>
                                 <tr>
                                     <td>40 sampai 64 tahun</td>
@@ -282,7 +286,8 @@
     const umur_kurang_dari_1 = document.querySelector('#umur_kurang_dari_1')
     const umur_1_sd_4 = document.querySelector('#umur_1_sd_4')
     const umur_5_sd_14 = document.querySelector('#umur_5_sd_14')
-    const umur_15_sd_39 = document.querySelector('#umur_15_sd_39')
+    const umur_15_sd_17 = document.querySelector('#umur_15_sd_17')
+    const umur_18_sd_39 = document.querySelector('#umur_18_sd_39')
     const umur_40_sd_65 = document.querySelector('#umur_40_sd_65')
     const umur_lebih_dari_65 = document.querySelector('#umur_lebih_dari_65')
 
@@ -402,7 +407,8 @@
             umur_kurang_dari_1.innerHTML = result.umur_kurang_dari_1
             umur_1_sd_4.innerHTML = result.umur_1_sd_4
             umur_5_sd_14.innerHTML = result.umur_5_sd_14
-            umur_15_sd_39.innerHTML = result.umur_15_sd_39
+            umur_15_sd_17.innerHTML = result.umur_15_sd_17
+            umur_18_sd_39.innerHTML = result.umur_18_sd_39
             umur_40_sd_65.innerHTML = result.umur_40_sd_65
             umur_lebih_dari_65.innerHTML = result.umur_lebih_dari_65
 

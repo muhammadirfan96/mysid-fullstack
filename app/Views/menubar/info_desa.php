@@ -25,28 +25,52 @@
     <div class="m-2">
         <div class="mb-4 flex flex-wrap flex-col gap-2 w-full h-60 border-2 border-cyan-700 rounded p-2 overflow-x-scroll">
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/liston.jpg'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Liston, S.S., B.Th.</p>
+                <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
+                    <p>KEPALA DESA</p>
+                    <p>Liston, S.S., B.Th.</p>
+                </div>
             </div>
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/izar.jpg'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Muhammad Izar, ST.</p>
+                <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
+                    <p>SEKRETARIS DESA</p>
+                    <p>Muhammad Izar, S.T.</p>
+                </div>
+            </div>
+            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/redi.jpg'); background-size: cover;">
+                <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
+                    <p>KASI PEMERINTAHAN</p>
+                    <p>Redi Alexander</p>
+                </div>
             </div>
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Redi Alexander</p>
+                <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
+                    <p>KASI KESEJAHTERAAN & PELAYANAN</p>
+                    <p>Hernandus Dedi</p>
+                </div>
             </div>
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Hernandus Dedi</p>
-            </div>
-            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Mei Maria, SM.</p>
+                <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
+                    <p>KAUR KEUANGAN</p>
+                    <p>Mei Maria, S.M.</p>
+                </div>
             </div>
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/karti.jpg'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Karti Apriani G., S.Si.</p>
+                <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
+                    <p>KAUR UMUM & PERENCANAAN</p>
+                    <p>Karti Apriani G., S.Si.</p>
+                </div>
             </div>
-            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Teodorus Umar</p>
+            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/umar.jpg'); background-size: cover;">
+                <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
+                    <p>KEPALA DUSUN I</p>
+                    <p>Teodorus Umar</p>
+                </div>
             </div>
-            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
-                <p class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">Silfister Dona</p>
+            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/dona.jpg'); background-size: cover;">
+                <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
+                    <p>KEPALA DUSUN II</p>
+                    <p>Silfister Dona</p>
+                </div>
             </div>
         </div>
     </div>
