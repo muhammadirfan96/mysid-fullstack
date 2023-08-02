@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>auth</title>
+    <meta property="og:title" content="MySID | Sistem Informasi Desa  (Latompa)" />
+    <meta property="og:description" content="auth" />
+    <meta property="og:image" content="<?= base_url(); ?>img/frontend/favicon.ico" />
+    <link rel="shortcut icon" href="<?= base_url(); ?>/img/frontend/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?= base_url(); ?>/fonts/andika/stylesheet.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/bi/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/css/output.css">

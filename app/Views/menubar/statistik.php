@@ -67,11 +67,11 @@
                                     <td id="umur_5_sd_14" class="text-right">0 orang</td>
                                 </tr>
                                 <tr>
-                                    <td>15 sampai 17 tahun</td>
+                                    <td>15 sampai 16 tahun</td>
                                     <td id="umur_15_sd_17" class="text-right">0 orang</td>
                                 </tr>
                                 <tr>
-                                    <td>18 sampai 39 tahun</td>
+                                    <td>17 sampai 39 tahun</td>
                                     <td id="umur_18_sd_39" class="text-right">0 orang</td>
                                 </tr>
                                 <tr>

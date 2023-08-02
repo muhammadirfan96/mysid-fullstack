@@ -42,7 +42,7 @@
                     <p>Redi Alexander</p>
                 </div>
             </div>
-            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/help.png'); background-size: cover;">
+            <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/dedi.jpg'); background-size: cover;">
                 <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
                     <p>KASI KESEJAHTERAAN & PELAYANAN</p>
                     <p>Hernandus Dedi</p>

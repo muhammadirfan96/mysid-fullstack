@@ -28,13 +28,14 @@ $menubar = [
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title; ?></title>
+    <meta property="og:title" content="MySID | Sistem Informasi Desa  (Latompa)" />
+    <meta property="og:description" content="<?= $title; ?>" />
+    <meta property="og:image" content="<?= base_url(); ?>img/frontend/favicon.ico" />
+    <link rel="shortcut icon" href="<?= base_url(); ?>/img/frontend/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?= base_url(); ?>/fonts/andika/stylesheet.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/fonts/ff-din/black/stylesheet.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/bi/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/css/output.css">
-    <!-- <link rel="stylesheet" href="<?= base_url(); ?>/css/build.css"> -->
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 
 <body class="mx-2 md:mx-1 font-andika">

@@ -9,7 +9,7 @@ class Home extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'MySID | Sistem Informasi Desa  (Latompa)'
+            'title' => 'home'
         ];
         return view('menubar/home', $data);
     }

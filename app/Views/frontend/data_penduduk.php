@@ -152,11 +152,11 @@
                                         <td id="umur_5_sd_14" class="text-right">0 orang</td>
                                     </tr>
                                     <tr>
-                                        <td>15 sampai 17 tahun</td>
+                                        <td>15 sampai 16 tahun</td>
                                         <td id="umur_15_sd_17" class="text-right">0 orang</td>
                                     </tr>
                                     <tr>
-                                        <td>18 sampai 39 tahun</td>
+                                        <td>17 sampai 39 tahun</td>
                                         <td id="umur_18_sd_39" class="text-right">0 orang</td>
                                     </tr>
                                     <tr>
@@ -706,8 +706,8 @@
                 if (age <= 0) total_kurang_dari_1++
                 if (age >= 1 && age <= 4) total_1_sd_4++
                 if (age >= 5 && age <= 14) total_5_sd_14++
-                if (age >= 15 && age <= 17) total_15_sd_17++
-                if (age >= 18 && age <= 39) total_18_sd_39++
+                if (age >= 15 && age <= 16) total_15_sd_17++
+                if (age >= 17 && age <= 39) total_18_sd_39++
                 if (age >= 40 && age <= 65) total_40_sd_65++
                 if (age > 65) total_lebih_dari_65++
             });
