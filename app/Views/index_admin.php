@@ -181,6 +181,9 @@ $menubar = [
     <!-- sweet alert -->
     <script src="<?= base_url(); ?>/js/sweetalert/script.js"></script>
     <script src="<?= base_url(); ?>/js/sweetalert/alert.js"></script>
+
+    <!-- sheet js -->
+    <script src="<?= base_url(); ?>/js/sheetjs/sheetjs.js"></script>
 </body>
 
 </html>

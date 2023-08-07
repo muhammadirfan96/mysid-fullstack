@@ -2,7 +2,12 @@
 <?= $this->section('page'); ?>
 
 <div>
-    <div class="bg-cyan-200 rounded-md m-2 p-2">
+    <div class="bg-cyan-200 rounded-md m-2 p-2 relative">
+        <div class="absolute left-0">
+            <button onclick="export_data_to_xls()" class="text-2xl ml-2 text-cyan-700" type="button">
+                <i class="bi-download"></i>
+            </button>
+        </div>
         <p class="text-center text-lg font-semibold uppercase"><?= $title; ?></p>
     </div>
 
@@ -120,6 +125,26 @@
 
     const cari_penduduk = document.querySelector('#cari_penduduk')
     let crrDesa = ''
+
+    const export_data_to_xls = async () => {
+        try {
+            const response = await fetch(`${api}/find/${key_pencarian.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            const worksheet = XLSX.utils.json_to_sheet(result);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "sheet1");
+            XLSX.writeFile(workbook, "data_disabilitas.xlsx", {
+                compression: true
+            });
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
 
     const option_select_desa = item => {
         return `<option value="${item.id}">${item.desa}</option>`
@@ -296,12 +321,10 @@
                 }
             })
             const result = await response.json()
-
             let all_tr_tbody = ``
             result.forEach(item => {
                 all_tr_tbody += tr_tbody(item)
             });
-
             tbody.innerHTML = all_tr_tbody
         } catch (error) {
             console.error("Error:", error)

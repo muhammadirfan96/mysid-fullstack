@@ -3,6 +3,11 @@
 
 <div>
     <div class="bg-cyan-200 rounded-md m-2 p-2 relative">
+        <div class="absolute left-0">
+            <button onclick="export_data_to_xls()" class="text-2xl ml-2 text-cyan-700" type="button">
+                <i class="bi-download"></i>
+            </button>
+        </div>
         <div class="absolute right-0">
             <button onclick="open_modal_resume()" class="text-2xl mr-2 text-cyan-700" type="button">
                 <i class="bi-menu-button-wide-fill"></i>
@@ -448,6 +453,26 @@
     const d1 = document.querySelector('#d1')
     const d2 = document.querySelector('#d2')
     const d3 = document.querySelector('#d3')
+
+    const export_data_to_xls = async () => {
+        try {
+            const response = await fetch(`${api}/find/${key_pencarian.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            const worksheet = XLSX.utils.json_to_sheet(result);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "sheet1");
+            XLSX.writeFile(workbook, "data_penduduk.xlsx", {
+                compression: true
+            });
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
 
     const save_resume = async () => {
         try {
