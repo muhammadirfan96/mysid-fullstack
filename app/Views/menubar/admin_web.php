@@ -7,57 +7,34 @@ $menuadminweb = [
     'data_bantuan_individu' => [
         'link' => '/databantuanindividu',
         'bg_src' => "url('img/frontend/help.png')",
-        'in_user' => 1,
     ],
     'data_disabilitas' => [
         'link' => '/datadisabilitas',
         'bg_src' => "url('img/frontend/help.png')",
-        'in_user' => 1,
     ],
     'data_nkk' => [
         'link' => '/datankk',
         'bg_src' => "url('img/frontend/help.png')",
-        'in_user' => 1,
     ],
     'data_penduduk' => [
         'link' => '/datapenduduk',
         'bg_src' => "url('img/frontend/help.png')",
-        'in_user' => 1,
     ],
     'data_wilayah' => [
         'link' => '/datawilayah',
         'bg_src' => "url('img/frontend/help.png')",
-        'in_user' => 1,
     ],
-    // 'desa' => [
-    //     'link' => '/desa',
-    //     'bg_src' => "url('img/frontend/help.png')",
-    //     'in_user' => 1,
-    // ],
-    // 'kecamatan' => [
-    //     'link' => '/kecamatan',
-    //     'bg_src' => "url('img/frontend/help.png')",
-    //     'in_user' => 1,
-    // ],
-    // 'kabupaten' => [
-    //     'link' => '/kabupaten',
-    //     'bg_src' => "url('img/frontend/help.png')",
-    //     'in_user' => 1,
-    // ],
-    // 'provinsi' => [
-    //     'link' => '/provinsi',
-    //     'bg_src' => "url('img/frontend/help.png')",
-    //     'in_user' => 1,
-    // ],
     'register' => [
         'link' => '/register',
         'bg_src' => "url('img/frontend/help.png')",
-        'in_user' => 1,
     ],
     'berita' => [
         'link' => '/berita',
         'bg_src' => "url('img/frontend/help.png')",
-        'in_user' => 1,
+    ],
+    'mpdf' => [
+        'link' => '/mpdf',
+        'bg_src' => "url('img/frontend/help.png')",
     ],
 ];
 

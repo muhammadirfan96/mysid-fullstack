@@ -136,6 +136,16 @@ $routes->get('infodesa', 'Menubar\Infodesa::index');
 $routes->get('statistik', 'Menubar\Statistik::index');
 $routes->get('adminweb', 'Menubar\Adminweb::index');
 
+// mPDF
+$routes->get('mpdf', 'Frontend\Mpdf::index');
+
+
+// print
+$routes->post('suket_kenal_lahir', 'Mpdf\Mysid::suket_kenal_lahir');
+$routes->post('suket_tidak_mampu', 'Mpdf\Mysid::suket_tidak_mampu');
+$routes->post('suket_domisili', 'Mpdf\Mysid::suket_domisili');
+$routes->post('suket_usaha', 'Mpdf\Mysid::suket_usaha');
+
 
 /*
  * --------------------------------------------------------------------
