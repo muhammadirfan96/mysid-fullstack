@@ -22,11 +22,11 @@
         </div>
     </div>
     <div style="text-align: center; margin-bottom: 14px;">
-        <p style="margin: 0; text-decoration: underline;">SURAT KETERANGAN DOMISILI MASJID</p>
+        <p style="margin: 0; text-decoration: underline;">SURAT KETERANGAN</p>
         <p style="margin: 0;">Nomor : <?= ' ' . $nomor_surat ?></p>
     </div>
     <div style="margin-bottom: 14px;">
-        <p style="margin: 0; text-indent: 40px;">Kepala Desa Latompa Kecamatan Maligano Kabupaten Muna, dengan ini menyatakan bahwa :</p>
+        <p style="margin: 0; text-indent: 40px;">Yang bertanda tangan di bawah ini Kepala Desa Latompa Kecamatan Maligano Kabupaten Muna menerangkan dengan sesungguhnya bahwa:</p>
     </div>
     <div style="margin-bottom: 14px;">
         <div style="margin-left: 40px;">
@@ -34,10 +34,6 @@
                 <tr>
                     <td>Nama</td>
                     <td>: <?= ' ' . $nama ?></td>
-                </tr>
-                <tr>
-                    <td>NIK</td>
-                    <td>: <?= ' ' . $nik ?></td>
                 </tr>
                 <tr>
                     <td>Tempat, Tanggal Lahir</td>
@@ -48,6 +44,10 @@
                     <td>: <?= ' ' . $jk ?></td>
                 </tr>
                 <tr>
+                    <td>Pekerjaan</td>
+                    <td>: <?= ' ' . $pekerjaan ?></td>
+                </tr>
+                <tr>
                     <td>Alamat</td>
                     <td>: <?= ' ' . $alamat ?></td>
                 </tr>
@@ -55,10 +55,10 @@
         </div>
     </div>
     <div style="margin-bottom: 14px;">
-        <p style="margin: 0; text-indent: 40px;">Adalah benar bahwa <?= ' ' . $nama ?> berdomisili di <?= ' ' . $alamat ?> Desa Latompa Kecamatan Maligano Kabupaten Muna.</p>
+        <p style="margin: 0; text-indent: 40px;">Orang tersebut di atas adalah benar-benar warga Desa Latompa, sepanjang pengamatan dan pengetahuan kami bahwa orang tersebut di atas sedang berada Di luar Kabupaten Muna (Kota Kendari) untuk <?= ' ' . $keperluan ?>.</p>
     </div>
     <div style="margin-bottom: 14px;">
-        <p style="margin: 0; text-indent: 40px;">Demikian Surat Keterangan ini kami buat dengan sebenarnya agar yang berkepentingan menjadi maklum dan dapat dipergunakan sebagaimana mestinya.</p>
+        <p style="margin: 0; text-indent: 40px;">Demikian surat keterangan ini kami buat dengan sebenarnya agar kepada pihak-pihak yang berkepentingan menjadi tahu dan maklum serta dapat dipergunakan sebagaimana mestinya.</p>
     </div>
     <div>
         <div style="width: 45%; float: right; text-align: center;">

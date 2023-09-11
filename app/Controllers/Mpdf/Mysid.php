@@ -70,6 +70,18 @@ class Mysid extends BaseController
             }
         }
 
+        $golongan_darahs = $this->db->table('golongan_darahs')
+            ->get()
+            ->getResultArray();
+
+        foreach ($data_penduduks as $key => $data_penduduk) {
+            foreach ($golongan_darahs as $golongan_darah) {
+                if ($data_penduduk['id_golongan_darahs'] == $golongan_darah['id']) {
+                    $data_penduduks[$key]['golongan_darah'] = $golongan_darah['golongan_darah'];
+                }
+            }
+        }
+
         return $data_penduduks;
     }
 
@@ -158,7 +170,25 @@ class Mysid extends BaseController
     {
         $mpdf = new Mpdf();
 
-        $data = [];
+        $id_data_penduduk = $this->request->getVar('penduduk');
+        $filter_anak = "id = '$id_data_penduduk'";
+        $data_anak = $this->data_penduduks($filter_anak)[0];
+
+        $id_nkk = $data_anak['id_data_nkks'];
+        $data_nkks = $this->db->table('data_nkks')
+            ->getWhere("id = '$id_nkk'")
+            ->getResultArray()[0];
+
+        $data = [
+            'nama' => $data_anak['nama_lengkap'],
+            'nik' => $data_anak['nik'],
+            'ttl' => $data_anak['tempat_lahir'] . ', ' . date("d-m-Y", strtotime($data_anak['tanggal_lahir'])),
+            'jk' => $data_anak['jenis_kelamin'],
+            'alamat' => $data_nkks['alamat_lengkap'],
+            'nomor_surat' => $this->request->getVar('nomor_surat'),
+            'tanggal' => date("d-m-Y", strtotime($this->request->getVar('tanggal'))),
+            'oleh' => $this->request->getVar('oleh'),
+        ];
 
         $this->response->setContentType("application/pdf");
         $mpdf->WriteHTML(view('mpdf/suket_domisili', $data));
@@ -194,5 +224,137 @@ class Mysid extends BaseController
         $this->response->setContentType("application/pdf");
         $mpdf->WriteHTML(view('mpdf/suket_usaha', $data));
         return $mpdf->Output('suket_usaha.pdf', "D");
+    }
+
+    public function suket_belum_menikah()
+    {
+        $mpdf = new Mpdf();
+
+        $id_data_penduduk = $this->request->getVar('penduduk');
+        $filter_penduduk = "id = '$id_data_penduduk'";
+        $data_penduduk = $this->data_penduduks($filter_penduduk)[0];
+
+        $id_nkk = $data_penduduk['id_data_nkks'];
+        $data_nkks = $this->db->table('data_nkks')
+            ->getWhere("id = '$id_nkk'")
+            ->getResultArray()[0];
+
+        $data = [
+            'nama' => $data_penduduk['nama_lengkap'],
+            'nik' => $data_penduduk['nik'],
+            'ttl' => $data_penduduk['tempat_lahir'] . ', ' . date("d-m-Y", strtotime($data_penduduk['tanggal_lahir'])),
+            'jk' => $data_penduduk['jenis_kelamin'],
+            'pekerjaan' => $data_penduduk['pekerjaan1'],
+            'alamat' => $data_nkks['alamat_lengkap'],
+            'nomor_surat' => $this->request->getVar('nomor_surat'),
+            'tanggal' => date("d-m-Y", strtotime($this->request->getVar('tanggal'))),
+            'oleh' => $this->request->getVar('oleh'),
+        ];
+
+        $this->response->setContentType("application/pdf");
+        $mpdf->WriteHTML(view('mpdf/suket_belum_menikah', $data));
+        return $mpdf->Output('suket_belum_menikah.pdf', "I");
+    }
+
+    public function suket_di_luar_daerah()
+    {
+        $mpdf = new Mpdf();
+
+        $id_data_penduduk = $this->request->getVar('penduduk');
+        $filter_penduduk = "id = '$id_data_penduduk'";
+        $data_penduduk = $this->data_penduduks($filter_penduduk)[0];
+
+        $id_nkk = $data_penduduk['id_data_nkks'];
+        $data_nkks = $this->db->table('data_nkks')
+            ->getWhere("id = '$id_nkk'")
+            ->getResultArray()[0];
+
+        $data = [
+            'nama' => $data_penduduk['nama_lengkap'],
+            'ttl' => $data_penduduk['tempat_lahir'] . ', ' . date("d-m-Y", strtotime($data_penduduk['tanggal_lahir'])),
+            'jk' => $data_penduduk['jenis_kelamin'],
+            'pekerjaan' => $data_penduduk['pekerjaan1'],
+            'alamat' => $data_nkks['alamat_lengkap'],
+            'keperluan' => $this->request->getVar('keperluan'),
+            'nomor_surat' => $this->request->getVar('nomor_surat'),
+            'tanggal' => date("d-m-Y", strtotime($this->request->getVar('tanggal'))),
+            'oleh' => $this->request->getVar('oleh'),
+        ];
+
+        $this->response->setContentType("application/pdf");
+        $mpdf->WriteHTML(view('mpdf/suket_di_luar_daerah', $data));
+        return $mpdf->Output('suket_di_luar_daerah.pdf', "I");
+    }
+
+    public function suket_pengantar_kk()
+    {
+        $mpdf = new Mpdf();
+
+        $id_data_penduduk = $this->request->getVar('penduduk');
+        $filter_penduduk = "id = '$id_data_penduduk'";
+        $data_penduduk = $this->data_penduduks($filter_penduduk)[0];
+
+        $id_nkk = $data_penduduk['id_data_nkks'];
+        $data_nkks = $this->db->table('data_nkks')
+            ->getWhere("id = '$id_nkk'")
+            ->getResultArray()[0];
+
+        $id_data_istri = $this->request->getVar('penduduk_istri');
+        $filter_istri = "id = '$id_data_istri'";
+        $data_istri = $this->data_penduduks($filter_istri)[0];
+
+        $data = [
+            'nama_suami' => $data_penduduk['nama_lengkap'],
+            'nik_suami' => $data_penduduk['nik'],
+            'ttl_suami' => $data_penduduk['tempat_lahir'] . ', ' . date("d-m-Y", strtotime($data_penduduk['tanggal_lahir'])),
+            'jk_suami' => $data_penduduk['jenis_kelamin'],
+            'agama_suami' => $data_penduduk['agama'],
+            'pekerjaan_suami' => $data_penduduk['pekerjaan1'],
+            'golongan_darah_suami' => $data_penduduk['golongan_darah'],
+            'alamat_suami' => $data_nkks['alamat_lengkap'],
+            'nama_istri' => $data_istri['nama_lengkap'],
+            'nik_istri' => $data_istri['nik'],
+            'ttl_istri' => $data_istri['tempat_lahir'] . ', ' . date("d-m-Y", strtotime($data_istri['tanggal_lahir'])),
+            'jk_istri' => $data_istri['jenis_kelamin'],
+            'nomor_surat' => $this->request->getVar('nomor_surat'),
+            'tanggal' => date("d-m-Y", strtotime($this->request->getVar('tanggal'))),
+            'oleh' => $this->request->getVar('oleh'),
+        ];
+
+        $this->response->setContentType("application/pdf");
+        $mpdf->WriteHTML(view('mpdf/suket_pengantar_kk', $data));
+        return $mpdf->Output('suket_pengantar_kk.pdf', "I");
+    }
+
+    public function suket_pengantar_ktp()
+    {
+        $mpdf = new Mpdf();
+
+        $id_data_penduduk = $this->request->getVar('penduduk');
+        $filter_penduduk = "id = '$id_data_penduduk'";
+        $data_penduduk = $this->data_penduduks($filter_penduduk)[0];
+
+        $id_nkk = $data_penduduk['id_data_nkks'];
+        $data_nkks = $this->db->table('data_nkks')
+            ->getWhere("id = '$id_nkk'")
+            ->getResultArray()[0];
+
+        $data = [
+            'nama' => $data_penduduk['nama_lengkap'],
+            'nik' => $data_penduduk['nik'],
+            'ttl' => $data_penduduk['tempat_lahir'] . ', ' . date("d-m-Y", strtotime($data_penduduk['tanggal_lahir'])),
+            'jk' => $data_penduduk['jenis_kelamin'],
+            'agama' => $data_penduduk['agama'],
+            'pekerjaan' => $data_penduduk['pekerjaan1'],
+            'golongan_darah' => $data_penduduk['golongan_darah'],
+            'alamat' => $data_nkks['alamat_lengkap'],
+            'nomor_surat' => $this->request->getVar('nomor_surat'),
+            'tanggal' => date("d-m-Y", strtotime($this->request->getVar('tanggal'))),
+            'oleh' => $this->request->getVar('oleh'),
+        ];
+
+        $this->response->setContentType("application/pdf");
+        $mpdf->WriteHTML(view('mpdf/suket_pengantar_ktp', $data));
+        return $mpdf->Output('suket_pengantar_ktp.pdf', "I");
     }
 }

@@ -22,43 +22,82 @@
         </div>
     </div>
     <div style="text-align: center; margin-bottom: 14px;">
-        <p style="margin: 0; text-decoration: underline;">SURAT KETERANGAN DOMISILI MASJID</p>
+        <p style="margin: 0; text-decoration: underline;">SURAT KETERANGAN</p>
         <p style="margin: 0;">Nomor : <?= ' ' . $nomor_surat ?></p>
     </div>
     <div style="margin-bottom: 14px;">
-        <p style="margin: 0; text-indent: 40px;">Kepala Desa Latompa Kecamatan Maligano Kabupaten Muna, dengan ini menyatakan bahwa :</p>
+        <p style="margin: 0; text-indent: 40px;">Yang bertanda tangan dibawah ini Kepala Desa Latompa Kecamatan Maligano Kabupaten Muna menerangkan dengan sebenarnya bahwa :</p>
     </div>
     <div style="margin-bottom: 14px;">
         <div style="margin-left: 40px;">
             <table>
                 <tr>
                     <td>Nama</td>
-                    <td>: <?= ' ' . $nama ?></td>
+                    <td>: <?= ' ' . $nama_suami ?></td>
                 </tr>
                 <tr>
                     <td>NIK</td>
-                    <td>: <?= ' ' . $nik ?></td>
+                    <td>: <?= ' ' . $nik_suami ?></td>
                 </tr>
                 <tr>
                     <td>Tempat, Tanggal Lahir</td>
-                    <td>: <?= ' ' . $ttl ?></td>
+                    <td>: <?= ' ' . $ttl_suami ?></td>
                 </tr>
                 <tr>
                     <td>Jenis Kelamin</td>
-                    <td>: <?= ' ' . $jk ?></td>
+                    <td>: <?= ' ' . $jk_suami ?></td>
+                </tr>
+                <tr>
+                    <td>Agama</td>
+                    <td>: <?= ' ' . $agama_suami ?></td>
+                </tr>
+                <tr>
+                    <td>Pekerjaan</td>
+                    <td>: <?= ' ' . $pekerjaan_suami ?></td>
+                </tr>
+                <tr>
+                    <td>Golongan Darah</td>
+                    <td>: <?= ' ' . $golongan_darah_suami ?></td>
                 </tr>
                 <tr>
                     <td>Alamat</td>
-                    <td>: <?= ' ' . $alamat ?></td>
+                    <td>: <?= ' ' . $alamat_suami ?></td>
                 </tr>
             </table>
         </div>
     </div>
     <div style="margin-bottom: 14px;">
-        <p style="margin: 0; text-indent: 40px;">Adalah benar bahwa <?= ' ' . $nama ?> berdomisili di <?= ' ' . $alamat ?> Desa Latompa Kecamatan Maligano Kabupaten Muna.</p>
+        <p style="margin: 0;">Pengikut</p>
+        <div style="margin-left: 40px;">
+            <table>
+                <tr>
+                    <td>Nama</td>
+                    <td>: <?= ' ' . $nama_istri ?></td>
+                </tr>
+                <tr>
+                    <td>NIK</td>
+                    <td>: <?= ' ' . $nik_istri ?></td>
+                </tr>
+                <tr>
+                    <td>Tempat, Tanggal Lahir</td>
+                    <td>: <?= ' ' . $ttl_istri ?></td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <td>: <?= ' ' . $jk_istri ?></td>
+                </tr>
+                <tr>
+                    <td>Keterangan</td>
+                    <td>: ISTRI</td>
+                </tr>
+            </table>
+        </div>
     </div>
     <div style="margin-bottom: 14px;">
-        <p style="margin: 0; text-indent: 40px;">Demikian Surat Keterangan ini kami buat dengan sebenarnya agar yang berkepentingan menjadi maklum dan dapat dipergunakan sebagaimana mestinya.</p>
+        <p style="margin: 0; text-indent: 40px;">Bahwa oknum yang namanya tersebut di atas benar-benar penduduk Desa kami dan mohon kiranya untuk dapat dilayani dalam Pembuatan Kartu Keluarga Baru.</p>
+    </div>
+    <div style="margin-bottom: 14px;">
+        <p style="margin: 0; text-indent: 40px;">Demikian surat keterangan ini dibuat dan diberikan kepada yang bersangkutan untuk digunakan seperlunya.</p>
     </div>
     <div>
         <div style="width: 45%; float: right; text-align: center;">
