@@ -149,6 +149,7 @@ $routes->post('suket_belum_menikah', 'Mpdf\Mysid::suket_belum_menikah');
 $routes->post('suket_di_luar_daerah', 'Mpdf\Mysid::suket_di_luar_daerah');
 $routes->post('suket_pengantar_kk', 'Mpdf\Mysid::suket_pengantar_kk');
 $routes->post('suket_pengantar_ktp', 'Mpdf\Mysid::suket_pengantar_ktp');
+$routes->post('suket_pengantar_pindah_domisili', 'Mpdf\Mysid::suket_pengantar_pindah_domisili');
 
 
 /*

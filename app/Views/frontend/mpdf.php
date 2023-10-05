@@ -15,6 +15,7 @@
             <button onclick="open_modal_suket_di_luar_daerah()" class="m-2 p-2 rounded-md bg-cyan-500 text-white w-full md:w-[45%] lg:w-[32%] mx-auto" type="button">suket di luar daerah</button>
             <button onclick="open_modal_suket_pengantar_kk()" class="m-2 p-2 rounded-md bg-cyan-500 text-white w-full md:w-[45%] lg:w-[32%] mx-auto" type="button">suket pengantar kk</button>
             <button onclick="open_modal_suket_pengantar_ktp()" class="m-2 p-2 rounded-md bg-cyan-500 text-white w-full md:w-[45%] lg:w-[32%] mx-auto" type="button">suket pengantar ktp</button>
+            <button onclick="open_modal_suket_pengantar_pindah_domisili()" class="m-2 p-2 rounded-md bg-cyan-500 text-white w-full md:w-[45%] lg:w-[32%] mx-auto" type="button">suket pengantar pindah domisili</button>
         </div>
 
         <!-- >>>> modal render suket kenal lahir -->
@@ -233,6 +234,40 @@
                         <select class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="data_penduduk_suket_pengantar_ktp" name="penduduk" required></select>
                         <input id="cari_penduduk_suket_pengantar_ktp" class="w-[50%] p-1 mb-2 outline-none border border-l-0 border-cyan-500 rounded-r-md text-sm" type="text" placeholder="cari_penduduk" onkeyup="generate_isi_option_select_data_penduduk_suket_pengantar_ktp()" autocomplete="off">
                     </div>
+
+                    <div class="text-white bg-red-700 rounded-md px-2 mb-1 text-sm italic inline-block">persetujuan</div>
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="nomor_surat" type="text" name="nomor_surat" autocomplete="off" required>
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="tanggal" type="date" name="tanggal" autocomplete="off" required>
+                    <select class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" name="oleh" required>
+                        <option value="kades">kades</option>
+                        <option value="sekretaris">sekretaris</option>
+                    </select>
+
+                    <button class="bg-cyan-500 text-lg text-white font-medium py-1 rounded-md w-full" type="submit">render pdf</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- >>>> modal render suket pengantar pindah domisili -->
+        <div id="modal_suket_pengantar_pindah_domisili" class="hidden fixed top-0 bottom-0 right-0 left-0 bg-slate-900 bg-opacity-50 z-10">
+            <div class="bg-white rounded-md p-4 relative w-[95%] md:w-[50%] my-4 max-h-[95%] mx-auto overflow-auto">
+                <button class="absolute right-1 top-0" onclick="close_modal_suket_pengantar_pindah_domisili()" type="button"><i class="bi-x-square-fill text-red-700 rounded-md text-xl"></i></button>
+                <p class="text-center font-medium text-lg" id="head_form">data suket pengantar pindah domisili</p>
+
+                <form action="/suket_pengantar_pindah_domisili" method="post" class="mt-2" enctype="multipart/form-data" id="form_input">
+
+                    <div class="text-white bg-red-700 rounded-md px-2 mb-1 text-sm italic inline-block">data penduduk</div>
+                    <div class="flex">
+                        <select onclick="generate_isi_checkbox_data_pengikut()" class="w-[50%] p-1 mb-2 outline-none border border-cyan-500 rounded-l-md" id="data_penduduk_suket_pengantar_pindah_domisili" name="id_data_penduduk" required></select>
+                        <input id="cari_penduduk_suket_pengantar_pindah_domisili" class="w-[50%] p-1 mb-2 outline-none border border-l-0 border-cyan-500 rounded-r-md text-sm" type="text" placeholder="cari_penduduk" onkeyup="generate_isi_option_select_data_penduduk_suket_pengantar_pindah_domisili()" autocomplete="off">
+                    </div>
+
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="alamat_tujuan_pindah" type="text" name="alamat_tujuan_pindah" autocomplete="off" required>
+                    <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="alasan_pindah" type="text" name="alasan_pindah" autocomplete="off" required>
+
+                    <div class="text-white bg-red-700 rounded-md px-2 mb-1 text-sm italic inline-block">pengikut</div>
+
+                    <div id="data_pengikut_suket_pengantar_pindah_domisili"></div>
 
                     <div class="text-white bg-red-700 rounded-md px-2 mb-1 text-sm italic inline-block">persetujuan</div>
                     <input class="w-full p-1 mb-2 outline-none border border-cyan-500 rounded-md" placeholder="nomor_surat" type="text" name="nomor_surat" autocomplete="off" required>
@@ -522,6 +557,85 @@
             });
 
             data_penduduk_suket_pengantar_ktp.innerHTML = all_option_select_data_nkk
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+
+    // suket pengantar pindah domisili
+    const cari_penduduk_suket_pengantar_pindah_domisili = document.querySelector('#cari_penduduk_suket_pengantar_pindah_domisili')
+    const data_penduduk_suket_pengantar_pindah_domisili = document.querySelector('#data_penduduk_suket_pengantar_pindah_domisili')
+    const modal_suket_pengantar_pindah_domisili = document.querySelector('#modal_suket_pengantar_pindah_domisili')
+    const open_modal_suket_pengantar_pindah_domisili = () => modal_suket_pengantar_pindah_domisili.classList.toggle('hidden');
+    const close_modal_suket_pengantar_pindah_domisili = () => modal_suket_pengantar_pindah_domisili.classList.toggle('hidden');
+
+    const option_select_data_penduduk_suket_pengantar_pindah_domisili = item => {
+        return `<option value="${item.id}">${item.nama_lengkap}</option>`
+    }
+
+    const generate_isi_option_select_data_penduduk_suket_pengantar_pindah_domisili = async () => {
+        try {
+            const response = await fetch(`${api_data_penduduk}/find/${cari_penduduk_suket_pengantar_pindah_domisili.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result = await response.json()
+
+            let all_option_select = ``
+            result.forEach(item => {
+                all_option_select += option_select_data_penduduk_suket_pengantar_pindah_domisili(item)
+            });
+
+            generate_isi_checkbox_data_pengikut()
+
+            data_penduduk_suket_pengantar_pindah_domisili.innerHTML = all_option_select
+        } catch (error) {
+            console.error("Error:", error)
+        }
+    }
+
+    const data_pengikut_suket_pengantar_pindah_domisili = document.querySelector('#data_pengikut_suket_pengantar_pindah_domisili')
+
+    const checkbox_data_pengikut = item => {
+        return `<div>
+                    <input type="checkbox" name="data_pengikut[]" value="${item.nik}|${item.nama_lengkap}"> <span>${item.nama_lengkap}</span>
+                </div>`
+    }
+
+    const generate_isi_checkbox_data_pengikut = async () => {
+        try {
+            // cari penduduk berdasarkan id data penduduk maka dapat id data nkks
+            const response_all_penduduk = await fetch(`${api_data_penduduk}/${data_penduduk_suket_pengantar_pindah_domisili.value}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result_all_penduduk = await response_all_penduduk.json()
+
+            // cari nkk pada tabel nkks berdasarkan id data nkks
+            const response_nkk = await fetch(`${api_data_nkk}/${result_all_penduduk.id_data_nkks}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result_nkk = await response_nkk.json()
+
+            // cari data penduduk berdasarkan nkk
+            const response_all_pengikut = await fetch(`${api_data_penduduk}/find/nkk@${result_nkk.nkk}`, {
+                headers: {
+                    Authorization: `Bearer ${getCookie('token')}`
+                }
+            })
+            const result_all_pengikut = await response_all_pengikut.json()
+
+            let all_checkbox = ``
+            result_all_pengikut.forEach(item => {
+                all_checkbox += checkbox_data_pengikut(item)
+            });
+
+            data_pengikut_suket_pengantar_pindah_domisili.innerHTML = all_checkbox
         } catch (error) {
             console.error("Error:", error)
         }

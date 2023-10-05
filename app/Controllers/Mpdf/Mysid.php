@@ -357,4 +357,47 @@ class Mysid extends BaseController
         $mpdf->WriteHTML(view('mpdf/suket_pengantar_ktp', $data));
         return $mpdf->Output('suket_pengantar_ktp.pdf', "I");
     }
+
+    public function suket_pengantar_pindah_domisili()
+    {
+        $mpdf = new Mpdf();
+
+        $id_data_penduduk = $this->request->getVar('id_data_penduduk');
+        $filter_penduduk = "id = '$id_data_penduduk'";
+        $data_penduduk = $this->data_penduduks($filter_penduduk)[0];
+
+        $id_nkk = $data_penduduk['id_data_nkks'];
+        $data_nkks = $this->db->table('data_nkks')
+            ->getWhere("id = '$id_nkk'")
+            ->getResultArray()[0];
+
+        $pengikut = [];
+        $data_pengikut = $this->request->getVar('data_pengikut');
+        if ($data_pengikut) {
+            foreach ($data_pengikut as $value) {
+                $pengikut[] =  explode("|", $value);
+            }
+        }
+
+        $data = [
+            'nama' => $data_penduduk['nama_lengkap'],
+            'nik' => $data_penduduk['nik'],
+            'ttl' => $data_penduduk['tempat_lahir'] . ', ' . date("d-m-Y", strtotime($data_penduduk['tanggal_lahir'])),
+            'jk' => $data_penduduk['jenis_kelamin'],
+            'agama' => $data_penduduk['agama'],
+            'alamat' => $data_nkks['alamat_lengkap'],
+            'nkk' => $data_nkks['nkk'],
+            'alamat_tujuan_pindah' => $this->request->getVar('alamat_tujuan_pindah'),
+            'alasan_pindah' => $this->request->getVar('alasan_pindah'),
+            'jml_pengikut' => count($pengikut),
+            'pengikut' => $pengikut,
+            'nomor_surat' => $this->request->getVar('nomor_surat'),
+            'tanggal' => date("d-m-Y", strtotime($this->request->getVar('tanggal'))),
+            'oleh' => $this->request->getVar('oleh'),
+        ];
+
+        $this->response->setContentType("application/pdf");
+        $mpdf->WriteHTML(view('mpdf/suket_pengantar_pindah_domisili', $data));
+        return $mpdf->Output('suket_pengantar_ktp.pdf', "I");
+    }
 }
