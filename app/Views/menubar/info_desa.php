@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="m-2">
+    <div class="m-2 mb-4">
         <div class="mb-4 flex flex-wrap flex-col gap-2 w-full h-60 border-2 border-cyan-700 rounded p-2 overflow-x-scroll">
             <div class="relative w-40 h-full border-2 border-cyan-900 rounded-md bg-cyan-50" style="background-image: url('img/frontend/liston.jpg'); background-size: cover;">
                 <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
@@ -70,6 +70,62 @@
                 <div class="absolute bg-cyan-900 rounded-b-sm w-full bottom-0 text-white text-sm text-center">
                     <p>KEPALA DUSUN II</p>
                     <p>Silfister Dona</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-2 mb-4">
+        <div class="border border-cyan-700 rounded-md m-2 w-full">
+            <p class="bg-cyan-700 rounded-t-sm p-2 text-white text-base text-center uppercase font-semibold">jadwal piket</p>
+            <div class="flex flex-wrap justify-evenly">
+                <div class="border border-cyan-700 rounded-md m-2 p-1 w-full md:w-[32%]">
+                    <p class="text-center bg-cyan-200">senin</p>
+                    <div class="senin">
+                        <p>namanya</p>
+                        <p>namanya</p>
+                        <p>namanya</p>
+                    </div>
+                </div>
+                <div class="border border-cyan-700 rounded-md m-2 p-1 w-full md:w-[32%]">
+                    <p class="text-center bg-cyan-200">selasa</p>
+                    <div class="selasa">
+                        <p>namanya</p>
+                        <p>namanya</p>
+                        <p>namanya</p>
+                    </div>
+                </div>
+                <div class="border border-cyan-700 rounded-md m-2 p-1 w-full md:w-[32%]">
+                    <p class="text-center bg-cyan-200">rabu</p>
+                    <div class="rabu">
+                        <p>namanya</p>
+                        <p>namanya</p>
+                        <p>namanya</p>
+                    </div>
+                </div>
+                <div class="border border-cyan-700 rounded-md m-2 p-1 w-full md:w-[32%]">
+                    <p class="text-center bg-cyan-200">kamis</p>
+                    <div class="kamis">
+                        <p>namanya</p>
+                        <p>namanya</p>
+                        <p>namanya</p>
+                    </div>
+                </div>
+                <div class="border border-cyan-700 rounded-md m-2 p-1 w-full md:w-[32%]">
+                    <p class="text-center bg-cyan-200">jumat</p>
+                    <div class="jumat">
+                        <p>namanya</p>
+                        <p>namanya</p>
+                        <p>namanya</p>
+                    </div>
+                </div>
+                <div class="border border-cyan-700 rounded-md m-2 p-1 w-full md:w-[32%]">
+                    <p class="text-center bg-cyan-200">sabtu</p>
+                    <div class="sabtu">
+                        <p>namanya</p>
+                        <p>namanya</p>
+                        <p>namanya</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -204,5 +260,51 @@
     </div>
 </div>
 </div>
+
+<script>
+    const senin = document.querySelector("#senin")
+    const selasa = document.querySelector("#selasa")
+    const rabu = document.querySelector("#rabu")
+    const kamis = document.querySelector("#kamis")
+    const jumat = document.querySelector("#jumat")
+    const sabtu = document.querySelector("#sabtu")
+
+    // const kode_piket = {
+    //     1: 'Muhammad Izar, S.T.',
+    //     2: 'Karti Apriani G., S.Si.',
+    //     3: 'Hernandus Dedi',
+    //     4: 'Silfister Dona',
+    //     5: 'Redi Alexander',
+    //     6: 'Mei Maria, S.E.',
+    //     7: 'Teodorus Umar',
+    //     8: 'Faradiana Jima',
+    // }
+
+    let jadwal_piket = {
+        senin: [8, 1, 2],
+        selasa: [3, 4, 5],
+        rabu: [6, 7, 1],
+        kamis: [2, 3, 4],
+        jumat: [5, 6, 7],
+        sabtu: [1, 2, 3, 4, 5, 6, 7, 8],
+    }
+
+    // setiap satu bulan akan berganti
+    // berarti setiap tanggal 1
+
+
+    // HARUS PAKE DATABASE CUK
+    // bikin tabel kode piket
+
+    // cuma ada satu baris
+    // field field nya adalah nama org
+
+    // yg di view itu jadwal piket
+    // jadi setiap bulan data nya di update
+    // atas nama siapa kodenya nomor berapa
+    // jadi mis. hari senin itu kodenya berganti2
+
+    console.log(jadwal_piket.senin[0] + 1)
+</script>
 
 <?= $this->endSection(); ?>
