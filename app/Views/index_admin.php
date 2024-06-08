@@ -74,7 +74,7 @@ $menubar = [
             <p id="loginAs" class="text-xs italic inline mr-1"></p>
             <button onclick="logout()"><i class="bi-box-arrow-right"></i></button>
         </div>
-        <p class="text-xs md:text-sm text-white absolute right-0 left-0 bottom-0 text-center">desa latompa kecamatan maligano kabupaten muna - sulawesi tenggara</p>
+        <p class="text-xs md:text-sm text-white absolute right-0 left-0 bottom-0 text-center">desa latompa kecamatan maligano</p>
     </div>
 
     <div id="container" class="mx-auto md:ml-60 mt-[78px]">
@@ -87,10 +87,10 @@ $menubar = [
 
     <!-- navbar start -->
 
-    <div id="sidebar" class="overflow-auto hidden md:block bg-red-50 border-red-700 border-r-2 fixed left-0 top-[72px] bottom-0 w-60 p-4 transition-all">
+    <div id="sidebar" class="overflow-auto hidden md:block bg-cyan-200 border-cyan-900 border-r-2 fixed left-0 top-[72px] bottom-0 w-60 p-4 transition-all">
 
         <?php foreach ($menubar as $key => $value) : ?>
-            <a href="<?= base_url($value['link']); ?>" class='flex hover:bg-cyan-50 rounded-md mb-1 h-8 p-2'>
+            <a href="<?= base_url($value['link']); ?>" class='flex bg-cyan-700 text-white rounded-md mb-1 h-8 p-2'>
                 <p class='text-lg inline self-center ml-2'>
                     <i class="<?= $value['icon'] ?> mr-2 text-xl"></i><?= $key ?>
                 </p>
@@ -109,15 +109,15 @@ $menubar = [
 
     <!-- start nav mobile -->
 
-    <div id='navMobile' class='bg-white fixed bottom-0 right-0 left-0 border-t-2 border-t-cyan-700 -mb-16 md:hidden'>
-        <button onclick="setNavMobile()" class='absolute right-0 -top-[28px] bg-cyan-700 pt-1 px-3 rounded-tl-lg'>
+    <div id='navMobile' class='bg-cyan-200 fixed bottom-0 right-0 left-0 border-t-2 border-t-cyan-900 -mb-16 md:hidden'>
+        <button onclick="setNavMobile()" class='absolute right-0 -top-[28px] bg-cyan-900 pt-1 px-3 rounded-tl-lg'>
             <span id='first' class='border-2 rounded-sm border-white bg-white font-extrabold inline-block rotate-45 transition delay-500 h-4'></span>
             <span id='second' class='border-2 rounded-sm border-black bg-black font-extrabold inline-block -rotate-45 transition delay-500 h-4'></span>
         </button>
         <div class='grid grid-cols-4 gap-2 p-2 transition-all text-center'>
 
             <?php foreach ($menubar as $key => $value) : ?>
-                <a href="<?= base_url($value['link']); ?>" class='bg-cyan-50 rounded-md p-1'>
+                <a href="<?= base_url($value['link']); ?>" class='bg-cyan-700 rounded-md p-1 text-white'>
                     <i class="<?= $value['icon'] ?>"></i>
                     <p class='text-xs'><?= $key ?></p>
                 </a>

@@ -132,6 +132,7 @@ $routes->get('berita', 'Frontend\Berita::index');
 
 // MENUBAR
 $routes->get('/', 'Menubar\Home::index');
+// $routes->get('/', 'Backend\Beritas::index');
 $routes->get('infodesa', 'Menubar\Infodesa::index');
 $routes->get('statistik', 'Menubar\Statistik::index');
 $routes->get('adminweb', 'Menubar\Adminweb::index');

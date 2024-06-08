@@ -12,6 +12,53 @@ class KategoriBeritas extends ResourceController
     protected $format    = 'json';
 
     /**
+     * Return an array of resource objects, themselves in array format
+     *
+     * @return mixed
+     */
+    public function index()
+    {
+        try {
+            $limit = $this->request->getGet('limit') ?? 20;
+            $page = $this->request->getGet('page') ?? 1;
+            $offset = $limit * $page - $limit;
+
+            $kategori_berita = $this->request->getGet('kategori_berita') ?? '';
+
+            // Membangun objek filter untuk query
+            $filter = [];
+            if ($kategori_berita !== '') {
+                $filter['kategori_berita LIKE'] = "%$kategori_berita%";
+            }
+
+            // Menambahkan filter tambahan berdasarkan peran pengguna,
+            // $user = $this->user->currLogin();
+            // if ($user['desa'] !== 'admin') {
+            //     $filter['created_by ='] = $user['desa'];
+            // }
+
+            // Menghitung total dokumen yang sesuai
+            $all_data = $this->model->where($filter)->countAllResults(false);
+
+            // Mengambil data dengan pagination
+            $data = $this->model->where($filter)
+                ->orderBy('id', 'desc')
+                ->findAll($limit, $offset);
+
+            $result = [
+                'all_data' => $all_data,
+                'all_page' => ceil($all_data / $limit),
+                'crr_page' => $page,
+                'data' => $data,
+            ];
+
+            return $this->respond($result);
+        } catch (\Exception $e) {
+            return $this->failServerError($e->getMessage());
+        }
+    }
+
+    /**
      * Return the properties of a resource object
      *
      * @return mixed

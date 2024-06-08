@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Backend;
 
-use App\Libraries\GetUser;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -16,7 +15,6 @@ class Beritas extends ResourceController
     public function __construct()
     {
         $this->db = \Config\Database::connect();
-        // $this->user = new GetUser();
     }
 
     /**
@@ -26,11 +24,61 @@ class Beritas extends ResourceController
      */
     public function index()
     {
-        // $currUser = $this->user->currLogin();
-        // if ($currUser['desa'] != 'admin') return $this->fail('desa not allowed');
+        try {
+            $limit = $this->request->getGet('limit') ?? 20;
+            $page = $this->request->getGet('page') ?? 1;
+            $offset = $limit * $page - $limit;
 
-        $data = $this->model->orderBy('id', 'DESC')->findAll();
-        return $this->respond($data);
+            $judul = $this->request->getGet('judul') ?? '';
+            $id_kategori_beritas = $this->request->getGet('id_kategori_beritas') ?? '';
+            $active = $this->request->getGet('active') ?? '';
+            $created_at = $this->request->getGet('created_at') ?? '';
+
+            // Membangun objek filter untuk query
+            $filter = [];
+            if ($judul !== '') {
+                $filter['judul LIKE'] = "%$judul%";
+            }
+            if ($id_kategori_beritas !== '') {
+                $filter['id_kategori_beritas LIKE'] = "%$id_kategori_beritas%";
+            }
+            if ($active !== '') {
+                $filter['active LIKE'] = "%$active%";
+            }
+
+            if ($created_at !== '') {
+                $created_atRange = explode('@', $created_at);
+                if (count($created_atRange) === 2) {
+                    $filter['created_at >='] = $created_atRange[0];
+                    $filter['created_at <='] = $created_atRange[1];
+                }
+            }
+
+            // Menambahkan filter tambahan berdasarkan peran pengguna,
+            // $user = $this->user->currLogin();
+            // if ($user['desa'] !== 'admin') {
+            //     $filter['created_by ='] = $user['desa'];
+            // }
+
+            // Menghitung total dokumen yang sesuai
+            $all_data = $this->model->where($filter)->countAllResults(false);
+
+            // Mengambil data dengan pagination
+            $data = $this->model->where($filter)
+                ->orderBy('id', 'desc')
+                ->findAll($limit, $offset);
+
+            $result = [
+                'all_data' => $all_data,
+                'all_page' => ceil($all_data / $limit),
+                'crr_page' => $page,
+                'data' => $data,
+            ];
+
+            return $this->respond($result);
+        } catch (\Exception $e) {
+            return $this->failServerError($e->getMessage());
+        }
     }
 
     /**
