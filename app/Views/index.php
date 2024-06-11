@@ -28,7 +28,7 @@ $menubar = [
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="MySID | Sistem Informasi Desa  (Latompa)" />
+    <meta property="og:title" content="SID | Sistem Informasi Desa Bhone Kainsetala" />
     <meta property="og:description" content="<?= $title; ?>" />
     <meta property="og:image" content="<?= base_url(); ?>img/frontend/favicon.ico" />
     <link rel="shortcut icon" href="<?= base_url(); ?>/img/frontend/favicon.ico" type="image/x-icon">
