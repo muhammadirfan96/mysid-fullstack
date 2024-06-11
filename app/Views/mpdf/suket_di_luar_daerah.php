@@ -15,10 +15,10 @@
         <div style="width: 75%;">
             <div style="font-weight: bold;">
                 <p style="margin: 0;">PEMERINTAH KABUPATEN MUNA</p>
-                <p style="margin: 0;">KECAMATAN MALIGANO</p>
-                <p style="margin: 0;">DESA LATOMPA</p>
+                <p style="margin: 0;">KECAMATAN BHONE</p>
+                <p style="margin: 0;">DESA BHONE KAINSETALA</p>
             </div>
-            <p style="margin: 0;">Alamat : Jalan Poros Maligano - Labuan KM 5 Kode Pos 93675</p>
+            <p style="margin: 0;">Alamat : Dusun 1 Desa Bhone Kainsetala Kode Pos 93663</p>
         </div>
     </div>
     <div style="text-align: center; margin-bottom: 14px;">
@@ -26,7 +26,7 @@
         <p style="margin: 0;">Nomor : <?= ' ' . $nomor_surat ?></p>
     </div>
     <div style="margin-bottom: 14px;">
-        <p style="margin: 0; text-indent: 40px;">Yang bertanda tangan di bawah ini Kepala Desa Latompa Kecamatan Maligano Kabupaten Muna menerangkan dengan sesungguhnya bahwa:</p>
+        <p style="margin: 0; text-indent: 40px;">Yang bertanda tangan di bawah ini Kepala Desa Bhone Kainsetala Kecamatan Bhone Kabupaten Muna menerangkan dengan sesungguhnya bahwa:</p>
     </div>
     <div style="margin-bottom: 14px;">
         <div style="margin-left: 40px;">
@@ -55,7 +55,7 @@
         </div>
     </div>
     <div style="margin-bottom: 14px;">
-        <p style="margin: 0; text-indent: 40px;">Orang tersebut di atas adalah benar-benar warga Desa Latompa, sepanjang pengamatan dan pengetahuan kami bahwa orang tersebut di atas sedang berada Di luar Kabupaten Muna (Kota Kendari) untuk <?= ' ' . $keperluan ?>.</p>
+        <p style="margin: 0; text-indent: 40px;">Orang tersebut di atas adalah benar-benar warga Desa Bhone Kainsetala, sepanjang pengamatan dan pengetahuan kami bahwa orang tersebut di atas sedang berada Di luar Kabupaten Muna (Kota Kendari) untuk <?= ' ' . $keperluan ?>.</p>
     </div>
     <div style="margin-bottom: 14px;">
         <p style="margin: 0; text-indent: 40px;">Demikian surat keterangan ini kami buat dengan sebenarnya agar kepada pihak-pihak yang berkepentingan menjadi tahu dan maklum serta dapat dipergunakan sebagaimana mestinya.</p>
@@ -66,10 +66,10 @@
                 <p style="margin: 0;">Latompa, <?= ' ' . $tanggal ?></p>
 
                 <?php if ($oleh == 'kades') : ?>
-                    <p style="margin: 0;">Kepala Desa Latompa</p>
+                    <p style="margin: 0;">Kepala Desa Bhone Kainsetala</p>
                 <?php endif ?>
                 <?php if ($oleh == 'sekretaris') : ?>
-                    <p style="margin: 0;">an. Kepala Desa Latompa</p>
+                    <p style="margin: 0;">an. Kepala Desa Bhone Kainsetala</p>
                     <p style="margin: 0;">Sekretaris</p>
                 <?php endif ?>
 
@@ -77,10 +77,10 @@
             <div style="width: 60px; height: 60px; margin: auto;"></div>
 
             <?php if ($oleh == 'kades') : ?>
-                <p style="margin: 0;">Liston, S.S, B.Th.</p>
+                <p style="margin: 0;">Marwan, SE</p>
             <?php endif ?>
             <?php if ($oleh == 'sekretaris') : ?>
-                <p style="margin: 0;">Muhammad Izar, S.T.</p>
+                <p style="margin: 0;">Alwis</p>
             <?php endif ?>
 
         </div>

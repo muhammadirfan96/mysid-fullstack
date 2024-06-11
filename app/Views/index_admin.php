@@ -74,7 +74,7 @@ $menubar = [
             <p id="loginAs" class="text-xs italic inline mr-1"></p>
             <button onclick="logout()"><i class="bi-box-arrow-right"></i></button>
         </div>
-        <p class="text-xs md:text-sm text-white absolute right-0 left-0 bottom-0 text-center">desa latompa kecamatan maligano</p>
+        <p class="text-xs md:text-sm text-white absolute right-0 left-0 bottom-0 text-center">desa bhone kainsetala kecamatan bone</p>
     </div>
 
     <div id="container" class="mx-auto md:ml-60 mt-[78px]">

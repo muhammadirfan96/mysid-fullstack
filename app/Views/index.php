@@ -48,7 +48,7 @@ $menubar = [
         <p class='text-center text-3xl md:text-4xl font-bold text-white mb-1'>
             <a class="font-din" href="/">MySID</a>
         </p>
-        <p class="text-xs md:text-sm text-white absolute right-0 left-0 bottom-0 text-center">desa latompa kecamatan maligano</p>
+        <p class="text-xs md:text-sm text-white absolute right-0 left-0 bottom-0 text-center">desa bhone kainsetala kecamatan bone</p>
     </div>
 
     <div id="container" class="mx-auto md:ml-60 mt-[78px]">
