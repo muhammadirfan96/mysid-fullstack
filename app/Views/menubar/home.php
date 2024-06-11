@@ -24,7 +24,7 @@
             <div class="w-full overflow-auto flex border-2 border-cyan-700 rounded-md text-cyan-700 text-center" id="page_list">
                 <!-- isi page list -->
             </div>
-            <select class="outline-none border-2 border-cyan-700 rounded text-cyan-700" id="limit">
+            <select onchange="generate_berita(`${limit.value}`,1,`${key_pencarian.value}=${val_pencarian.value}`)" class="outline-none border-2 border-cyan-700 rounded text-cyan-700" id="limit">
                 <option value="20">20</option>
                 <option value="10">10</option>
                 <option value="5">5</option>
@@ -57,20 +57,23 @@
     const bulan = document.querySelector('.bulan')
     const tahun = document.querySelector('.tahun')
 
-    const getBerita = async (limit = 20, page = 1, key = '') => {
+
+    const getBerita = async (limit, page, key) => {
         try {
-            const response = await fetch(`${api}?limit=${limit}&page=${page}&${key}`)
+            const response = await fetch(`${api}?limit=${limit}&page=${page}&${key}&active=1`)
             const result = await response.json()
+            // console.log(result)
             return result
         } catch (error) {
             console.log(error)
         }
     }
 
-    const getKategoriBerita = async (limit = 20, page = 1, key = '') => {
+    const getKategoriBerita = async () => {
         try {
-            const response = await fetch(`${api_kategori_berita}?limit=${limit}&page=${page}&${key}`)
+            const response = await fetch(`${api_kategori_berita}`)
             const result = await response.json()
+            // console.log(result)
             return result
         } catch (error) {
             console.log(error)
@@ -78,16 +81,16 @@
     }
 
     btn_pencarian.addEventListener('click', async () => {
-        await generate_berita(`${limit.value}`, 1, `${key_pencarian.value}=${val_pencarian.value}`)
+        await generate_berita(20, 1, `${key_pencarian.value}=${val_pencarian.value}`)
     })
 
-    // const isi_page_list = page => {
-    //     return `<button class="px-1 m-1 border rounded-sm flex-none border-cyan-500 text-center focus:text-white focus:bg-cyan-500" onclick="generate_berita(${limit.value},${page},'${key_pencarian.value}=${val_pencarian.value}')" type="button">${page}</button>`
-    // }
+    const isi_page_list = (page, crr_page) => {
+        return `<button class="px-1 m-1 border rounded-sm flex-none border-cyan-500 text-center focus:text-white focus:bg-cyan-500 ${crr_page == page ? 'bg-cyan-500 text-white' : ''}" onclick="generate_berita(${limit.value},${page},'${key_pencarian.value}=${val_pencarian.value}')" type="button">${page}</button>`
+    }
 
     const div_berita = (item) => {
-        return `<div class="shadow-md shadow-cyan-700 bg-cyan-200 rounded-md w-full md:w-[45%] lg:w-[30%] p-2" onclick="open_modal_berita(${item.id})">
-                    <img class="w-full h-40 mb-2 rounded-md" src="img/berita/${item.foto}" alt="img/berita/${item.foto}">
+        return `<div class="shadow-md shadow-cyan-700 bg-cyan-200 rounded-md w-full md:w-[45%] lg:w-[30%] p-2"><a href="/berita/detail/${item.id}">
+                    <img class="w-full h-40 mb-2 rounded-md" src="/img/berita/${item.foto}" alt="/img/berita/${item.foto}">
                     <div class="w-full h-16 px-2">
                         <div class="w-full h-6 overflow-hidden">
                             <p class="text-base font-semibold mb-2 block">${item.judul}</p>
@@ -95,14 +98,15 @@
                         <p class="text-xs font-medium mb-1">${item.kategori_berita}</p>
                         <p class="text-xs font-light">${item.created_at}</p>
                     </div>
-                </div>`
+                </a></div>`
     }
+
 
     const generate_berita = async (limit = 20, page = 1, key = '') => {
         try {
             const berita = await getBerita(limit, page, key)
             const kategori_berita = await getKategoriBerita()
-            console.table(berita)
+            // console.table(berita)
 
             let all_berita = ``
             berita.data.forEach(item => {
@@ -114,13 +118,13 @@
                 })
             });
 
+            konten_berita.innerHTML = all_berita
 
-            // let all_page = ``
-            // for (let index = 1; index <= berita.all_page; index++) {
-            //     all_page += isi_page_list(index)
-            // }
+            let all_page = ``
+            for (let index = 1; index <= berita.all_page; index++) {
+                all_page += isi_page_list(index, berita.crr_page)
+            }
 
-            // konten_berita.innerHTML = all_berita
             page_list.innerHTML = all_page
         } catch (error) {
             console.error("Error:", error)
@@ -140,7 +144,7 @@
         tahun.innerHTML = waktu.getFullYear();
     }
 
-    generate_berita(3, 1, '')
+    generate_berita()
 </script>
 
 <?= $this->endSection(); ?>

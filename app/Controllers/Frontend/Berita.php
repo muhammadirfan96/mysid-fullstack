@@ -14,4 +14,14 @@ class Berita extends BaseController
 
         return view('frontend/berita', $data);
     }
+
+    public function detail($id)
+    {
+        $data = [
+            'title' => 'detail berita',
+            'id' => $id
+        ];
+
+        return view('frontend/berita_detail', $data);
+    }
 }

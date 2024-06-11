@@ -129,10 +129,10 @@ $routes->get('databantuanindividu', 'Frontend\DataBantuanIndividu::index');
 $routes->get('kelompokmasyarakats', 'Frontend\KelompokMasyarakats::index');
 $routes->get('databantuankelompok', 'Frontend\DataBantuanKelompok::index');
 $routes->get('berita', 'Frontend\Berita::index');
+$routes->get('berita/detail/(:num)', 'Frontend\Berita::detail/$1');
 
 // MENUBAR
 $routes->get('/', 'Menubar\Home::index');
-// $routes->get('/', 'Backend\Beritas::index');
 $routes->get('infodesa', 'Menubar\Infodesa::index');
 $routes->get('statistik', 'Menubar\Statistik::index');
 $routes->get('adminweb', 'Menubar\Adminweb::index');
@@ -151,7 +151,6 @@ $routes->post('suket_di_luar_daerah', 'Mpdf\Mysid::suket_di_luar_daerah');
 $routes->post('suket_pengantar_kk', 'Mpdf\Mysid::suket_pengantar_kk');
 $routes->post('suket_pengantar_ktp', 'Mpdf\Mysid::suket_pengantar_ktp');
 $routes->post('suket_pengantar_pindah_domisili', 'Mpdf\Mysid::suket_pengantar_pindah_domisili');
-
 
 /*
  * --------------------------------------------------------------------
